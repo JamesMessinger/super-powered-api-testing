@@ -14,11 +14,11 @@
 
       {% if site.github.private != true and site.github.license %}
       <div class="footer border-top border-gray-light mt-5 pt-3 text-center text-small text-gray">
-        <a href="{{ site.github.owner_url }}">{{ site.author | default: site.github.owner_name }}</a>
-        |
+        <a href="{{ site.github.owner_url }}">{{ site.author.name | default: site.github.owner_name }}</a>
+        &nbsp;|&nbps;
         <a href="{{ site.github.repository_url }}">GitHub</a>
         {% if site.twitter and site.twitter.username %}
-        |
+        &nbsp;|&nbps;
         <a href="https://twitter.com/{{ site.twitter.username }}">@{{ site.twitter.username }}</a>
         {% endif %}
         <br>

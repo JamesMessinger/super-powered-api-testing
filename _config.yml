@@ -9,13 +9,13 @@ theme: jekyll-theme-primer
 # https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md
 title: Super-Powered API Testing
 logo: /Images/title-banner.png
-author: James Messinger
+author:
+  name: James Messinger
+  twitter: BigstickCarpet
 twitter:
   username: BigstickCarpet
 defaults:
   - scope:
       path: ""  # All pages
     values:
-      author:
-        twitter: BigstickCarpet
       image: /Images/title-banner.png
