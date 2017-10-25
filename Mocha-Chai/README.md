@@ -1,6 +1,6 @@
 [![Super-Powered API Testing](../Images/Title-Banner.png)](http://bigstickcarpet.com/super-powered-api-testing)
 
-[![Mocha & Chai](../Images/Mocha-Chai/Logo.png)](http://mochajs.org)
+[![Mocha & Chai](./Images/Logo.png)](http://mochajs.org)
 
 Chai HTTP is an assertion library that uses [SuperAgent](https://visionmedia.github.io/superagent/) under the hood to do HTTP requests, and then lets you do assertions on the [HTTP response](https://visionmedia.github.io/superagent/#response-properties) using a really nice fluent syntax.
 
@@ -81,7 +81,7 @@ Many popular IDEs and text editors have built-in support for [Mocha](https://moc
   - [Mocha plug-ins for Atom](https://atom.io/packages/search?q=mocha)
   - [Mocha package for Emacs](https://github.com/scottaj/mocha.el)
 
-![IDE example](../Images/Mocha-Chai/IDE.gif)
+![IDE example](./Images/IDE.gif)
 
 
 Running the tests in a web browser
@@ -100,4 +100,4 @@ The `npm start` command will start an HTTP server at `http://localhost:3000` and
 
 > **Bonus!** You can click the arrow next to any test to run _just_ that test. This is great for debugging!
 
-![Browser example](../Images/Mocha-Chai/Browser.gif)
+![Browser example](./Images/Browser.gif)
