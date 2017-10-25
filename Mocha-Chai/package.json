@@ -1,0 +1,49 @@
+{
+  "name": "super-powered-api-testing",
+  "version": "2.0.0",
+  "description": "Sample REST API tests, written in Mocha + Chai",
+  "keywords": [
+    "rest",
+    "api",
+    "test",
+    "testing",
+    "browser",
+    "universal"
+  ],
+  "author": {
+    "name": "James Messinger",
+    "url": "http://jamesmessinger.com"
+  },
+  "license": "MIT",
+  "homepage": "http://bigstickcarpet.com/super-powered-api-testing",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigstickCarpet/super-powered-api-testing.git"
+  },
+  "scripts": {
+    "start": "static-server --port 3000 & open http://localhost:3000/test/browser.html",
+    "test": "npm run mocha && npm run karma",
+    "mocha": "mocha",
+    "karma": "karma start --single-run"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "chai-json-schema": "^1.5.0",
+    "karma": "^1.7.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-host-environment": "^1.1.1",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-mocha": "^1.3.0",
+    "karma-safari-launcher": "^1.0.0",
+    "mocha": "^4.0.1",
+    "static-server": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=4.0",
+    "npm": ">=2.0"
+  }
+}
