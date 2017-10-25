@@ -2,7 +2,7 @@
 # https://jekyllrb.com/docs/configuration/
 
 # https://github.com/pages-themes/primer
-theme: jekyll-theme-merlot
+theme: jekyll-theme-primer
 
 # Jekyll SEO Tag plugin
 # https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
