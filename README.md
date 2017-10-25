@@ -1,13 +1,4 @@
-Super-Powered API Testing
-============================
-#### How and why to test your API
-
-This code repository accompanies a presentation I gave in Austin, Texas on February 4th, 2016.  Video of the presentation is [available on YouTube](https://youtu.be/bhrg-7f2e8k?t=1800), and the slide deck is [right here](https://docs.google.com/presentation/d/1oZknCWA6M186Pmfx43LVmWwdQvaqFhZLXX-_5lZkpQw/edit?usp=sharing).
-
-[![Build Status](https://api.travis-ci.org/BigstickCarpet/super-powered-api-testing.svg)](https://travis-ci.org/BigstickCarpet/super-powered-api-testing)
-[![npm](http://img.shields.io/npm/v/super-powered-api-testing.svg)](https://www.npmjs.com/package/super-powered-api-testing)
-[![License](https://img.shields.io/npm/l/super-powered-api-testing.svg)](LICENSE)
-[![Dependencies](https://david-dm.org/BigstickCarpet/super-powered-api-testing.svg)](https://david-dm.org/BigstickCarpet/super-powered-api-testing)
+[![Super-Powered API Testing](Images/Title-Banner.png)](http://bigstickcarpet.com/super-powered-api-testing)
 
 - **[What is this project?](#what-is-this-project)**
 
@@ -34,10 +25,10 @@ This project contains a [sample REST API](https://documenter.getpostman.com/view
 
 The following API test frameworks are covered:
 
-- [Chai HTTP](tests/chai-http)
-- [Chakram](tests/chakram)
-- [Supertest](tests/supertest)
-- [Postman](tests/postman)
+- [Chai HTTP](chai-http)
+- [Chakram](chakram)
+- [Supertest](supertest)
+- [Postman](postman)
 
 
 Installation
@@ -59,11 +50,11 @@ The [`package.json`](package.json) file includes several scripts to make it easy
 
 | command                | description
 |------------------------|------------------------------------
-| `npm run chakram`      | Run the [Chakram](tests/chakram) test suite*
-| `npm run supertest`    | Run the [SuperTest](tests/supertest) test suite*
-| `npm run chai-http`    | Run the [Chai-HTTP](tests/chai-http) test suite*
-| `npm run newman`       | Run the [Postman](tests/postman) test suite in [Newman](https://www.npmjs.com/package/newman)*
-| `npm test`             | Run **all four** test suites back-to-back. The results will [look like this](https://travis-ci.org/BigstickCarpet/super-powered-api-testing)
+| `npm run chakram`      | Run the [Chakram](chakram) test suite*
+| `npm run supertest`    | Run the [SuperTest](supertest) test suite*
+| `npm run chai-http`    | Run the [Chai-HTTP](chai-http) test suite*
+| `npm run newman`       | Run the [Postman](postman) test suite in [Newman](https://www.npmjs.com/package/newman)*
+| `npm test`             | Run **all four** test suites back-to-back. The results will [look like this](https://travis-ci.org/BigstickCarpet/super-powered-api-testing/jobs/287051295)
 | `npm start`            | Start a local web server running the [sample REST API](https://documenter.getpostman.com/view/220187/trendsetter-api/2MuEBW)
 | `npm stop`             | Stop the web server
 | `npm restart`          | Stop the web server (if it's running), and then start it
@@ -83,7 +74,7 @@ Supertest, Chakram, and Chai-HTTP all use [Mocha](https://mochajs.org/) as their
   - [How to use Mocha in Visual Studio](https://github.com/Microsoft/nodejstools/wiki/Test-Explorer)
   - [Mocha plug-ins for Atom](https://atom.io/packages/search?q=mocha)
 
-![IDE example](docs/IDE.gif)
+![IDE example](Images/Mocha-Chai/IDE.gif)
 
 
 #### Option 2: Run them in a web browser
@@ -95,17 +86,17 @@ Start the local web server (using the `npm start` command above), and then brows
 
 > **Bonus!** You can click the arrow next to any test to run _just_ that test. This is great for debugging!
 
-![Browser example](docs/browser.gif)
+![Browser example](Images/Mocha-Chai/browser.gif)
 
 
 #### Option 3: Run them in Postman
-To run the Postman tests, just import the [`tests.json`](https://raw.githubusercontent.com/BigstickCarpet/super-powered-api-testing/master/tests/postman/tests.json) and [`localhost-environment.json`](https://raw.githubusercontent.com/BigstickCarpet/super-powered-api-testing/master/tests/postman/localhost-environment.json) files into Postman. (you can do this by clicking the "_import_" button in the header bar)
+To run the Postman tests, just import the [`tests.json`](https://raw.githubusercontent.com/BigstickCarpet/super-powered-api-testing/v1/tests/postman/tests.json) and [`localhost-environment.json`](https://raw.githubusercontent.com/BigstickCarpet/super-powered-api-testing/v1/tests/postman/localhost-environment.json) files into Postman. (you can do this by clicking the "_import_" button in the header bar)
 
 > **Note:** The `localhost-environment.json` file creates a [Postman environment](http://www.getpostman.com/docs/environments) that points to the local web server ([http://localhost:8080](http://localhost:8080)). Be sure to select this environment from the drop-down list in Postman, otherwise none of the requests will know where to go.
 
 > **Note:** Make sure you run the two requests in the `00: Setup` folder first.  These requests download [Postman BDD](https://github.com/BigstickCarpet/postman-bdd) and add some test fixtures that are needed by all of the other tests.
 
-![Postman example](docs/postman.gif)
+![Postman example](Images/Postman/Screenshot.gif)
 
 
 #### Option 4: Run them in the Postman Runner
@@ -113,7 +104,7 @@ The normal Postman UI allows you to test individual requests one-by-one and see 
 
 Select the collection you want to run (in this case, the "_Trendsetter API Tests_" collection), and select an environment (in this case, the "_Local Machine_" environment).  Then click the "_Start Test_" button.  You'll see the test results on the right-hand side, as well as a pass/fail summary at the top.  You can also click the "info" icon for any request to see detailed test results for that request.
 
-![Postman Runner example](docs/postman-runner.gif)
+![Postman Runner example](Images/Postman/Runner.gif)
 
 
 

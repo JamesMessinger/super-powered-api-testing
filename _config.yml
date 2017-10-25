@@ -1,1 +1,19 @@
-theme: jekyll-theme-dinky
+# Jekyll configuration file
+# https://jekyllrb.com/docs/configuration/
+
+# https://github.com/pages-themes/primer
+theme: jekyll-theme-primer
+
+# Jekyll SEO Tag plugin
+# https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
+# https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md
+title: Super-Powered API Testing
+logo: /Images/title-banner.png
+author: bigstickcarpet
+twitter:
+  username: bigstickcarpet
+defaults:
+  - scope:
+      path: ""  # All pages
+    values:
+      image: /Images/title-banner.png
