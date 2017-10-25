@@ -14,12 +14,12 @@
 
       {% if site.github.private != true and site.github.license %}
       <div class="footer border-top border-gray-light mt-5 pt-3 text-center text-small text-gray">
-        <a href="{% site.github.owner_url }">{% site.data.author | default: site.github.owner_name %}</a>
+        <a href="{{ site.github.owner_url }}">{{ site.data.author | default: site.github.owner_name }}</a>
         |
-        <a href="{% site.github.repository_url }">GitHub</a>
+        <a href="{{ site.github.repository_url }}">GitHub</a>
         {% if site.data.twitter and site.data.twitter.username %}
         |
-        <a href="https://twitter.com/{% site.data.twitter.username }">@{% site.data.twitter.username }</a>
+        <a href="https://twitter.com/{{ site.data.twitter.username }}">@{{ site.data.twitter.username }}</a>
         {% endif %}
         <br>
         This site is open source. {% github_edit_link "Improve this page" %}.
