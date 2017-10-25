@@ -2,6 +2,8 @@
 
 [![Mocha & Chai](./Images/Logo.png)](http://mochajs.org)
 
+![Mocha + Chai screenshots](./Images/Screenshot.gif)
+
 Chai HTTP is an assertion library that uses [SuperAgent](https://visionmedia.github.io/superagent/) under the hood to do HTTP requests, and then lets you do assertions on the [HTTP response](https://visionmedia.github.io/superagent/#response-properties) using a really nice fluent syntax.
 
 Here's an example:
