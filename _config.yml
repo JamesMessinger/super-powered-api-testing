@@ -8,7 +8,7 @@ theme: jekyll-theme-primer
 # https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md
 title: Super-Powered API Testing
-logo: /Images/title-banner.png
+logo: /Images/Title-Banner.png
 author:
   name: James Messinger
   twitter: BigstickCarpet
@@ -18,4 +18,4 @@ defaults:
   - scope:
       path: ""  # All pages
     values:
-      image: /Images/title-banner.png
+      image: /Images/Title-Banner.png
