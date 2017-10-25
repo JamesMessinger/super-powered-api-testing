@@ -1,0 +1,696 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.12",
+    "title": "Super Tech Heroes",
+    "description": "A REST API for technology-themed superheroes A REST API for technology-themed superheroes"
+  },
+  "paths": {
+    "/characters/{slug}": {
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "pattern": "^[a-z0-9]+$"
+        }
+      ],
+      "get": {
+        "operationId": "GET_characters-slug",
+        "summary": "Get a specific character",
+        "tags": [
+          "Characters"
+        ],
+        "description": "This endpoint returns a specific character, given its slug. The slug is the character's name, lowercased, with all non-alphanumeric characters removed. For example, the slug for \"Wonder Woman\" would be \"wonderwoman\".\n",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested character",
+            "schema": {
+              "$ref": "#/definitions/CharacterResponse"
+            }
+          },
+          "400": {
+            "description": "Something is wrong with the request, such as invalid character slug.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "There is no character with the specified slug.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "GET_characters-slug",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      },
+      "put": {
+        "operationId": "PUT_characters-slug",
+        "summary": "Updates a character",
+        "tags": [
+          "Characters"
+        ],
+        "description": "This endpoint updates an existing character. Unlike the `POST /characters` endpoint, you _cannot_ update multiple characters at a time.\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CharacterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The character was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/CharacterResponse"
+            }
+          },
+          "400": {
+            "description": "Something is wrong with the request, such as invalid character data.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "There is already an existing character with the same (or very similar) name.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "PUT_characters-slug",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      }
+    },
+    "/characters": {
+      "get": {
+        "operationId": "GET_characters",
+        "summary": "Find characters",
+        "tags": [
+          "Characters"
+        ],
+        "description": "This endpoint returns all characters by default, or you can filter by `name` and `type` via query parameters.\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filters the results by character name. This is a wildcard search, so `?name=man` will reeturn \"Superman\", \"Batman\", and \"Wonder Woman\".\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filters the results by character type (i.e. \"hero\", \"sidekick\", or \"villain\").\n",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "hero",
+              "sidekick",
+              "villain"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all characters that matched the filter criteria. If there are no matching characters, then the response is an empty array.\n",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CharacterResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Something is wrong with the request. For example, the `type` query parameter is not a valid character type.\n",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "GET_characters",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DELETE_characters",
+        "summary": "Deletes all characters",
+        "tags": [
+          "Characters"
+        ],
+        "description": "This endpoint deletes **all** characters.  It's mostly just used during testing, to reset state between each test.\n",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All charactes were deleted",
+            "schema": {
+              "type": "object",
+              "required": [
+                "count",
+                "message"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "DELETE_characters",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      },
+      "post": {
+        "operationId": "POST_characters",
+        "summary": "Creates a new character",
+        "tags": [
+          "Characters"
+        ],
+        "description": "This endpoint creates a new character. For heroes, you can also create the sidekick and/or nemesis at the same time by setting the `sidekick` and/or `nemesis` properties to objects rather than strings.\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CharacterHierarchy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The character was created successfully",
+            "schema": {
+              "$ref": "#/definitions/CharacterResponse"
+            }
+          },
+          "400": {
+            "description": "Something is wrong with the request, such as invalid character data.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "There is already an existing character with the same (or very similar) name.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "POST_characters",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "operationId": "GET_root",
+        "summary": "Get API info",
+        "tags": [
+          "Root"
+        ],
+        "description": "This endpoint returns general API info, such as the version number, description, and relevant links.\n",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns API info",
+            "schema": {
+              "$ref": "#/definitions/APIInfo"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "GET_root",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      }
+    },
+    "/schema": {
+      "get": {
+        "operationId": "GET_schema",
+        "summary": "Get API definition schema",
+        "tags": [
+          "Schema"
+        ],
+        "description": "This endpoint returns the API definition schema. By default, the response is in OpenAPI v3.0 JSON format, but you can specify your desired format via the `Accept` header or an `accept` query parameter.\n",
+        "produces": [
+          "application/openapi+json;version=3.0",
+          "application/openapi+yaml;version=3.0",
+          "application/openapi+json;version=2.0",
+          "application/openapi+yaml;version=2.0"
+        ],
+        "parameters": [
+          {
+            "name": "accept",
+            "in": "query",
+            "description": "You can override the `Accept` header using the `accept` query parameter. This parameter takes the same format as the `Accept` header. For example, to request OpenAPI v2.0 in YAML format, the querystring would be `?accept=application/openapi+yaml;version=2.0`.\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "You can request a specific OpenAPI version and format. The default is `application/openapi+json;version=3.0`, which returns a OpenAPI v3.0 definition, in JSON format.  You can request either OpenAPI v2.0 (fka Swagger) or v3.0, in either JSON or YAML format. For example, to request OpenAPI v2.0 in YAML format, you would set the `Accept` header to `application/openapi+yaml;version=2.0`.\n",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the API schema in the requested format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "GET_schema",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "statusCode": 200,
+            "dynamic": false,
+            "enabled": false
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CharacterHierarchy": {
+      "title": "CharacterHierarchy",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "hero",
+            "sidekick",
+            "villain"
+          ]
+        },
+        "powers": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "weakness": {
+          "type": "string",
+          "minLength": 0
+        },
+        "bio": {
+          "type": "string",
+          "minLength": 0
+        },
+        "sidekick": {
+          "type": "object"
+        },
+        "nemesis": {
+          "type": "object"
+        }
+      },
+      "x-stoplight": {
+        "id": "CharacterHierarchy",
+        "name": "CharacterHierarchy",
+        "public": true
+      }
+    },
+    "ErrorResponse": {
+      "title": "ErrorResponse",
+      "type": "object",
+      "required": [
+        "error",
+        "message"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "x-stoplight": {
+        "id": "ErrorResponse",
+        "name": "ErrorResponse",
+        "public": true
+      }
+    },
+    "CharacterUpdate": {
+      "title": "CharacterUpdate",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "hero",
+            "sidekick",
+            "villain"
+          ]
+        },
+        "powers": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "weakness": {
+          "type": "string",
+          "minLength": 0
+        },
+        "bio": {
+          "type": "string",
+          "minLength": 0
+        },
+        "sidekick": {
+          "type": "string",
+          "minLength": 0
+        },
+        "nemesis": {
+          "type": "string",
+          "minLength": 0
+        }
+      },
+      "x-stoplight": {
+        "id": "CharacterUpdate",
+        "name": "CharacterUpdate",
+        "public": true
+      }
+    },
+    "CharacterResponse": {
+      "title": "CharacterResponse",
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "powers",
+        "weakness",
+        "bio",
+        "links"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "hero",
+            "sidekick",
+            "villain"
+          ]
+        },
+        "powers": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "weakness": {
+          "type": "string",
+          "minLength": 0
+        },
+        "bio": {
+          "type": "string",
+          "minLength": 0
+        },
+        "links": {
+          "type": "object",
+          "required": [
+            "self"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "self": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sidekick": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nemesis": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "x-stoplight": {
+        "id": "CharacterResponse",
+        "name": "CharacterResponse",
+        "public": true
+      }
+    },
+    "APIInfo": {
+      "title": "APIInfo",
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "description",
+        "links"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "required": [
+            "characters",
+            "www",
+            "schema",
+            "docs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "characters": {
+              "type": "string"
+            },
+            "www": {
+              "type": "string"
+            },
+            "schema": {
+              "type": "string"
+            },
+            "docs": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "x-stoplight": {
+        "id": "APIInfo",
+        "name": "APIInfo",
+        "public": true
+      }
+    }
+  },
+  "x-stoplight": {
+    "beforeScript": "",
+    "afterScript": "",
+    "version": {
+      "groups": {
+        "utilFuncs": [],
+        "savedEntries": [],
+        "tests": [],
+        "traits": [],
+        "docs": [
+          {
+            "items": [
+              {
+                "type": "endpoints",
+                "_id": "GET_characters-slug"
+              },
+              {
+                "type": "endpoints",
+                "_id": "GET_characters"
+              },
+              {
+                "type": "endpoints",
+                "_id": "DELETE_characters"
+              },
+              {
+                "type": "endpoints",
+                "_id": "POST_characters"
+              },
+              {
+                "type": "endpoints",
+                "_id": "PUT_characters-slug"
+              }
+            ],
+            "name": "Characters"
+          },
+          {
+            "items": [
+              {
+                "type": "endpoints",
+                "_id": "GET_root"
+              }
+            ],
+            "name": "Root"
+          },
+          {
+            "items": [
+              {
+                "type": "endpoints",
+                "_id": "GET_schema"
+              }
+            ],
+            "name": "Schema"
+          },
+          {
+            "items": [
+              {
+                "type": "schemas",
+                "_id": "CharacterHierarchy"
+              },
+              {
+                "type": "schemas",
+                "_id": "ErrorResponse"
+              },
+              {
+                "type": "schemas",
+                "_id": "CharacterUpdate"
+              },
+              {
+                "type": "schemas",
+                "_id": "CharacterResponse"
+              },
+              {
+                "type": "schemas",
+                "_id": "APIInfo"
+              }
+            ],
+            "description": "Models make up the core input and ouput structures in this API. They are used in endpoint request and response bodies.",
+            "name": "Models"
+          }
+        ]
+      }
+    },
+    "functions": {},
+    "textSections": {},
+    "mock": {
+      "dynamic": false,
+      "enabled": false
+    }
+  },
+  "x-tests": {}
+}
