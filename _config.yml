@@ -9,9 +9,9 @@ theme: jekyll-theme-primer
 # https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md
 title: Super-Powered API Testing
 logo: /Images/title-banner.png
-author: bigstickcarpet
+author: James Messinger
 twitter:
-  username: bigstickcarpet
+  username: BigstickCarpet
 defaults:
   - scope:
       path: ""  # All pages
