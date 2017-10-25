@@ -1,0 +1,362 @@
+{
+	"info": {
+		"name": "Super Tech Heroes API",
+		"_postman_id": "2f04fd7c-a56c-0a1d-9e36-20a6eb5e2a27",
+		"description": "A REST API for technology-themed superheroes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "characters",
+			"description": "Folder for characters",
+			"item": [
+				{
+					"name": "Find characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"});",
+									"",
+									"pm.test(\"12 characters were returned\", function () {",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{API_ROOT}}/characters?name={{name}}&type={{type}}",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{name}}",
+									"equals": true
+								},
+								{
+									"key": "type",
+									"value": "{{type}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "This endpoint returns all characters by default, or you can filter by `name` and `type` via query parameters.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Creates a new character",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"});",
+									"",
+									"pm.test(\"The Location header is set\", function () {",
+									"});",
+									"",
+									"pm.test(\"The new character was returned\", function () {",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\",\n    \"Caffeine\"\n  ],\n  \"weakness\": \"Imposter syndrome\",\n  \"nemesis\": {\n    \"name\": \"Space Bugs from Dimension Z\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{API_ROOT}}/characters",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"characters"
+							]
+						},
+						"description": "This endpoint creates a new character. For heroes, you can also create the sidekick and/or nemesis at the same time by setting the `sidekick` and/or `nemesis` properties to objects rather than strings.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletes all characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{API_ROOT}}/characters",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"characters"
+							]
+						},
+						"description": "This endpoint deletes **all** characters.  It's mostly just used during testing, to reset state between each test.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific character",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"});",
+									"",
+									"pm.test(\"The Location header is set\", function () {",
+									"});",
+									"",
+									"pm.test(\"The correct character was returned\", function () {",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{API_ROOT}}/characters/{{SLUG}}",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"characters",
+								"{{SLUG}}"
+							]
+						},
+						"description": "This endpoint returns a specific character, given its slug. The slug is the character's name, lowercased, with all non-alphanumeric characters removed. For example, the slug for \"Wonder Woman\" would be \"wonderwoman\".\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates a character",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"});",
+									"",
+									"pm.test(\"The Location header is set\", function () {",
+									"});",
+									"",
+									"pm.test(\"The updated character was returned\", function () {",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_ROOT}}/characters/{{SLUG}}",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"characters",
+								"{{SLUG}}"
+							]
+						},
+						"description": "This endpoint updates an existing character. Unlike the `POST /characters` endpoint, you _cannot_ update multiple characters at a time.\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "schema",
+			"description": "Folder for schema",
+			"item": [
+				{
+					"name": "Get API definition schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"});",
+									"",
+									"pm.test(\"The schema is valid\", function () {",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/openapi+json;version=3.0, application/openapi+yaml;version=3.0, application/openapi+json;version=2.0, application/openapi+yaml;version=2.0"
+							},
+							{
+								"key": "Accept",
+								"value": "{{Accept}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{API_ROOT}}/schema?accept={{accept}}",
+							"host": [
+								"{{API_ROOT}}"
+							],
+							"path": [
+								"schema"
+							],
+							"query": [
+								{
+									"key": "accept",
+									"value": "{{accept}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "This endpoint returns the API definition schema. By default, the response is in OpenAPI v3.0 JSON format, but you can specify your desired format via the `Accept` header or an `accept` query parameter.\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get API info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"});",
+							"",
+							"pm.test(\"The version number is correct\", function () {",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{API_ROOT}}/",
+					"host": [
+						"{{API_ROOT}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "This endpoint returns general API info, such as the version number, description, and relevant links.\n"
+			},
+			"response": []
+		}
+	]
+}
