@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](../Images/Title-Banner.png)](http://bigstickcarpet.com/super-powered-api-testing)
+[![Super-Powered API Testing](../Images/Title-Banner.png)](http://apitesting.bigstickcarpet.com)
 
 [![Mocha & Chai](./Images/Logo.png)](http://mochajs.org)
 

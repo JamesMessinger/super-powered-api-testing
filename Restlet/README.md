@@ -1,3 +1,3 @@
-[![Super-Powered API Testing](../Images/Title-Banner.png)](http://bigstickcarpet.com/super-powered-api-testing)
+[![Super-Powered API Testing](../Images/Title-Banner.png)](http://apitesting.bigstickcarpet.com)
 
 [![Postman](./Images/Logo.png)](https://restlet.com/)
