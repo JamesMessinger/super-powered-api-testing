@@ -1,0 +1,41 @@
+{
+	"id": "3f1e95e9-317b-0e18-abed-b1b64f8059e4",
+	"name": "Fake Domain",
+	"values": [
+		{
+			"key": "root",
+			"value": "http://trendsetter.com/api",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "bigstickcarpet",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "repo",
+			"value": "super-powered-api-testing",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "year",
+			"value": "2005",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "MySpace",
+			"type": "text",
+			"enabled": true
+		}
+	],
+	"team": null,
+	"timestamp": 1454386941398,
+	"synced": false,
+	"syncedFilename": "",
+	"isDeleted": false
+}

@@ -1,0 +1,41 @@
+{
+	"id": "60da7c10-c985-1747-a1f3-0ed1b05cf39b",
+	"name": "Local Machine",
+	"values": [
+		{
+			"key": "root",
+			"value": "http://localhost:8080/api",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "bigstickcarpet",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "repo",
+			"value": "super-powered-api-testing",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "year",
+			"value": "1998",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "Beanie%20Babies",
+			"type": "text",
+			"enabled": true
+		}
+	],
+	"team": null,
+	"timestamp": 1454386995397,
+	"synced": false,
+	"syncedFilename": "",
+	"isDeleted": false
+}

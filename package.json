@@ -1,0 +1,55 @@
+{
+  "name": "super-powered-api-testing",
+  "version": "1.6.0",
+  "description": "Super-Powered REST API Testing",
+  "keywords": [
+    "rest",
+    "http",
+    "swagger",
+    "api",
+    "test",
+    "testing"
+  ],
+  "author": {
+    "name": "James Messinger",
+    "url": "http://jamesmessinger.com"
+  },
+  "homepage": "https://bigstickcarpet.github.io/super-powered-api-testing",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BigstickCarpet/super-powered-api-testing.git"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/start",
+    "stop": "node server/stop",
+    "test": "npm run supertest && npm run chakram && npm run chai-http && npm run newman",
+    "supertest": "npm restart && mocha tests/supertest && npm stop",
+    "chakram": "npm restart && mocha tests/chakram && npm stop",
+    "chai-http": "npm restart && mocha tests/chai-http && npm stop",
+    "postman": "npm run newman",
+    "newman": "npm restart && newman -c tests/postman/tests.json -e tests/postman/localhost-environment.json --html tests/postman/report.html && npm stop"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "chakram": "1.2.2",
+    "express": "^4.14.0",
+    "jquery": "^2.2.0",
+    "marked": "^0.3.6",
+    "mocha": "^2.4.5",
+    "morgan": "^1.7.0",
+    "newman": "^3.2.0",
+    "ono": "^2.1.1",
+    "supertest": "^1.1.0",
+    "supertest-as-promised": "^2.0.2",
+    "tv4": "^1.2.7"
+  },
+  "engines": {
+    "node": ">=4.0",
+    "npm": ">=2.0"
+  }
+}

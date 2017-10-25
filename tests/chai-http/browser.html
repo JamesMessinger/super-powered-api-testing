@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chai-Http</title>
+
+    <link rel="stylesheet" href="/node_modules/mocha/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <!-- Dependencies -->
+    <script src="/node_modules/mocha/mocha.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/chai-http/dist/chai-http.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/tv4/tv4.js"></script>
+    <script>mocha.setup('bdd');</script>
+
+    <!-- Test Fixutres -->
+    <script src="fixtures.js"></script>
+
+    <!-- Tests -->
+    <script src="get-trends.spec.js"></script>
+    <script src="get-trends-filter.spec.js"></script>
+    <script src="post-trends.spec.js"></script>
+
+    <script>
+      // Load the Swagger.json file via jQuery.
+      $.get('/api/swagger.json')
+        .done(function(data) {
+          swagger = data;
+
+          // Now run the tests
+          mocha.run();
+        });
+    </script>
+  </body>
+</html>

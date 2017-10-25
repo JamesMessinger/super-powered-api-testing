@@ -1,0 +1,816 @@
+{
+	"id": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+	"name": "Trendsetter API",
+	"description": "Trendsetter is a simple REST API to demonstrate various API testing frameworks. [More info here](https://github.com/bigstickcarpet/super-powered-api-testing#super-powered-api-testing)\n\n**The idea is simple:** Trendsetter lets you set trends.  That is, you get to decide _what's_ trendy, and _when_.  Are bell-bottoms due for a comeback?  Is the handlebar mustache fad over?  Has Crystal Pepsi become so retro that it's cool now?  The decision is all yours.\n\n**There's just one rule:** Once something's trendy, it can't be trendy again for 10 years. So you'll have to wait just a _little bit longer_ before resurrecting MySpace.\n",
+	"order": [
+		"01326bb3-393e-aa45-1765-da3ec1136434",
+		"c414b8c1-5edf-f0a6-e56d-a50ae56abcf3",
+		"54cb08a1-d282-023b-5144-83d5f9e108f2",
+		"2ba39292-f2bd-2388-b738-13d63c5c1cfd",
+		"2b5e9717-41d0-50f1-bfa9-a6e2b5d6d3dd"
+	],
+	"folders": [],
+	"timestamp": 1454694360179,
+	"owner": "305754",
+	"remoteLink": "https://www.getpostman.com/collections/687406919b710582172b",
+	"public": false,
+	"requests": [
+		{
+			"id": "01326bb3-393e-aa45-1765-da3ec1136434",
+			"name": "All trends",
+			"dataMode": "params",
+			"data": null,
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "Returns _all_ trends and dates, sorted by name and then by date.\n\nThis endpoint does _not_ allow filtering. It _always_ returns _everything_. To get filtered results, use the `/trends/{{year}}` or `/trends/{{name}}` endpoint.\n",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": [],
+			"url": "{{root}}/trends",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+			"responses": [
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132179854,
+					"request": {
+						"url": "http://localhost:8080/api/trends",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"type": "text",
+								"name": "Postman-Token",
+								"value": "df4779d2-01a9-0e22-5f11-8331df358add"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					},
+					"id": "437382fe-cfb2-0e85-d44a-77caef33dade",
+					"name": "200 Response",
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": "16",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "228",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 02:56:27 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"e4-OV3hxHPhoqkjPAuxY6qNiA\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "[{\"name\":\"Beanie Babies\",\"from\":1993,\"to\":1999},{\"name\":\"Bell Bottoms\",\"from\":1967,\"to\":1978},{\"name\":\"Bell Bottoms\",\"from\":1996,\"to\":2005},{\"name\":\"Crystal Pepsi\",\"from\":1992,\"to\":1993},{\"name\":\"Furbies\",\"from\":1998,\"to\":2002}]",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends\",\"headers\":[{\"key\":\"Cache-Control\",\"type\":\"text\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"type\":\"text\",\"name\":\"Postman-Token\",\"value\":\"df4779d2-01a9-0e22-5f11-8331df358add\"}],\"data\":\"\",\"method\":\"GET\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T02:59:29.000Z",
+					"updatedAt": "2016-02-02T02:59:29.000Z",
+					"write": true
+				}
+			]
+		},
+		{
+			"id": "2b5e9717-41d0-50f1-bfa9-a6e2b5d6d3dd",
+			"name": "Delete a trend",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": "So you've decided that leisure suits aren't trendy after all, eh?\n\nThis endpoint will delete the specified trend, including _all_ of its date ranges.\n\n**204 response:** The trend was deleted. This will be the result, even if the trend didn't exist.",
+			"headers": "",
+			"method": "DELETE",
+			"pathVariables": [],
+			"url": "{{root}}/trends/{{name}}",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+			"responses": [
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132223098,
+					"request": {
+						"url": "http://localhost:8080/api/trends/beanie%20babies",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "16ca1051-2f13-70a7-1eb5-cec478aa8dee"
+							}
+						],
+						"data": "",
+						"method": "DELETE",
+						"dataMode": "params"
+					},
+					"id": "b3513ac7-dcd7-be8d-ab57-9dce51a7eb2c",
+					"name": "204 Response",
+					"status": "",
+					"responseCode": {
+						"code": 204,
+						"name": "No Content"
+					},
+					"time": "16",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 04:18:15 GMT",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "",
+					"language": "html",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends/beanie%20babies\",\"headers\":[{\"key\":\"Cache-Control\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"name\":\"Postman-Token\",\"value\":\"16ca1051-2f13-70a7-1eb5-cec478aa8dee\"}],\"data\":\"\",\"method\":\"DELETE\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T04:18:22.000Z",
+					"updatedAt": "2016-02-02T04:18:22.000Z",
+					"write": true
+				}
+			]
+		},
+		{
+			"id": "2ba39292-f2bd-2388-b738-13d63c5c1cfd",
+			"name": "Start a trend !",
+			"dataMode": "raw",
+			"data": [],
+			"descriptionFormat": null,
+			"description": "This is it. The endpoint you've been looking for. Use your power wisely.\n\nYou can use this endpoint to start a new trend, or to add a new date range for an existing trend.\n\nThe response is an array containing all the date ranges for the trend, including the one you just added. The response is _always_ an array, even if there's only one result.\n\n**400 response:** The submitted data is invalid\n\n**409 response:** The dates conflict with an existing date range for that trend.  Remember, trends can't be trendy again for 10 years.\n",
+			"headers": "",
+			"method": "POST",
+			"pathVariables": [],
+			"url": "{{root}}/trends",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": "{}",
+			"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+			"responses": [
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132216187,
+					"request": "2ba39292-f2bd-2388-b738-13d63c5c1cfd",
+					"id": "48bb64d0-4562-b7d8-21e6-a7686803b158",
+					"name": "400 Response",
+					"status": "",
+					"responseCode": {
+						"code": 400,
+						"name": "Bad Request"
+					},
+					"time": "20",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "62",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 04:04:08 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"3e-uVTiYVqOuNn1YHiBLKTGOA\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"error\":400,\"message\":\"The specified date range is invalid.\"}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "\"2ba39292-f2bd-2388-b738-13d63c5c1cfd\"",
+					"createdAt": "2016-02-02T04:05:08.000Z",
+					"updatedAt": "2016-02-02T04:05:08.000Z",
+					"write": true,
+					"collection": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+					"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f"
+				},
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132216186,
+					"request": "2ba39292-f2bd-2388-b738-13d63c5c1cfd",
+					"id": "606d6da0-f547-ecaa-7086-3eb02e95d345",
+					"name": "409 Response",
+					"status": "",
+					"responseCode": {
+						"code": 409,
+						"name": "Conflict"
+					},
+					"time": "20",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "104",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 04:02:39 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"68-yvhF5ljlhxelhUGx4Df3jA\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"error\":409,\"message\":\"MySpace can't be trendy again so soon. It was already trendy from 2005 to 2008\"}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "\"2ba39292-f2bd-2388-b738-13d63c5c1cfd\"",
+					"createdAt": "2016-02-02T04:05:08.000Z",
+					"updatedAt": "2016-02-02T04:05:08.000Z",
+					"write": true,
+					"collection": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+					"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f"
+				},
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132216185,
+					"request": "2ba39292-f2bd-2388-b738-13d63c5c1cfd",
+					"id": "b2762cd3-25c3-981f-e1b5-a39f066aea90",
+					"name": "200 Response",
+					"status": "",
+					"responseCode": {
+						"code": 201,
+						"name": "Created"
+					},
+					"time": "24",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "42",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 04:01:04 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"2a-B2pN4Rol6uughUHxb2gJAQ\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "[{\"name\":\"MySpace\",\"from\":2005,\"to\":2008}]",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "\"2ba39292-f2bd-2388-b738-13d63c5c1cfd\"",
+					"createdAt": "2016-02-02T04:05:08.000Z",
+					"updatedAt": "2016-02-02T04:05:08.000Z",
+					"write": true,
+					"collection": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+					"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f"
+				}
+			],
+			"rawModeData": "{\n    \"name\": \"MySpace\",\n    \"from\": 2005,\n    \"to\": 2008\n}",
+			"folder": null,
+			"folderId": null
+		},
+		{
+			"id": "54cb08a1-d282-023b-5144-83d5f9e108f2",
+			"name": "History of a specific trend",
+			"dataMode": "params",
+			"data": null,
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "Returns all date ranges for the given trend, sorted by date.\n\nThe return value is _always_ an array of trends, even if there is only one result.\n\n**404 response:** The specified trend doesn't exist",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": [],
+			"url": "{{root}}/trends/{{name}}",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+			"responses": [
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132183410,
+					"request": {
+						"url": "http://localhost:8080/api/trends/handlebar%20mustaches",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "029652af-61e8-986f-f4a1-4d1d53c36501"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					},
+					"id": "e18705fd-fec2-8501-b284-f14f7b0ef667",
+					"name": "200 Response",
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": "17",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "107",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 03:05:10 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"6b-lr+LAv0UZUn6jtxXxFsW8w\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "[{\"name\":\"Handlebar Mustaches\",\"from\":1890,\"to\":1950},{\"name\":\"Handlebar Mustaches\",\"from\":2009,\"to\":2016}]",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends/handlebar%20mustaches\",\"headers\":[{\"key\":\"Cache-Control\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"name\":\"Postman-Token\",\"value\":\"029652af-61e8-986f-f4a1-4d1d53c36501\"}],\"data\":\"\",\"method\":\"GET\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T03:05:21.000Z",
+					"updatedAt": "2016-02-02T03:05:21.000Z",
+					"write": true
+				},
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132183509,
+					"request": {
+						"url": "http://localhost:8080/api/trends/Mullets",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "75d4d4d3-4514-6125-eee7-ebfb49931016"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					},
+					"id": "2c1cdfd2-a45e-91f7-6f5a-9cd479ba5511",
+					"name": "404 Response",
+					"status": "",
+					"responseCode": {
+						"code": 404,
+						"name": "Not Found"
+					},
+					"time": "15",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "47",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 03:05:29 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"2f-DwY2qVDA087ruQGamm+H1g\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"error\":404,\"message\":\"Mullets aren't trendy\"}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends/Mullets\",\"headers\":[{\"key\":\"Cache-Control\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"name\":\"Postman-Token\",\"value\":\"75d4d4d3-4514-6125-eee7-ebfb49931016\"}],\"data\":\"\",\"method\":\"GET\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T03:05:36.000Z",
+					"updatedAt": "2016-02-02T03:05:36.000Z",
+					"write": true
+				}
+			]
+		},
+		{
+			"id": "c414b8c1-5edf-f0a6-e56d-a50ae56abcf3",
+			"name": "All trends for a specific year",
+			"dataMode": "params",
+			"data": null,
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "Returns all trends for the given year, sorted by name and then by date.\n\nIf the given year is between a trend's `from` and `to` dates (inclusive), then that trend will be returned.\n\n**404 response:** There are no trends for the given year.\n",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": [],
+			"url": "{{root}}/trends/{{year}}",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "e42eb157-3c28-f9fa-d5f8-0555c3644e6f",
+			"responses": [
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132173290,
+					"request": {
+						"url": "http://localhost:8080/api/trends/1992",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "6f8c5d94-cc48-90ae-f6f7-cfeff6a3c53e"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					},
+					"id": "7b766c45-859d-753f-bfd4-8559d704a067",
+					"name": "200 Response",
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": "11",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "178",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 02:42:51 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"b2-Zw5yDPFL4anwWj7hvSgQVA\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "[{\"name\":\"Crystal Pepsi\",\"from\":1992,\"to\":1993},{\"name\":\"MTV\",\"from\":1981,\"to\":1995},{\"name\":\"My Little Pony\",\"from\":1983,\"to\":1992},{\"name\":\"Vanilla Ice\",\"from\":1990,\"to\":1993}]",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends/1992\",\"headers\":[{\"key\":\"Cache-Control\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"name\":\"Postman-Token\",\"value\":\"6f8c5d94-cc48-90ae-f6f7-cfeff6a3c53e\"}],\"data\":\"\",\"method\":\"GET\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T02:48:18.000Z",
+					"updatedAt": "2016-02-02T02:48:18.000Z",
+					"write": true
+				},
+				{
+					"owner": "305754",
+					"lastUpdatedBy": "305754",
+					"lastRevision": 132173289,
+					"request": {
+						"url": "http://localhost:8080/api/trends/2007",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "20b89916-d474-2bf5-1bb9-8b9606143aff"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					},
+					"id": "5169dd3f-6177-a800-4ad0-3398cfe50097",
+					"name": "404 Response",
+					"status": "",
+					"responseCode": {
+						"code": 404,
+						"name": "Not Found"
+					},
+					"time": "11",
+					"headers": [
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "50",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 02 Feb 2016 02:42:26 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"32-2i8VCTLX3EVSj3UF94dDCw\"",
+							"description": ""
+						},
+						{
+							"name": "X-Powered-By",
+							"key": "X-Powered-By",
+							"value": "Express",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"error\":404,\"message\":\"2007 isn't a trendy year\"}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": "-1",
+					"version": null,
+					"requestObject": "{\"url\":\"http://localhost:8080/api/trends/2007\",\"headers\":[{\"key\":\"Cache-Control\",\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"key\":\"Postman-Token\",\"name\":\"Postman-Token\",\"value\":\"20b89916-d474-2bf5-1bb9-8b9606143aff\"}],\"data\":\"\",\"method\":\"GET\",\"dataMode\":\"params\"}",
+					"createdAt": "2016-02-02T02:48:18.000Z",
+					"updatedAt": "2016-02-02T02:48:18.000Z",
+					"write": true
+				}
+			]
+		}
+	]
+}
