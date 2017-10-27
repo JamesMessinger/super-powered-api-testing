@@ -23,6 +23,34 @@ describe('POST /characters', function () {
       });
   });
 
+  it('should not be able to create two characters with the same name', function () {
+    return Promise.resolve()
+      .then(function () {
+        // Create a character
+        return chai.request(API_ROOT)
+          .post('/characters')
+          .set('X-API-Key', API_KEY)
+          .send({ name: 'Super Coder', bio: 'The ORIGINAL Super Coder' });
+      })
+      .then(function (response) {
+        response.should.be.successful(201);
+
+        // Attempt to create a character with the same name
+        return chai.request(API_ROOT)
+          .post('/characters')
+          .set('X-API-Key', API_KEY)
+          .send({ name: 'Super Coder', bio: 'An IMPOSTER Super Coder' });
+      })
+      .then(function (response) {
+        throw new Error('Expected a 400 response, but got a ' + response.status);
+      })
+      .catch(function (error) {
+        error.response.should.be.an.error(409);
+        error.response.body.error.should.equal('CONFLICT');
+        error.response.body.message.should.equal('There is already another character named Super Coder');
+      });
+  });
+
   it('should create a hero, sidekick, and villain', function () {
     return Promise.resolve()
       .then(function () {
@@ -39,6 +67,19 @@ describe('POST /characters', function () {
               name: 'Professor Capital',
             },
           });
+      })
+      .then(function (response) {
+        // The response should just be Startup Man
+        response.should.be.successful(201);
+        response.body.should.be.a.character({
+          name: 'Startup Man',
+          type: 'hero',
+          links: {
+            self: API_ROOT + '/characters/startupman',
+            sidekick: API_ROOT + '/characters/theincrediblemvp',
+            nemesis: API_ROOT + '/characters/professorcapital',
+          }
+        });
       })
       .then(function () {
         // Fetch all characters
