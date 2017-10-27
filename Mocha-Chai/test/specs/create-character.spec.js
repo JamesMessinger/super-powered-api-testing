@@ -9,15 +9,9 @@ describe('POST /characters', function () {
           .set('X-API-Key', API_KEY)
           .send({ name: 'Super Coder', powers: ['10x-ing']});
       })
-      .then(function () {
-        // Fetch the character
-        return chai.request(API_ROOT)
-          .get('/characters/supercoder')
-          .set('X-API-Key', API_KEY);
-      })
       .then(function (response) {
         // The response should be Super Coder
-        response.should.be.successful(200);
+        response.should.be.successful(201);
         response.body.should.be.a.character({
           name: 'Super Coder',
           type: 'hero',
