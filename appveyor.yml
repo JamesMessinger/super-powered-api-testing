@@ -3,38 +3,45 @@
 
 image: Visual Studio 2017
 
+# Don't run MSBuild
+build: off
+
 environment:
   nodejs_version: "8"
 
 install:
+  # Install Node 8 (required by Mocha and Postman)
   - ps: Install-Product node $env:nodejs_version
-
-  - choco install maven
-
-  # Output version numbers, for debugging
   - node --version
   - npm --version
 
+  # Install Mocha + Chai
+  - cd mocha-chai
+  - npm install
+
+  # Install Newman (required by Postman)
+  - npm install --global newman
+
+  # Install Prism (required by Stoplight)
+  - curl -L "https://github.com/stoplightio/prism/releases/download/v2.0.0-beta.2/prism_windows_386.exe" > stoplight/prism.exe
+
+  # Install Maven (required by Restlet)
+  - choco install maven
+
 test_script:
   # Mocha + Chai
-  - cd mocha-chai && node banner.js
-  # - npm install
+  - cd ../mocha-chai && node banner.js
   # - npm run mocha
   # - npm run karma
 
-  # Restlet
-  - cd ../restlet && node banner.js
-  - mvn test
-
   # Postman
   - cd ../postman && node banner.js
-  # - npm install --global newman
   # - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  # - curl -L "https://github.com/stoplightio/prism/releases/download/v2.0.0-beta.2/prism_windows_386.exe" > prism.exe
   # - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
-# Don't run MSBuild
-build: off
+  # Restlet
+  - cd ../restlet && node banner.js
+  - mvn test

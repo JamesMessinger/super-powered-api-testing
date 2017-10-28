@@ -15,28 +15,35 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
-  # Install Node 8
+  # Install Node 8 (required by Mocha and Postman)
   - nvm install 8
   - node --version
   - npm --version
 
+  # Install Mocha + Chai
+  - cd mocha-chai
+  - npm install
+
+  # Install Newman (required by Postman)
+  - npm install --global newman
+
+  # Install Prism (required by Stoplight)
+  - sudo curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sudo sh
+
 script:
   # Mocha + Chai
-  - cd mocha-chai && node banner.js
-  # - npm install
+  - cd ../mocha-chai && node banner.js
   # - npm run mocha
   # - npm run karma
 
-  # Restlet
-  - cd ../restlet && node banner.js
-  - mvn test
-
   # Postman
   - cd ../postman && node banner.js
-  # - npm install --global newman
   # - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  # - sudo curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sudo sh
   # - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+
+  # Restlet
+  - cd ../restlet && node banner.js
+  - mvn test
