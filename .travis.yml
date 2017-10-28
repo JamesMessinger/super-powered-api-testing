@@ -18,6 +18,10 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
+  # Output version numbers, for debugging
+  - node --version
+  - npm --version
+
   # Mocha + Chai
   - cd mocha-chai && node banner.js
   - echo "travis_fold:start:SCRIPT folding starts"

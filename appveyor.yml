@@ -9,6 +9,10 @@ install:
   - npm install
 
 test_script:
+  # Output version numbers, for debugging
+  - node --version
+  - npm --version
+
   # Mocha + Chai
   - cd mocha-chai && node banner.js
   - npm install
