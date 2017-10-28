@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+console.log('\n\n\n');
 console.log(' ______    _______  _______  _______  ___      _______  _______ ');
 console.log('|    _ |  |       ||       ||       ||   |    |       ||       |');
 console.log('|   | ||  |    ___||  _____||_     _||   |    |    ___||_     _|');
