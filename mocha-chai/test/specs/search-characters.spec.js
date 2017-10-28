@@ -13,7 +13,7 @@ describe('GET /characters (with query params)', function () {
   });
 
   it('should find characters by type', function () {
-    let testData = [
+    var testData = [
       { name: 'Web Standards Woman', type: 'hero' },
       { name: 'The Incredible MVP', type: 'sidekick' },
       { name: 'The Feature Creep', type: 'villain' },
@@ -62,7 +62,7 @@ describe('GET /characters (with query params)', function () {
   });
 
   it('should find characters by name', function () {
-    let testData = [
+    var testData = [
       { name: 'Web Standards Woman' },
       { name: 'The Project Manager' },
       { name: 'The Incredible MVP' },
@@ -120,7 +120,7 @@ describe('GET /characters (with query params)', function () {
   });
 
   it('should find characters by name and type', function () {
-    let testData = [
+    var testData = [
       { name: 'Web Standards Woman', type: 'hero' },
       { name: 'The Project Manager', type: 'sidekick' },
       { name: 'The Incredible MVP', type: 'sidekick' },

@@ -63,7 +63,7 @@ describe('PUT /characters/{slug}', function () {
   });
 
   it('should change the character\'s sidekick and nemesis', function () {
-    let testData = [
+    var testData = [
       {
         name: 'Web Standards Woman',
         sidekick: {
@@ -120,7 +120,7 @@ describe('PUT /characters/{slug}', function () {
   });
 
   it('should not allow setting sidekick or nemesis to characters with the wrong type', function () {
-    let testData = [
+    var testData = [
       {
         name: 'Startup Man',
         sidekick: {

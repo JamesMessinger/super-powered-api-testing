@@ -45,7 +45,7 @@ describe('GET /characters', function () {
   });
 
   it('should return multiple characters', function () {
-    let testData = [
+    var testData = [
       { name: 'Web Standards Woman', powers: ['backward-compatibility']},
       { name: 'The Fantastic Four Spaces', powers: ['being objectively better than tabs']},
       { name: 'The Incredible MVP', powers: ['non-viability', 'justification']},
@@ -105,7 +105,7 @@ describe('GET /characters', function () {
   });
 
   it('should return heroes, sidekicks, and villains', function () {
-    let testData = [
+    var testData = [
       {
         name: 'Web Standards Woman',
         nemesis: {

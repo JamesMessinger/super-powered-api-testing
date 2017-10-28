@@ -1,7 +1,7 @@
 describe('GET /characters/{slug}', function () {
 
   it('should return the correct character', function () {
-    let testData = [
+    var testData = [
       { name: 'Web Standards Woman', type: 'hero' },
       { name: 'The Incredible MVP', type: 'sidekick' },
       { name: 'The Feature Creep', type: 'villain' },
@@ -36,7 +36,7 @@ describe('GET /characters/{slug}', function () {
   });
 
   it('should return links to the character\'s sidekick and villain', function () {
-    let testData = [
+    var testData = [
       {
         name: 'Web Standards Woman',
         nemesis: {

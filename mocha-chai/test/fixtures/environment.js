@@ -18,8 +18,8 @@
     }
     else if (host.browser) {
       // We're running in a web browser, so parse the value from the querystring
-      let parser = new RegExp('[?&]' + name + '=([^&]+)');
-      let parsed = parser.exec(location.search);
+      var parser = new RegExp('[?&]' + name + '=([^&]+)');
+      var parsed = parser.exec(location.search);
       if (parsed) {
         return parsed[1];
       }
