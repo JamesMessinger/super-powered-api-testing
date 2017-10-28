@@ -41,10 +41,14 @@ module.exports = function (karma) {
  * Configures the browsers for the current platform
  */
 function getBrowsersForCurrentPlatform () {
+  var isCI = process.env.CI;
   var isMac = /^darwin/.test(process.platform);
   var isWindows = /^win/.test(process.platform);
   var isLinux = !isMac && !isWindows;
 
+  if (isCI) {
+    return ['Firefox', 'ChromeHeadless'];
+  }
   if (isMac) {
     return ['Firefox', 'Chrome', 'Safari'];
   }

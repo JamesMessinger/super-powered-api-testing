@@ -1,0 +1,25 @@
+# Travis CI config
+# http://docs.travis-ci.com/user/languages/javascript-with-nodejs/
+# https://docs.travis-ci.com/user/customizing-the-build/
+# https://docs.travis-ci.com/user/migrating-from-legacy/
+
+dist: trusty
+sudo: false
+language: nodejs
+
+addons:
+  firefox: latest
+  chrome: stable
+
+before_script:
+  # Setup a virtual display for browser testing
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  # Mocha + Chai
+  - cd mocha-chai
+  - npm run mocha
+  - npm run karma
+
+
