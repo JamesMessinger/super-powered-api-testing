@@ -46,6 +46,10 @@ script:
   - echo "|   |    |       | _____| |  |   |  | ||_|| ||   _   || | |   |"
   - echo "|___|    |_______||_______|  |___|  |_|   |_||__| |__||_|  |__|"
 
+  - cd ../postman
+  - npm install --global newman
+  - newman run postman-collection.json --environment postman-environment.json
+
   - echo " _______  _______  _______  _______  ___      ___   _______  __   __  _______ "
   - echo "|       ||       ||       ||       ||   |    |   | |       ||  | |  ||       |"
   - echo "|  _____||_     _||   _   ||    _  ||   |    |   | |    ___||  |_|  ||_     _|"
