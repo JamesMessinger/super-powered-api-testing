@@ -28,9 +28,9 @@ test_script:
   - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
-  #- cd ../stoplight && node banner.js
+  - cd ../stoplight && node banner.js
   #- curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sh
-  #- prism conduct /Users/james/Code/Personal/Training/super-powered-api-testing/Stoplight/stoplight-collection.json --spec "/Users/james/Code/Personal/Training/super-powered-api-testing/Stoplight/stoplight-spec.json" --env "API_ROOT=http://localhost:8080" --env "SLUG=supercoder"
+  #- prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
 # Don't run MSBuild
 build: off
