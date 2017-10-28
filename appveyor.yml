@@ -1,6 +1,11 @@
 # AppVeyor Config
 # http://www.appveyor.com/docs/lang/nodejs-iojs
 
+# The VS2017 image includes Docker, which is needed to run Stoplight
+image: Visual Studio 2017
+
+clone_folder: c:\super-powered-api-testing
+
 environment:
   nodejs_version: "8"
 
@@ -29,8 +34,7 @@ test_script:
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  #- curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sh
-  #- prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+  - docker run -v c:\super-powered-api-testing\stoplight:/app bigstickcarpet/stoplight-prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
 # Don't run MSBuild
 build: off
