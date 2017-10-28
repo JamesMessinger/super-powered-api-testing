@@ -18,6 +18,7 @@ install:
   # Install Mocha + Chai
   - cd mocha-chai
   - npm install
+  - cd ..
 
   # Install Newman (required by Postman)
   - npm install --global newman
@@ -30,7 +31,7 @@ install:
 
 test_script:
   # Mocha + Chai
-  - cd ../mocha-chai && node banner.js
+  - cd mocha-chai && node banner.js
   - npm run mocha
   - npm run karma
 
