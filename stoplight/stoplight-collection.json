@@ -47,46 +47,6 @@
           }
         },
         {
-          "id": "rkzt",
-          "type": "http",
-          "name": "Get a specific character",
-          "input": {
-            "method": "get",
-            "url": "{$$.env.API_ROOT}/characters/{$$.env.SLUG}"
-          },
-          "after": {
-            "assertions": [
-              {
-                "target": "output.status",
-                "op": "eq",
-                "expected": 200
-              }
-            ]
-          }
-        },
-        {
-          "id": "byet",
-          "type": "http",
-          "name": "Updates a character",
-          "input": {
-            "method": "put",
-            "url": "{$$.env.API_ROOT}/characters/{$$.env.SLUG}",
-            "body": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\",\n  \"powers\": [\n    \"10-xing\",\n    \"Caffeine\"\n  ],\n  \"weakness\": \"Imposter syndrome\"\n}",
-            "headers": {
-              "Content-Type": "application/json"
-            }
-          },
-          "after": {
-            "assertions": [
-              {
-                "target": "output.status",
-                "op": "eq",
-                "expected": 200
-              }
-            ]
-          }
-        },
-        {
           "id": "hjb6",
           "type": "http",
           "name": "Deletes all characters",
