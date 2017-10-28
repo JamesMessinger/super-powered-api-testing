@@ -42,5 +42,5 @@ script:
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  - curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sh
+  - sudo curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sh
   - prism conduct /Users/james/Code/Personal/Training/super-powered-api-testing/Stoplight/stoplight-collection.json --spec "/Users/james/Code/Personal/Training/super-powered-api-testing/Stoplight/stoplight-spec.json" --env "API_ROOT=http://localhost:8080" --env "SLUG=supercoder"
