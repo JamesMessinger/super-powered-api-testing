@@ -14,7 +14,7 @@
       "description": "The `GET /characters` endpoint should return an array of all characters",
       "id": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8",
       "lastModified": "2017-10-27T15:05:04.923-05:00",
-      "name": "GET /characters - multiple characters",
+      "name": "Get all characters - multiple characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -437,7 +437,7 @@
       "description": "When there are no characters, The `GET /characters` endpoint should return an empty array - NOT an error",
       "id": "1c906e65-f6ee-4fd6-a7a2-18e9802b4965",
       "lastModified": "2017-10-27T15:05:04.923-05:00",
-      "name": "GET /characters - no characters exist",
+      "name": "Get all characters - no characters exist",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -557,7 +557,7 @@
       "description": "The `GET /characters` endpoint should return all characters whose names contain a given string",
       "id": "94c2849b-7de0-4c00-8259-2e67d4979885",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "GET /characters - query by name",
+      "name": "Search for characters - query by name",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -929,7 +929,7 @@
       "description": "The `GET /characters` endpoint should return all characters of the specified type, whose names also contain a given string",
       "id": "50a481a5-ba96-4bf3-9a07-a255635f1ac6",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "GET /characters - query by name and type",
+      "name": "Search for characters - query by name and type",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -1294,7 +1294,7 @@
       "description": "The `GET /characters` endpoint should return all characters of the specified type",
       "id": "2618b099-2dfd-4df3-b86c-94cd4b37d94e",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "GET /characters - query by type",
+      "name": "Search for characters - query by type",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -1660,7 +1660,7 @@
       "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
       "id": "d35145e3-1a8b-48fe-b24e-35a0a1c25a5b",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "GET /characters - query w/ no matches",
+      "name": "Search for characters - query w/ no matches",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -1791,7 +1791,7 @@
       "description": "The `GET /characters` endpoint should return sidekicks and nemesis in addition to heroes",
       "id": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8",
       "lastModified": "2017-10-27T15:05:04.923-05:00",
-      "name": "GET /characters - related characters",
+      "name": "Get all characters - related characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -2205,7 +2205,7 @@
       "description": "When there's only one character, The `GET /characters` endpoint should return a single-item array",
       "id": "64c3978a-6d3b-447a-9cfc-0005fc6f00df",
       "lastModified": "2017-10-27T15:05:04.923-05:00",
-      "name": "GET /characters - single character",
+      "name": "Get all characters - single character",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -2423,7 +2423,7 @@
       "description": "The `GET /characters/{slug}` endpoint should return the correct character",
       "id": "b6ce7134-64bd-4fa2-83bc-92977753a220",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "GET /characters/{slug} - correct result",
+      "name": "Get a specific character - correct result",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -2801,7 +2801,7 @@
       "description": "The `GET /characters/{slug}` endpoint should return a 404 if the character doesn't exist",
       "id": "9f6122e6-1285-4d6e-8cae-320095de591d",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "GET /characters/{slug} - nonexistent character",
+      "name": "Get a specific character - nonexistent character",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -2927,7 +2927,7 @@
       "description": "The `GET /characters/{slug}` endpoint should return links to the character's sidekick and nemesis",
       "id": "8267e815-b284-4ff7-a19f-853d37961879",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "GET /characters/{slug} - related characters",
+      "name": "Get a specific character - related characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -3203,7 +3203,7 @@
       "description": "Two characters cannot have the same name",
       "id": "fbb70f53-e3f3-44da-b2c7-716ba2beabbf",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "POST /characters - duplicate characters",
+      "name": "Create characters - duplicate characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -3434,7 +3434,7 @@
       "description": "Creates a hero, sidekicks, and nemesis all at the same time",
       "id": "34e8ca32-8aad-46a3-8641-56a00a433650",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "POST /characters - related characters",
+      "name": "Create characters - related characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -3772,7 +3772,7 @@
       "description": "Creates a new character",
       "id": "495796f4-3030-48a6-8f06-318917b35464",
       "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "POST /characters - single character",
+      "name": "Create characters - single character",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -3935,7 +3935,7 @@
       "description": "A character's sidekick and/or nemesis can be updated by setting them to the URL of another character",
       "id": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91",
       "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "PUT /characters/{slug} - change related characters",
+      "name": "Update characters - change related characters",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -4117,7 +4117,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"${\"Super Tech Heroes API\".\"PUT /characters/{slug} - change related characters\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"sidekick\"}\",\n  \"nemesis\": \"${\"Super Tech Heroes API\".\"PUT /characters/{slug} - change related characters\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"nemesis\"}\"\n}"
+        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"${\"Super Tech Heroes API\".\"Update characters - change related characters\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"sidekick\"}\",\n  \"nemesis\": \"${\"Super Tech Heroes API\".\"Update characters - change related characters\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"nemesis\"}\"\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -4130,7 +4130,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - change related characters\".\"3. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - change related characters\".\"3. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4201,7 +4201,7 @@
       "description": "When a character's name is changed, it's URL changes too",
       "id": "f49040e9-cbe6-4f6f-a707-e49ae40c5794",
       "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "PUT /characters/{slug} - name change",
+      "name": "Update characters - name change",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -4344,7 +4344,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4418,7 +4418,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4487,7 +4487,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - name change\".\"3. Rename the character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"3. Rename the character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4535,7 +4535,7 @@
       "description": "Attempting to set a character's sidekick and/or nemesis to a non-existent character will return a 404 error ",
       "id": "a00f31fe-3a09-4a39-81c9-9f6c11356d53",
       "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "PUT /characters/{slug} - related characters don't exist",
+      "name": "Update characters - related characters don't exist",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -4673,7 +4673,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - related characters don't exist\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - related characters don't exist\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4726,7 +4726,7 @@
       "description": "When updating a character, any properties that are not set are cleared",
       "id": "5dc4a754-a37c-4618-9a80-0f54fdb42c73",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "PUT /characters/{slug} - unset properties",
+      "name": "Update characters - unset properties",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -4863,7 +4863,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - unset properties\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - unset properties\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -4940,7 +4940,7 @@
       "description": "Updates an existing character",
       "id": "9ebefced-5de9-4153-8cd9-0062a05bc22d",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "PUT /characters/{slug} - update a character",
+      "name": "Update characters - update a character",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -5077,7 +5077,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - update a character\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - update a character\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
@@ -5160,7 +5160,7 @@
       "description": "Attempting to set a character's sidekick and/or nemesis to a character of the wrong type will return a 400 error ",
       "id": "fa0259c4-b8b2-4932-b6e7-d4a50a11d830",
       "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "PUT /characters/{slug} - wrong character types",
+      "name": "Update characters - wrong character types",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
@@ -5285,7 +5285,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"${\"Super Tech Heroes API\".\"PUT /characters/{slug} - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"nemesis\"}\",\n  \"nemesis\": \"${\"Super Tech Heroes API\".\"PUT /characters/{slug} - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"sidekick\"}\"\n}"
+        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"${\"Super Tech Heroes API\".\"Update characters - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"nemesis\"}\",\n  \"nemesis\": \"${\"Super Tech Heroes API\".\"Update characters - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"sidekick\"}\"\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -5298,7 +5298,7 @@
           "name": "https",
           "version": "V11"
         },
-        "host": "${\"Super Tech Heroes API\".\"PUT /characters/{slug} - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"self\"}",
+        "host": "${\"Super Tech Heroes API\".\"Update characters - wrong character types\".\"2. Create a hero + sidekick + villain\".\"response\".\"body\".\"links\".\"self\"}",
         "path": ""
       },
       "description": "",
