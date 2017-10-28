@@ -1,8 +1,8 @@
-[![Super-Powered API Testing](Images/Title-Banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
 What is this?
 --------------------------
-This website accompanies a talk/workshop ([here's the slide deck](https://github.com/BigstickCarpet/super-powered-api-testing/blob/master/Presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
+This website accompanies a talk/workshop ([here's the slide deck](https://github.com/BigstickCarpet/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
 
 
 Getting Started
