@@ -4,7 +4,7 @@
 # https://docs.travis-ci.com/user/migrating-from-legacy/
 
 dist: trusty
-sudo: false
+sudo: required
 language: nodejs
 node_js:
   - 8
@@ -43,5 +43,5 @@ script:
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  # - curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sh
-  # - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+  - sudo curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sudo sh
+  - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
