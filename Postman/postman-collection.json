@@ -1,180 +1,60 @@
 {
 	"info": {
-		"name": "Super Tech Heroes API",
-		"_postman_id": "2f04fd7c-a56c-0a1d-9e36-20a6eb5e2a27",
-		"description": "A REST API for technology-themed superheroes",
+		"name": "Super Tech Heroes API Tests",
+		"_postman_id": "d09a057f-f799-126a-03db-5edd0749df2d",
+		"description": "API_DESCRIPTION",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "characters",
-			"description": "Folder for characters",
+			"name": "Test fixtures",
+			"description": "",
 			"item": [
 				{
-					"name": "Find characters",
+					"name": "Initialize environment",
 					"event": [
 						{
-							"listen": "test",
+							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"});",
-									"",
-									"pm.test(\"12 characters were returned\", function () {",
-									"});"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "{{API_ROOT}}/characters?name={{name}}&type={{type}}",
-							"host": [
-								"{{API_ROOT}}"
-							],
-							"path": [
-								"characters"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "{{name}}",
-									"equals": true
-								},
-								{
-									"key": "type",
-									"value": "{{type}}",
-									"equals": true
-								}
-							]
-						},
-						"description": "This endpoint returns all characters by default, or you can filter by `name` and `type` via query parameters.\n"
-					},
-					"response": []
-				},
-				{
-					"name": "Creates a new character",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 201\", function () {",
-									"});",
-									"",
-									"pm.test(\"The Location header is set\", function () {",
-									"});",
-									"",
-									"pm.test(\"The new character was returned\", function () {",
-									"});"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\",\n    \"Caffeine\"\n  ],\n  \"weakness\": \"Imposter syndrome\",\n  \"nemesis\": {\n    \"name\": \"Space Bugs from Dimension Z\"\n  }\n}"
-						},
-						"url": {
-							"raw": "{{API_ROOT}}/characters",
-							"host": [
-								"{{API_ROOT}}"
-							],
-							"path": [
-								"characters"
-							]
-						},
-						"description": "This endpoint creates a new character. For heroes, you can also create the sidekick and/or nemesis at the same time by setting the `sidekick` and/or `nemesis` properties to objects rather than strings.\n"
-					},
-					"response": []
-				},
-				{
-					"name": "Deletes all characters",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 204\", function () {",
-									"});",
+									"// Generate a unique API Key to prevent conflicts with",
+									"// other people who are running these tests at the same time",
+									"pm.environment.set('API_KEY', Date.now().toString());",
 									""
 								]
 							}
 						}
 					],
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "X-API-Key",
+								"value": "{{API_KEY}}"
 							}
 						],
 						"body": {},
 						"url": {
-							"raw": "{{API_ROOT}}/characters",
+							"raw": "{{API_ROOT}}",
 							"host": [
 								"{{API_ROOT}}"
-							],
-							"path": [
-								"characters"
 							]
 						},
-						"description": "This endpoint deletes **all** characters.  It's mostly just used during testing, to reset state between each test.\n"
+						"description": "This request initializes environment variables that are used throughout this collection."
 					},
 					"response": []
 				},
 				{
-					"name": "Get a specific character",
+					"name": "Download OpenAPI definition",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"});",
-									"",
-									"pm.test(\"The Location header is set\", function () {",
-									"});",
-									"",
-									"pm.test(\"The correct character was returned\", function () {",
-									"});"
+									"pm.environment.set('openAPI', pm.response.text());",
+									""
 								]
 							}
 						}
@@ -183,180 +63,714 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "X-API-Key",
+								"value": "{{API_KEY}}"
 							}
 						],
 						"body": {},
 						"url": {
-							"raw": "{{API_ROOT}}/characters/{{SLUG}}",
-							"host": [
-								"{{API_ROOT}}"
-							],
-							"path": [
-								"characters",
-								"{{SLUG}}"
-							]
-						},
-						"description": "This endpoint returns a specific character, given its slug. The slug is the character's name, lowercased, with all non-alphanumeric characters removed. For example, the slug for \"Wonder Woman\" would be \"wonderwoman\".\n"
-					},
-					"response": []
-				},
-				{
-					"name": "Updates a character",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"});",
-									"",
-									"pm.test(\"The Location header is set\", function () {",
-									"});",
-									"",
-									"pm.test(\"The updated character was returned\", function () {",
-									"});"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{API_ROOT}}/characters/{{SLUG}}",
-							"host": [
-								"{{API_ROOT}}"
-							],
-							"path": [
-								"characters",
-								"{{SLUG}}"
-							]
-						},
-						"description": "This endpoint updates an existing character. Unlike the `POST /characters` endpoint, you _cannot_ update multiple characters at a time.\n"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "schema",
-			"description": "Folder for schema",
-			"item": [
-				{
-					"name": "Get API definition schema",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"});",
-									"",
-									"pm.test(\"The schema is valid\", function () {",
-									"});"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/openapi+json;version=3.0, application/openapi+yaml;version=3.0, application/openapi+json;version=2.0, application/openapi+yaml;version=2.0"
-							},
-							{
-								"key": "Accept",
-								"value": "{{Accept}}"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "{{API_ROOT}}/schema?accept={{accept}}",
+							"raw": "{{API_ROOT}}/schema",
 							"host": [
 								"{{API_ROOT}}"
 							],
 							"path": [
 								"schema"
-							],
-							"query": [
-								{
-									"key": "accept",
-									"value": "{{accept}}",
-									"equals": true
-								}
 							]
 						},
-						"description": "This endpoint returns the API definition schema. By default, the response is in OpenAPI v3.0 JSON format, but you can specify your desired format via the `Accept` header or an `accept` query parameter.\n"
+						"description": "This request downloads the OpenAPI (fka Swagger) definition for the Super Tech Heroes API and stores it in a Postman variable.  Many tests in this collection validate API responses against the JSON Schemas in the OpenAPI definition."
+					},
+					"response": []
+				},
+				{
+					"name": "Helpers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set('helpers', `(${helpers}())`);",
+									"",
+									"function helpers () {",
+									"    API_ROOT = pm.environment.get('API_ROOT');",
+									"    openAPI = JSON.parse(pm.environment.get('openAPI'));",
+									"    ",
+									"    /**",
+									"     * Deletes all characters, so that tests can start-off from an empty state",
+									"     */",
+									"    resetState = () => {",
+									"        let request = { ",
+									"            method: 'DELETE', ",
+									"            url: '{{API_ROOT}}/characters', ",
+									"            header: [",
+									"                { key: 'X-API-Key', value: '{{API_KEY}}' },",
+									"            ]",
+									"        };",
+									"        ",
+									"        pm.sendRequest(request, (err, response) => {",
+									"            assertSuccessfulResponse(response, 200);",
+									"        });",
+									"    };",
+									"    ",
+									"    /**",
+									"     * Returns the specified response header (case-insensitive)",
+									"     */",
+									"    getHeader = (response, name) => {",
+									"        name = name.toLowerCase();",
+									"        let header = response.headers.find(({ key }) => key.toLowerCase() === name);",
+									"        if (header) {",
+									"            return header.value;",
+									"        }",
+									"    };",
+									"    ",
+									"    /**",
+									"     * Asserts that the response was successful and has the specified status code",
+									"     */",
+									"    assertSuccessfulResponse = (response, status) => {",
+									"        pm.expect(response).to.be.an('object');",
+									"        pm.expect(response.code).to.be.a('number').at.least(200).and.below(400);",
+									"        pm.expect(response.code).to.equal(status);",
+									"",
+									"        let contentType = getHeader(response, 'content-type');",
+									"        pm.expect(contentType).to.be.a('string').and.include('application/json');",
+									"    };",
+									"    ",
+									"    /**",
+									"     * Asserts that the response was an error and has the specified status code",
+									"     */",
+									"    assertErrorResponse = (response, status) => {",
+									"        pm.expect(response).to.be.an('object');",
+									"        pm.expect(response.code).to.be.a('number').at.least(400).and.below(600);",
+									"        pm.expect(response.code).to.equal(status);",
+									"",
+									"        let contentType = getHeader(response, 'content-type');",
+									"        pm.expect(contentType).to.be.a('string').and.include('application/json');",
+									"    ",
+									"        // Validate the response body against the OpenAPI schema",
+									"        assertJSONSchema(response.json(), openAPI.components.schemas.ErrorResponse);",
+									"    };",
+									"        ",
+									"    /**",
+									"     * Asserts that the character is valid and has the expected property values",
+									"     */",
+									"    assertCharacter = (character, expected) => {",
+									"        // Validate the character against the OpenAPI schema",
+									"        assertJSONSchema(character, openAPI.components.schemas.CharacterResponse);",
+									"    ",
+									"        // The HATEOAS links should all be relative to the API_ROOT",
+									"        for (let key of Object.keys(character.links)) {",
+									"          var link = character.links[key];",
+									"          pm.expect(link.substr(0, API_ROOT.length)).to.equal(API_ROOT);",
+									"          pm.expect(link.substr(API_ROOT.length)).to.match(/^\\/characters\\/[a-z0-9]+$/);",
+									"        }",
+									"    ",
+									"        // Make sure the character's properties have the expected values",
+									"        for (let key of Object.keys(expected)) {",
+									"          var actualValue = character[key];",
+									"          var expectedValue = expected[key];",
+									"          pm.expect(actualValue).to.deep.equal(expectedValue);",
+									"        }",
+									"    };",
+									"    ",
+									"    /**",
+									"     * Validates the given object against the JSON Schema",
+									"     */",
+									"    assertJSONSchema = (data, schema) => {",
+									"        let isValid = tv4.validate(data, schema);",
+									"        if (!isValid) {",
+									"            throw tv4.error;",
+									"        }",
+									"    };",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{API_KEY}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{API_ROOT}}",
+							"host": [
+								"{{API_ROOT}}"
+							]
+						},
+						"description": "This request creates helper functions and variables that are used throughout this collection to reduce redundancy. The helpers are stored in a Postman variable named \"helpers\".  Use the JavaScript `eval()` function to load the helpers.  For example:\n\n```javascript\n// Load our helpers\neval(pm.environment.get('helpers'));\n```"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Get API info",
-			"event": [
+			"name": "Get all characters",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"});",
-							"",
-							"pm.test(\"Status code is 200\", function () {",
-							"});",
-							"",
-							"pm.test(\"The version number is correct\", function () {",
-							"});"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "{{API_ROOT}}/",
-					"host": [
-						"{{API_ROOT}}"
+					"name": "No characters",
+					"description": "",
+					"item": [
+						{
+							"name": "Get all characters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 200);",
+											"});",
+											"",
+											"pm.test('Response is an empty array', () => {",
+											"    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(0);",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"// Delete all existing characters",
+											"resetState();",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": "There are no characters, so the response should be an empty array - NOT an error"
+							},
+							"response": []
+						}
 					],
-					"path": [
-						""
-					]
+					"_postman_isSubFolder": true
 				},
-				"description": "This endpoint returns general API info, such as the version number, description, and relevant links.\n"
-			},
-			"response": []
+				{
+					"name": "Single character",
+					"description": "",
+					"item": [
+						{
+							"name": "Create a character",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helpers",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 201);",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helpers",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"// Delete all existing characters",
+											"resetState();",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"name\": \"Super Coder\", \n\t\"powers\": [\n\t\t\"10x-ing\"\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get all characters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 200);",
+											"});",
+											"",
+											"pm.test('The correct character was returned', () => {",
+											"    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(1);",
+											"",
+											"    let character = pm.response.json()[0];",
+											"    assertCharacter(character, {",
+											"      name: 'Super Coder',",
+											"      type: 'hero',",
+											"      powers: ['10x-ing'],",
+											"      links: {",
+											"        self: API_ROOT + '/characters/supercoder',",
+											"      }",
+											"    });",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": "The response should be an array containing the character that we just created"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Multiple characters",
+					"description": "",
+					"item": [
+						{
+							"name": "Create character 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 201);",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"// Delete all existing characters",
+											"resetState();",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"name\": \"Web Standards Woman\", \n\t\"powers\": [\n\t\t\"backward-compatibility\"\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create character 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 201);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"name\": \"The Fantastic Four Spaces\", \n\t\"powers\": [\n\t\t\"being objectively better than tabs\"\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create character 3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 201);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"name\": \"The Incredible MVP\", \n\t\"powers\": [\n\t\t\"non-viability\", \n\t\t\"justification\"\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get all characters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Load our helper functions",
+											"eval(pm.environment.get('helpers'));",
+											"",
+											"pm.test('Successful response', () => {",
+											"    assertSuccessfulResponse(pm.response, 200);",
+											"});",
+											"",
+											"pm.test('The correct characters were returned', () => {",
+											"    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(3);",
+											"",
+											"    // The characters should be sorted by name",
+											"    let fantasticFourSpaces = pm.response.json()[0];",
+											"    let incredibleMVP = pm.response.json()[1];",
+											"    let webStandardsWoman = pm.response.json()[2];",
+											"    ",
+											"    assertCharacter(fantasticFourSpaces, {",
+											"      name: 'The Fantastic Four Spaces',",
+											"      type: 'hero',",
+											"      powers: ['being objectively better than tabs'],",
+											"      links: {",
+											"        self: API_ROOT + '/characters/thefantasticfourspaces',",
+											"      }",
+											"    });",
+											"    ",
+											"    assertCharacter(incredibleMVP, {",
+											"      name: 'The Incredible MVP',",
+											"      type: 'hero',",
+											"      powers: ['non-viability', 'justification'],",
+											"      links: {",
+											"        self: API_ROOT + '/characters/theincrediblemvp',",
+											"      }",
+											"    });",
+											"    ",
+											"    assertCharacter(webStandardsWoman, {",
+											"      name: 'Web Standards Woman',",
+											"      type: 'hero',",
+											"      powers: ['backward-compatibility'],",
+											"      links: {",
+											"        self: API_ROOT + '/characters/webstandardswoman',",
+											"      }",
+											"    });",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-API-Key",
+										"value": "{{API_KEY}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{API_ROOT}}/characters",
+									"host": [
+										"{{API_ROOT}}"
+									],
+									"path": [
+										"characters"
+									]
+								},
+								"description": "The response should contain all three of the characters that we just created"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Multiple related characters",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Search for characters",
+			"description": "",
+			"item": [
+				{
+					"name": "Query w/ no matches",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Query by name",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Query by type",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Query by name and type",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Get a specific character",
+			"description": "",
+			"item": [
+				{
+					"name": "Correct result",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Non-existent character",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Related characters",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Create characters",
+			"description": "",
+			"item": [
+				{
+					"name": "Single character",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Multiple related characters",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Duplicate name",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Update characters",
+			"description": "",
+			"item": [
+				{
+					"name": "Update a character",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Unset properties",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Change related characters",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Rename a character",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Related characters don't exist",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Related characters w/ wrong types ",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
 		}
 	]
 }
