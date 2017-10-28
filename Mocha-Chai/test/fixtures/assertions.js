@@ -40,6 +40,7 @@ before('Custom assertions', function () {
       link.substr(API_ROOT.length).should.match(/^\/characters\/[a-z0-9]+$/);
     });
 
+    // Make sure the character's properties have the expected values
     Object.keys(expected).forEach(function (key) {
       var actualValue = character[key];
       var expectedValue = expected[key];
