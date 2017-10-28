@@ -31,16 +31,16 @@ install:
 test_script:
   # Mocha + Chai
   - cd ../mocha-chai && node banner.js
-  # - npm run mocha
-  # - npm run karma
+  - npm run mocha
+  - npm run karma
 
   # Postman
   - cd ../postman && node banner.js
-  # - newman run postman-collection.json --environment postman-environment.json
+  - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  # - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+  - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
   # Restlet
   - cd ../restlet && node banner.js
