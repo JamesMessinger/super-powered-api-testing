@@ -13,6 +13,8 @@ install:
   # Output version numbers, for debugging
   - node --version
   - npm --version
+  - docker --version
+  - docker info
 
 test_script:
   # Mocha + Chai
@@ -31,7 +33,7 @@ test_script:
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  - docker run -v ./:/app bigstickcarpet/stoplight-prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+  - docker run -v .:c:\app bigstickcarpet/stoplight-prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
 # Don't run MSBuild
 build: off
