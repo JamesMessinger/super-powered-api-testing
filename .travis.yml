@@ -16,7 +16,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
   # Install Node 8
-  - nvm use 8
+  - nvm install 8
   - node --version
   - npm --version
 
