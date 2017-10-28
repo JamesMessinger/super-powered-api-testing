@@ -44,4 +44,4 @@ test_script:
 
   # Restlet
   - cd ../restlet && node banner.js
-  - mvn test
+  - mvn test --quiet --define license_key=$LICENSE_KEY

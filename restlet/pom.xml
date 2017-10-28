@@ -18,7 +18,7 @@
                         <configuration>
                           <file>restlet-repository.json</file>
                           <selectedEnvironment>super-tech-heroes (public)</selectedEnvironment>
-                          <licenseKey></licenseKey>
+                          <licenseKey>${license_key}</licenseKey>
                         </configuration>
                     </execution>
                 </executions>
