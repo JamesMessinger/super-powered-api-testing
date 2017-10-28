@@ -1,5 +1,8 @@
 [![Super-Powered API Testing](img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
+[![Build Status](https://api.travis-ci.org/BigstickCarpet/super-powered-api-testing.svg?branch=master)](https://travis-ci.org/BigstickCarpet/super-powered-api-testing)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/bigstickcarpet/super-powered-api-testing?svg=true&branch=master&failingText=Windows%20build%20failing&passingText=Windows%20build%20passing)](https://ci.appveyor.com/project/BigstickCarpet/super-powered-api-testing/branch/master)
+
 What is this?
 --------------------------
 This website accompanies a talk/workshop ([here's the slide deck](https://github.com/BigstickCarpet/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
@@ -19,7 +22,7 @@ Some of the testing tools require you to download and install them. Others requi
     - [Stoplight](./stoplight/)
 
 
-The ✨_Super Tech Heroes_✨ API
+The _✨Super Tech Heroes✨_ API
 --------------------------
 This is the REST API that we're testing.  It's a directory of technology-themed superheroes, sidekicks, and villains.
 
