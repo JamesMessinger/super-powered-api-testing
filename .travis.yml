@@ -23,9 +23,7 @@ before_script:
 script:
   # Mocha + Chai
   - cd mocha-chai && node banner.js
-  - echo "travis_fold:start:SCRIPT folding starts"
   - npm install
-  - echo "travis_fold:end:SCRIPT folding ends"
   - npm run mocha
   - npm run karma
 
@@ -34,9 +32,7 @@ script:
 
   # Postman
   - cd ../postman && node banner.js
-  - echo "travis_fold:start:SCRIPT folding starts"
   - npm install --global newman
-  - echo "travis_fold:end:SCRIPT folding ends"
   - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
