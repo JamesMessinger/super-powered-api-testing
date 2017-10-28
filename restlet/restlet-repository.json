@@ -1660,7 +1660,7 @@
       "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
       "id": "d35145e3-1a8b-48fe-b24e-35a0a1c25a5b",
       "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Search for characters - query w/ no matches",
+      "name": "Search for characters - query with no matches",
       "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
     },
     {
