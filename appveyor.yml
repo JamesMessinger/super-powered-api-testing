@@ -15,17 +15,17 @@ install:
   - npm --version
 
 test_script:
-  # # Mocha + Chai
-  # - cd mocha-chai && node banner.js
+  # Mocha + Chai
+  - cd mocha-chai && node banner.js
   # - npm install
   # - npm run mocha
   # - npm run karma
 
-  # # Restlet
-  # - cd ../restlet && node banner.js
+  # Restlet
+  - cd ../restlet && node banner.js
 
-  # # Postman
-  # - cd ../postman && node banner.js
+  # Postman
+  - cd ../postman && node banner.js
   # - npm install --global newman
   # - newman run postman-collection.json --environment postman-environment.json
 
