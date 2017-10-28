@@ -21,7 +21,7 @@
     "url": "git+https://github.com/BigstickCarpet/super-powered-api-testing.git"
   },
   "scripts": {
-    "start": "static-server --port 3000 & open http://localhost:3000/test/browser.html",
+    "start": "opn test/browser.html",
     "test": "npm run mocha && npm run karma",
     "mocha": "mocha",
     "karma": "karma start --single-run"
@@ -40,7 +40,7 @@
     "karma-mocha": "^1.3.0",
     "karma-safari-launcher": "^1.0.0",
     "mocha": "^4.0.1",
-    "static-server": "^2.0.5"
+    "opn-cli": "^3.1.0"
   },
   "engines": {
     "node": ">=4.0",
