@@ -13,10 +13,10 @@ Getting Started
 - **Step 2: Setup each tool**<br>
 Some of the testing tools require you to download and install them. Others require you to create free online accounts.  Here are the setup instructions for each tool:
 
-    - [Mocha+Chai](./Mocha-Chai/)
-    - [Restlet](./Restlet/)
-    - [Postman](./Postman/)
-    - [Stoplight](./Stoplight/)
+    - [Mocha+Chai](./mocha-chai/)
+    - [Restlet](./restlet/)
+    - [Postman](./postman/)
+    - [Stoplight](./stoplight/)
 
 
 The ✨_Super Tech Heroes_✨ API
