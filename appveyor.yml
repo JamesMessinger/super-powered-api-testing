@@ -4,33 +4,30 @@
 # The VS2017 image includes Docker, which is needed to run Stoplight
 image: Visual Studio 2017
 
-clone_folder: c:\super-powered-api-testing
-
 environment:
   nodejs_version: "8"
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install
 
   # Output version numbers, for debugging
   - node --version
   - npm --version
 
 test_script:
-  # Mocha + Chai
-  - cd mocha-chai && node banner.js
-  - npm install
-  - npm run mocha
-  - npm run karma
+  # # Mocha + Chai
+  # - cd mocha-chai && node banner.js
+  # - npm install
+  # - npm run mocha
+  # - npm run karma
 
-  # Restlet
-  - cd ../restlet && node banner.js
+  # # Restlet
+  # - cd ../restlet && node banner.js
 
-  # Postman
-  - cd ../postman && node banner.js
-  - npm install --global newman
-  - newman run postman-collection.json --environment postman-environment.json
+  # # Postman
+  # - cd ../postman && node banner.js
+  # - npm install --global newman
+  # - newman run postman-collection.json --environment postman-environment.json
 
   # Stoplight
   - cd ../stoplight && node banner.js
