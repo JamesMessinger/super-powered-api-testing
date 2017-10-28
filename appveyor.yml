@@ -30,7 +30,7 @@ test_script:
 
   # Stoplight
   - cd ../stoplight && node banner.js
-  - Invoke-WebRequest "https://github.com/stoplightio/prism/releases/download/v2.0.0-beta.2/prism_windows_386.exe" -OutFile ./prism.exe
+  - curl -L "https://github.com/stoplightio/prism/releases/download/v2.0.0-beta.2/prism_windows_386.exe" > prism.exe
   - prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
 
 # Don't run MSBuild
