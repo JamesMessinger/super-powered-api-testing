@@ -5,17 +5,17 @@
     {
       "type": "Project",
       "description": "A REST API for technology-themed superheroes",
-      "id": "de3db2c3-6ff8-436b-b925-049fd87517f1",
-      "lastModified": "2017-10-27T15:07:36.750-05:00",
+      "id": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5",
+      "lastModified": "2017-10-29T08:54:27.144-05:00",
       "name": "Super Tech Heroes API"
     },
     {
       "type": "Service",
-      "description": "The `GET /characters` endpoint should return an array of all characters",
-      "id": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
-      "name": "Get all characters - multiple characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "description": "Two characters cannot have the same name",
+      "id": "ee0f4ffc-3b98-4529-a84d-cff0d5522489",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "Create characters - duplicate characters",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -47,8 +47,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "e31e5389-5add-43dd-8a4d-a73d556662fe",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "b9c924ab-9ab7-4271-b769-8bde640bd66b",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -66,7 +66,1519 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8"
+      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"bio\": \"The ORIGINAL Super Coder\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "027b9269-35db-4153-9296-8d5419e4b0a7",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "2. Create a character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Super Coder"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.type",
+          "value": "hero"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers.0",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.bio",
+          "value": "The ORIGINAL Super Coder"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/supercoder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"bio\": \"An IMPOSTER Super Coder\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "330b7828-9f34-46a0-b018-3323b0d74a5d",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "3. Create another character with the same name",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "409"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.error",
+          "value": "CONFLICT"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.message",
+          "value": "There is already another character named Super Coder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+    },
+    {
+      "type": "Service",
+      "description": "Creates a hero, sidekicks, and nemesis all at the same time",
+      "id": "ba942e90-ff36-43f1-8fe8-0544ebb25e26",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "Create characters - related characters",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "2539b08d-51e9-4d73-bc0f-9d68dbdccddc",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "ae3a3e3f-a734-4524-92e1-b34a2d97f247",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "2. Create a hero + sidekick + villain",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Startup Man"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.type",
+          "value": "hero"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers",
+          "value": "[]"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/startupman"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.sidekick",
+          "value": "${API_ROOT}/characters/theincrediblemvp"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.nemesis",
+          "value": "${API_ROOT}/characters/professorcapital"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "e8c22189-8001-4ef1-a58e-84d2ccb091ad",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "3. Get all characters",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.name",
+          "value": "Professor Capital"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.type",
+          "value": "villain"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.powers",
+          "value": "[]"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.links.self",
+          "value": "${API_ROOT}/characters/professorcapital"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.name",
+          "value": "Startup Man"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.type",
+          "value": "hero"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.powers",
+          "value": "[]"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.links.self",
+          "value": "${API_ROOT}/characters/startupman"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.name",
+          "value": "The Incredible MVP"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.type",
+          "value": "sidekick"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.powers",
+          "value": "[]"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.links.self",
+          "value": "${API_ROOT}/characters/theincrediblemvp"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.3",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+    },
+    {
+      "type": "Service",
+      "description": "Creates a new character",
+      "id": "083878d0-a365-4008-8e77-43ef32d2af38",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "Create characters - single character",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "56c21047-fe1e-4021-bda2-51f4c68dd551",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "083878d0-a365-4008-8e77-43ef32d2af38"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "a20a3644-c761-4984-b855-1b3630af9f63",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "name": "2. Create a character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Super Coder"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.type",
+          "value": "hero"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers.0",
+          "value": "10-xing"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers.1",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/supercoder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "083878d0-a365-4008-8e77-43ef32d2af38"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters/{slug}` endpoint should return the correct character",
+      "id": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "name": "Get a specific character - correct result",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "0166c6cf-d2be-4be4-ac0f-9c2d8a984d66",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "85426b71-e187-44fc-9342-f6c6af7a50d4",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "2. Create Character 1",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Incredible MVP\",\n  \"type\": \"sidekick\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "cd22a7ed-2291-4cd3-80f2-976ac33cd9cb",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "3. Create Character 2",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Feature Creep\",\n  \"type\": \"villain\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "61afd696-ba91-4c27-9075-4aaddcd3cb39",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "4. Create Character 3",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Fantastic Four Spaces\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "700d8dad-1351-4e32-acd8-342dee560010",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "5. Create Character 4",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters/theincrediblemvp"
+      },
+      "id": "5efd74a8-5ccd-4757-a4a4-52e14b781059",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "6. Get a specific character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "The Incredible MVP"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.type",
+          "value": "sidekick"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers.0",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/theincrediblemvp"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters/{slug}` endpoint should return a 404 if the character doesn't exist",
+      "id": "b2d07b92-1f67-4563-ae34-f15760914256",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "Get a specific character - nonexistent character",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "862b9a94-0764-41a6-99c3-3f2f032a447d",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b2d07b92-1f67-4563-ae34-f15760914256"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters/supercoder"
+      },
+      "id": "4700adc3-54bb-4087-93c9-234239a5fd01",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "6. Try to get a non-existent character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "404"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.error",
+          "value": "NOT_FOUND"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.message",
+          "value": "Character \"supercoder\" does not exist"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b2d07b92-1f67-4563-ae34-f15760914256"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters/{slug}` endpoint should return links to the character's sidekick and nemesis",
+      "id": "26687ebf-93e5-47fb-b78e-17532f711774",
+      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "name": "Get a specific character - related characters",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "5961ef15-0dda-4587-934c-346b6b42e875",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"nemesis\": {\n    \"name\": \"IE 6\"\n  }\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "d120e5e1-9bfc-4c4d-a182-7541865deed3",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "2. Create a hero + villain",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "351a26ac-e63a-48ef-a738-3fa1ab8bde1f",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "3. Create a hero + sidekick + villain",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters/startupman"
+      },
+      "id": "819101d5-1ada-412c-96af-7327a88b6be0",
+      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "name": "4. Get a character and links to their relations",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Startup Man"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.type",
+          "value": "hero"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.powers",
+          "value": "[]"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.weakness",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.bio",
+          "value": ""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/startupman"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.sidekick",
+          "value": "${API_ROOT}/characters/theincrediblemvp"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.nemesis",
+          "value": "${API_ROOT}/characters/professorcapital"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters` endpoint should return an array of all characters",
+      "id": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "name": "Get all characters - multiple characters",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "9583e4da-72f6-4cf6-b496-c12864e9c016",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
     },
     {
       "type": "Request",
@@ -99,8 +1611,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "f67489fd-2e03-4bfe-980b-543e696dfff5",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "00358c71-4044-40c8-808d-f8de0c21e915",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
@@ -123,7 +1635,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8"
+      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
     },
     {
       "type": "Request",
@@ -156,8 +1668,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "fdb9ab12-bebf-4b7b-8cb2-afdfb4937dc2",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "928b64ea-89b0-4a79-ad9b-b51c3044300f",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
@@ -180,7 +1692,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8"
+      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
     },
     {
       "type": "Request",
@@ -213,8 +1725,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "7f84395c-6724-497d-8e37-862020b7d157",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "748b3191-f31e-4605-9a3e-a5384bc34704",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
@@ -237,7 +1749,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8"
+      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
     },
     {
       "type": "Request",
@@ -267,8 +1779,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "d3b4c001-fa35-4d67-8cd2-ff9c475b2313",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "b98b4a12-c4b5-450c-946d-166413f3342d",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
       "name": "5. Get all characters",
       "headers": [
         {
@@ -430,15 +1942,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a5254b52-9877-4ce3-85a7-7f77ef9af7f8"
+      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
     },
     {
       "type": "Service",
       "description": "When there are no characters, The `GET /characters` endpoint should return an empty array - NOT an error",
-      "id": "1c906e65-f6ee-4fd6-a7a2-18e9802b4965",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "fc275cca-c2ae-42b6-a85c-413da9c34547",
+      "lastModified": "2017-10-29T06:36:50.120-05:00",
       "name": "Get all characters - no characters exist",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -470,8 +1982,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "b053b0f2-e59b-486a-9de9-e00adfd9c718",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "b84ffcf2-d7ce-4ff6-a237-79752dffd93a",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -489,7 +2001,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "1c906e65-f6ee-4fd6-a7a2-18e9802b4965"
+      "parentId": "fc275cca-c2ae-42b6-a85c-413da9c34547"
     },
     {
       "type": "Request",
@@ -519,8 +2031,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "1f0005b0-e8c4-48c7-adba-dc27669de8cc",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "3748c9d7-1e6b-42bb-8267-aed5728346bf",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
       "name": "2. Get all characters",
       "headers": [
         {
@@ -550,1249 +2062,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "1c906e65-f6ee-4fd6-a7a2-18e9802b4965"
-    },
-    {
-      "type": "Service",
-      "description": "The `GET /characters` endpoint should return all characters whose names contain a given string",
-      "id": "94c2849b-7de0-4c00-8259-2e67d4979885",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Search for characters - query by name",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "4da0ad01-b481-4fdf-a726-1917fc9e4419",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Web Standards Woman\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "00f7b00d-5682-4614-85d6-9e30086ae769",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "2. Create Character 1",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Incredible MVP\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "7e7e657c-8ea7-48b8-86a6-57d8e2d4d831",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "3. Create Character 2",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Project Manager\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "7ab5f8b2-eeee-4bd5-a0ff-150fb4a29305",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "4. Create Character 3",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Testing Man\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "9969c68e-18d6-458f-96b6-42694bd07312",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "5. Create Character 4",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": [
-            {
-              "enabled": true,
-              "name": "name",
-              "value": "mAn"
-            }
-          ]
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "c472f6d4-d423-449e-9074-fc8f7c225bb0",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "6. Search by type",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.name",
-          "value": "Testing Man"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.name",
-          "value": "The Project Manager"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.name",
-          "value": "Web Standards Woman"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.3",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "94c2849b-7de0-4c00-8259-2e67d4979885"
-    },
-    {
-      "type": "Service",
-      "description": "The `GET /characters` endpoint should return all characters of the specified type, whose names also contain a given string",
-      "id": "50a481a5-ba96-4bf3-9a07-a255635f1ac6",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Search for characters - query by name and type",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "04419e6a-4fda-401c-8de9-f21d9af9d561",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "9e3d4f00-100d-4705-91b7-2ed1b3f4204f",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "2. Create Character 1",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Incredible MVP\",\n  \"type\": \"sidekick\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "2a8be2fd-b625-4a9b-97f7-cf7733cc2d20",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "3. Create Character 2",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Project Manager\",\n  \"type\": \"sidekick\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "c44fd939-59bb-42b9-9bf3-7d11f83b30f6",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "4. Create Character 3",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Testing Man\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "b400b3e7-0803-4977-9cf9-158b01fcd9cd",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "5. Create Character 4",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": [
-            {
-              "enabled": true,
-              "name": "name",
-              "value": "man"
-            },
-            {
-              "enabled": true,
-              "name": "type",
-              "value": "sidekick"
-            }
-          ]
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "f4a0403c-ab8d-4242-aece-f7f5e1a977c4",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "6. Search by type",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.name",
-          "value": "The Project Manager"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.1",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "50a481a5-ba96-4bf3-9a07-a255635f1ac6"
-    },
-    {
-      "type": "Service",
-      "description": "The `GET /characters` endpoint should return all characters of the specified type",
-      "id": "2618b099-2dfd-4df3-b86c-94cd4b37d94e",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Search for characters - query by type",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "f3c72229-23a0-436d-8ed9-12a0e220200a",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "250cd410-b5e9-496d-ad08-ab0634eb6d68",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "2. Create Character 1",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Incredible MVP\",\n  \"type\": \"sidekick\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "83aee339-cab2-4125-a373-3f52422d0621",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "3. Create Character 2",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Feature Creep\",\n  \"type\": \"villain\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "6b1d58be-9546-4a4d-9779-4369bf63400a",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "4. Create Character 3",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"The Fantastic Four Spaces\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "247dd3ae-83ee-4898-99fe-b514bffea27a",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "5. Create Character 4",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": [
-            {
-              "enabled": true,
-              "name": "type",
-              "value": "hero"
-            }
-          ]
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "42ba80f9-a7b6-4024-aec6-3bb6e2c758a3",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "6. Search by type",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.name",
-          "value": "The Fantastic Four Spaces"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.name",
-          "value": "Web Standards Woman"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.2",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "2618b099-2dfd-4df3-b86c-94cd4b37d94e"
-    },
-    {
-      "type": "Service",
-      "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
-      "id": "d35145e3-1a8b-48fe-b24e-35a0a1c25a5b",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Search for characters - query with no matches",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "78725108-8029-4eb1-bac3-f38880b8c2d4",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "d35145e3-1a8b-48fe-b24e-35a0a1c25a5b"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": [
-            {
-              "enabled": true,
-              "name": "name",
-              "value": "spiderman"
-            },
-            {
-              "enabled": true,
-              "name": "type",
-              "value": "villain"
-            }
-          ]
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "bcba11a4-528b-430a-88bb-53c794267ccd",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "2. Search for a character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$",
-          "value": "[]"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "d35145e3-1a8b-48fe-b24e-35a0a1c25a5b"
+      "parentId": "fc275cca-c2ae-42b6-a85c-413da9c34547"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return sidekicks and nemesis in addition to heroes",
-      "id": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "2a0a4fb5-8548-4d95-b092-823f8006ab79",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "Get all characters - related characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -1824,8 +2102,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "09c228ea-8fbb-434c-8ae7-248d793f6a2f",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "19d6616b-d0db-401b-9c84-c3b19f9a09fa",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -1843,7 +2121,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8"
+      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
     },
     {
       "type": "Request",
@@ -1876,8 +2154,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "4f75ffbf-9cd5-4f27-bfbb-839a551c3c02",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "07be0256-1717-4ab4-be48-27e2bc6e1182",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "2. Create a hero + villain",
       "headers": [
         {
@@ -1900,7 +2178,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8"
+      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
     },
     {
       "type": "Request",
@@ -1933,8 +2211,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "6756c1af-b4e9-4ee6-99f8-2e2c5301155b",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "3ed3c190-dc92-46e7-a0d6-34f737f60b5f",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "3. Create a hero + sidekick + villain",
       "headers": [
         {
@@ -1957,7 +2235,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8"
+      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
     },
     {
       "type": "Request",
@@ -1987,8 +2265,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "a303aa26-c665-4919-80c9-14ede0e43b3b",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "031a727a-c4e7-40f3-bbf4-5c798dc8e7ed",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "4. Get all characters",
       "headers": [
         {
@@ -2198,15 +2476,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "d3371b49-d8ce-44a6-ab34-124e9ae1d0a8"
+      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
     },
     {
       "type": "Service",
       "description": "When there's only one character, The `GET /characters` endpoint should return a single-item array",
-      "id": "64c3978a-6d3b-447a-9cfc-0005fc6f00df",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "e661eb6f-22ec-492b-a103-665045ecb9dd",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "Get all characters - single character",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -2238,8 +2516,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "cc9988b0-1e0c-4c6b-898b-a94b5edfca8c",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "8cb14f20-b2c5-4b86-b9e9-de0b682a8ea8",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -2257,7 +2535,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "64c3978a-6d3b-447a-9cfc-0005fc6f00df"
+      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
     },
     {
       "type": "Request",
@@ -2289,8 +2567,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "5bbc03bf-ada3-411a-b85e-e4638a902ac8",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "886e719c-0886-48f4-8fb4-7f5e425b9b85",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "2. Create a character",
       "headers": [
         {
@@ -2313,7 +2591,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "64c3978a-6d3b-447a-9cfc-0005fc6f00df"
+      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
     },
     {
       "type": "Request",
@@ -2343,8 +2621,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "a9cdcbbe-8e90-4054-9633-1c57e16c968c",
-      "lastModified": "2017-10-27T15:05:04.923-05:00",
+      "id": "b8ecd728-154c-4ef8-89c8-566286ddeab8",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
       "name": "3. Get all characters",
       "headers": [
         {
@@ -2416,15 +2694,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "64c3978a-6d3b-447a-9cfc-0005fc6f00df"
+      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
     },
     {
       "type": "Service",
-      "description": "The `GET /characters/{slug}` endpoint should return the correct character",
-      "id": "b6ce7134-64bd-4fa2-83bc-92977753a220",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Get a specific character - correct result",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "description": "The `GET /characters` endpoint should return all characters whose names contain a given string",
+      "id": "b0583bba-8ed2-49b5-a649-f623ea446cc0",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "Search for characters - query by name",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -2456,8 +2734,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "a7ef5344-001e-4512-8a76-cb80bbb0ada9",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "63b96741-592f-4ac5-9c5f-db3400a6934e",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -2475,7 +2753,379 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Web Standards Woman\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "98645c24-0c86-483c-85d7-417f53a53b34",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "2. Create Character 1",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Incredible MVP\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "d18e60d3-f924-46a7-8db4-dbae4482b0d9",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "3. Create Character 2",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Project Manager\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "c57c508c-17a4-4fb3-bb1d-99853f5160cc",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "4. Create Character 3",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Testing Man\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "3eaa7dcd-9cff-480a-acf7-eaab05d7d8f9",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "5. Create Character 4",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "name",
+              "value": "mAn"
+            }
+          ]
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "7eabd685-898d-48d8-91f8-bf97df1c5ad1",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "6. Search by type",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.name",
+          "value": "Testing Man"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.1.name",
+          "value": "The Project Manager"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.2.name",
+          "value": "Web Standards Woman"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.3",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters` endpoint should return all characters of the specified type, whose names also contain a given string",
+      "id": "103e6f91-3513-45a6-934a-ffc6e33bda73",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "Search for characters - query by name and type",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "8158e9ae-74a5-4370-a6f6-115ca148bce9",
+      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
     },
     {
       "type": "Request",
@@ -2508,8 +3158,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "d94b273b-931b-47c1-b18f-cf56d960f86c",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "c7b75ff8-9b80-4972-8d8c-55e5ea3789cf",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
@@ -2532,7 +3182,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
     },
     {
       "type": "Request",
@@ -2565,8 +3215,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "24658ed3-cff3-4c5b-a4b4-7b25e7ffe5c9",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "3cc6acda-73c8-46dd-8b96-a06657f9cb79",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
@@ -2589,7 +3239,372 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Project Manager\",\n  \"type\": \"sidekick\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "00f69632-45b5-4da3-a490-7ea2994b7b4a",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "4. Create Character 3",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Testing Man\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "36d9c576-8984-4062-be84-fddb696852bf",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "5. Create Character 4",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "name",
+              "value": "man"
+            },
+            {
+              "enabled": true,
+              "name": "type",
+              "value": "sidekick"
+            }
+          ]
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "a0e1530a-432e-4439-82eb-5ca1cd0cb45b",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "6. Search by type",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.0.name",
+          "value": "The Project Manager"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseJsonBody",
+          "path": "$.1",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+    },
+    {
+      "type": "Service",
+      "description": "The `GET /characters` endpoint should return all characters of the specified type",
+      "id": "e868caa3-ed20-4cfe-95fe-d820c6bf780c",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "Search for characters - query by type",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "1ead013a-e81e-4e99-9a2c-3a1eb28dce3b",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "c099bfa5-bb6e-4e3d-846a-5879de7c7b4b",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "2. Create Character 1",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"The Incredible MVP\",\n  \"type\": \"sidekick\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "",
+      "id": "e8b60281-a023-4207-85d6-9b95d52ea341",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "3. Create Character 2",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
     },
     {
       "type": "Request",
@@ -2622,8 +3637,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "f628a1f8-7860-417c-8c76-260f140a9029",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "006b91e6-b449-4c7c-9ac8-8e2b4c55d35e",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
@@ -2646,7 +3661,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
     },
     {
       "type": "Request",
@@ -2679,8 +3694,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "a82ed9e1-9cfe-472a-9f55-1388f320c650",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "276ea930-253a-4226-a264-c3eecc908d0c",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
       "name": "5. Create Character 4",
       "headers": [
         {
@@ -2703,7 +3718,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
     },
     {
       "type": "Request",
@@ -2723,107 +3738,13 @@
       "uri": {
         "query": {
           "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters/theincrediblemvp"
-      },
-      "id": "f85155b9-467b-4fd4-91a0-a096a6338d67",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "6. Get a specific character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "The Incredible MVP"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.type",
-          "value": "sidekick"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers.0",
-          "value": "200"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/theincrediblemvp"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "b6ce7134-64bd-4fa2-83bc-92977753a220"
-    },
-    {
-      "type": "Service",
-      "description": "The `GET /characters/{slug}` endpoint should return a 404 if the character doesn't exist",
-      "id": "9f6122e6-1285-4d6e-8cae-320095de591d",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Get a specific character - nonexistent character",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
+          "items": [
+            {
+              "enabled": true,
+              "name": "type",
+              "value": "hero"
+            }
+          ]
         },
         "scheme": {
           "secure": true,
@@ -2833,802 +3754,9 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "ba90b24d-57d5-4df7-a5a4-b2d8c822dda9",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "9f6122e6-1285-4d6e-8cae-320095de591d"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters/supercoder"
-      },
-      "id": "20acd40d-7960-4d5d-9150-bc4af181f9ff",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "6. Try to get a non-existent character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "404"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.error",
-          "value": "NOT_FOUND"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.message",
-          "value": "Character \"supercoder\" does not exist"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "9f6122e6-1285-4d6e-8cae-320095de591d"
-    },
-    {
-      "type": "Service",
-      "description": "The `GET /characters/{slug}` endpoint should return links to the character's sidekick and nemesis",
-      "id": "8267e815-b284-4ff7-a19f-853d37961879",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Get a specific character - related characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "637a6b2f-1b84-4acf-b0a9-ac878dc38b77",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "8267e815-b284-4ff7-a19f-853d37961879"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Web Standards Woman\",\n  \"nemesis\": {\n    \"name\": \"IE 6\"\n  }\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "ad53bdae-fec1-496f-920b-8ecd46463b94",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "2. Create a hero + villain",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "8267e815-b284-4ff7-a19f-853d37961879"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "",
-      "id": "4f8386dc-f4fb-41b3-a2f8-8a08a3a22a2a",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "3. Create a hero + sidekick + villain",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "8267e815-b284-4ff7-a19f-853d37961879"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters/startupman"
-      },
-      "id": "d64784a8-47e4-4c7b-82b8-bededb87c42f",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "4. Get a character and links to their relations",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Startup Man"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.type",
-          "value": "hero"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers",
-          "value": "[]"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/startupman"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.sidekick",
-          "value": "${API_ROOT}/characters/theincrediblemvp"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.nemesis",
-          "value": "${API_ROOT}/characters/professorcapital"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "8267e815-b284-4ff7-a19f-853d37961879"
-    },
-    {
-      "type": "Service",
-      "description": "Two characters cannot have the same name",
-      "id": "fbb70f53-e3f3-44da-b2c7-716ba2beabbf",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Create characters - duplicate characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "68696b29-304b-4bab-8517-9f4254684c99",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "fbb70f53-e3f3-44da-b2c7-716ba2beabbf"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"bio\": \"The ORIGINAL Super Coder\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "184a5812-5e77-4bad-a206-448591dedb87",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "2. Create a character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Super Coder"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.type",
-          "value": "hero"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers.0",
-          "value": "200"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.bio",
-          "value": "The ORIGINAL Super Coder"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/supercoder"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "fbb70f53-e3f3-44da-b2c7-716ba2beabbf"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"bio\": \"An IMPOSTER Super Coder\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "b2ba69a3-b092-4523-b351-9958ab2b16a6",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "3. Create another character with the same name",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "409"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.error",
-          "value": "CONFLICT"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.message",
-          "value": "There is already another character named Super Coder"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "fbb70f53-e3f3-44da-b2c7-716ba2beabbf"
-    },
-    {
-      "type": "Service",
-      "description": "Creates a hero, sidekicks, and nemesis all at the same time",
-      "id": "34e8ca32-8aad-46a3-8641-56a00a433650",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Create characters - related characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "6ea565cd-44bf-4d70-ae72-922421112c24",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "34e8ca32-8aad-46a3-8641-56a00a433650"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "6dc54cd6-ff55-4b10-b3aa-27776e09dc77",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "2. Create a hero + sidekick + villain",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Startup Man"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.type",
-          "value": "hero"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers",
-          "value": "[]"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/startupman"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.sidekick",
-          "value": "${API_ROOT}/characters/theincrediblemvp"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.nemesis",
-          "value": "${API_ROOT}/characters/professorcapital"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "34e8ca32-8aad-46a3-8641-56a00a433650"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "bb30a863-3e58-476b-954e-d7fa08aeb66f",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "3. Get all characters",
+      "id": "b9484eff-b946-431a-838e-9d2a5a9c758c",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "6. Search by type",
       "headers": [
         {
           "enabled": true,
@@ -3653,127 +3781,31 @@
           "comparison": "Equals",
           "subject": "ResponseJsonBody",
           "path": "$.0.name",
-          "value": "Professor Capital"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.type",
-          "value": "villain"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.powers",
-          "value": "[]"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.0.links.self",
-          "value": "${API_ROOT}/characters/professorcapital"
+          "value": "The Fantastic Four Spaces"
         },
         {
           "comparison": "Equals",
           "subject": "ResponseJsonBody",
           "path": "$.1.name",
-          "value": "Startup Man"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.type",
-          "value": "hero"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.powers",
-          "value": "[]"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.1.links.self",
-          "value": "${API_ROOT}/characters/startupman"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.name",
-          "value": "The Incredible MVP"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.type",
-          "value": "sidekick"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.powers",
-          "value": "[]"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.2.links.self",
-          "value": "${API_ROOT}/characters/theincrediblemvp"
+          "value": "Web Standards Woman"
         },
         {
           "comparison": "DoesNotExist",
           "subject": "ResponseJsonBody",
-          "path": "$.3",
+          "path": "$.2",
           "value": "200"
         }
       ],
       "metaInfo": {},
-      "parentId": "34e8ca32-8aad-46a3-8641-56a00a433650"
+      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
     },
     {
       "type": "Service",
-      "description": "Creates a new character",
-      "id": "495796f4-3030-48a6-8f06-318917b35464",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "Create characters - single character",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
+      "id": "e97b7288-7910-43e0-97c4-43fe5b4cf52b",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "name": "Search for characters - query with no matches",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -3805,8 +3837,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "2f2be293-0a97-48fe-aaa6-4a51aaaba2c5",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
+      "id": "bdd7653a-c974-4d6d-87d8-0bca3a2504ac",
+      "lastModified": "2017-10-29T06:36:50.122-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -3824,14 +3856,13 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "495796f4-3030-48a6-8f06-318917b35464"
+      "parentId": "e97b7288-7910-43e0-97c4-43fe5b4cf52b"
     },
     {
       "type": "Request",
       "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
       },
       "body": {
         "formBody": {
@@ -3839,14 +3870,24 @@
           "encoding": "application/x-www-form-urlencoded"
         },
         "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+        "autoSetLength": true
       },
       "headersType": "Form",
       "uri": {
         "query": {
           "delimiter": "&",
-          "items": []
+          "items": [
+            {
+              "enabled": true,
+              "name": "name",
+              "value": "spiderman"
+            },
+            {
+              "enabled": true,
+              "name": "type",
+              "value": "villain"
+            }
+          ]
         },
         "scheme": {
           "secure": true,
@@ -3856,19 +3897,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "f45fe003-8e3d-4864-868b-cc2c6c83bd29",
-      "lastModified": "2017-10-27T15:05:04.924-05:00",
-      "name": "2. Create a character",
+      "id": "6a0aae03-798a-41d0-85d0-6c40d53be1dc",
+      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "name": "2. Search for a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
           "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
         }
       ],
       "assertions": [
@@ -3876,7 +3912,7 @@
           "comparison": "Equals",
           "subject": "ResponseStatus",
           "path": "code",
-          "value": "201"
+          "value": "200"
         },
         {
           "comparison": "Contains",
@@ -3887,56 +3923,20 @@
         {
           "comparison": "Equals",
           "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Super Coder"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.type",
-          "value": "hero"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers.0",
-          "value": "10-xing"
-        },
-        {
-          "comparison": "DoesNotExist",
-          "subject": "ResponseJsonBody",
-          "path": "$.powers.1",
-          "value": "200"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.weakness",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.bio",
-          "value": ""
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/supercoder"
+          "path": "$",
+          "value": "[]"
         }
       ],
       "metaInfo": {},
-      "parentId": "495796f4-3030-48a6-8f06-318917b35464"
+      "parentId": "e97b7288-7910-43e0-97c4-43fe5b4cf52b"
     },
     {
       "type": "Service",
       "description": "A character's sidekick and/or nemesis can be updated by setting them to the URL of another character",
-      "id": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "14c8119f-b7dc-4f65-8a14-34075aeb6061",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "Update characters - change related characters",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -3968,8 +3968,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "b934272e-526f-4be5-9a4e-3ac297f966b5",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "fef5568d-348b-4760-9dd6-70cb8e901a2b",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -3987,7 +3987,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91"
+      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
     },
     {
       "type": "Request",
@@ -4020,8 +4020,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "1cc54dc8-e8b7-4f04-a9bc-50b59bd2b590",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "31cdaff6-5804-4e9f-bccc-fd7d37eb5fa8",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "2. Create a hero + sidekick + villain",
       "headers": [
         {
@@ -4044,7 +4044,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91"
+      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
     },
     {
       "type": "Request",
@@ -4077,8 +4077,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "dc3f88f8-a80a-447c-ad87-123f1f21fdb5",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "61d57053-297d-4808-8664-c7b3436f36d1",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "3. Create a hero + sidekick + villain",
       "headers": [
         {
@@ -4101,7 +4101,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91"
+      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
     },
     {
       "type": "Request",
@@ -4134,8 +4134,8 @@
         "path": ""
       },
       "description": "",
-      "id": "4d88117d-744f-42a3-85bf-61fdce7f05f4",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "c949bdf0-5994-4441-a508-63c812149ce3",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "4. Change the sidekick and nemesis",
       "headers": [
         {
@@ -4194,349 +4194,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "88958adc-6448-4b9c-ba0d-ee9ef2bf3d91"
-    },
-    {
-      "type": "Service",
-      "description": "When a character's name is changed, it's URL changes too",
-      "id": "f49040e9-cbe6-4f6f-a707-e49ae40c5794",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "Update characters - name change",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
-        "name": "DELETE"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "0bb43294-9a1a-41b3-a0d5-8b46ae6c38b2",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "1. Reset state",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "f49040e9-cbe6-4f6f-a707-e49ae40c5794"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-        "name": "POST"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${API_ROOT}",
-        "path": "/characters"
-      },
-      "id": "a8a99b5f-e996-4e64-bc70-12dcfa8f845f",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "2. Create a character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "201"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/supercoder"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "f49040e9-cbe6-4f6f-a707-e49ae40c5794"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "requestBody": true,
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
-        "name": "PUT"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
-        "path": ""
-      },
-      "description": "",
-      "id": "7f401688-8e9e-423b-b3a0-d947dfb1dfb2",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
-      "name": "3. Rename the character",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        },
-        {
-          "enabled": true,
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Super Duper Coder"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/superdupercoder"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "f49040e9-cbe6-4f6f-a707-e49ae40c5794"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
-        "path": ""
-      },
-      "description": "",
-      "id": "b9af4199-2bb7-4fb5-90c3-8e2643526f0f",
-      "lastModified": "2017-10-27T15:05:23.449-05:00",
-      "name": "4. Try to get the old name",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "404"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.error",
-          "value": "NOT_FOUND"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.message",
-          "value": "Character \"supercoder\" does not exist"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "f49040e9-cbe6-4f6f-a707-e49ae40c5794"
-    },
-    {
-      "type": "Request",
-      "method": {
-        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-        "name": "GET"
-      },
-      "body": {
-        "formBody": {
-          "overrideContentType": true,
-          "encoding": "application/x-www-form-urlencoded"
-        },
-        "bodyType": "Text",
-        "autoSetLength": true,
-        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
-      },
-      "headersType": "Form",
-      "uri": {
-        "query": {
-          "delimiter": "&",
-          "items": []
-        },
-        "scheme": {
-          "secure": true,
-          "name": "https",
-          "version": "V11"
-        },
-        "host": "${\"Super Tech Heroes API\".\"Update characters - name change\".\"3. Rename the character\".\"response\".\"body\".\"links\".\"self\"}",
-        "path": ""
-      },
-      "description": "",
-      "id": "9f1c3a88-1450-444d-814b-25fac5344a12",
-      "lastModified": "2017-10-27T15:07:36.750-05:00",
-      "name": "5. Get the new name",
-      "headers": [
-        {
-          "enabled": true,
-          "name": "X-API-Key",
-          "value": "${API_KEY}"
-        }
-      ],
-      "assertions": [
-        {
-          "comparison": "Equals",
-          "subject": "ResponseStatus",
-          "path": "code",
-          "value": "200"
-        },
-        {
-          "comparison": "Contains",
-          "subject": "ResponseHeader",
-          "path": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.name",
-          "value": "Super Duper Coder"
-        },
-        {
-          "comparison": "Equals",
-          "subject": "ResponseJsonBody",
-          "path": "$.links.self",
-          "value": "${API_ROOT}/characters/superdupercoder"
-        }
-      ],
-      "metaInfo": {},
-      "parentId": "f49040e9-cbe6-4f6f-a707-e49ae40c5794"
+      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
     },
     {
       "type": "Service",
       "description": "Attempting to set a character's sidekick and/or nemesis to a non-existent character will return a 404 error ",
-      "id": "a00f31fe-3a09-4a39-81c9-9f6c11356d53",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "bcd5b488-7a22-4501-ba6b-a07f43af80b1",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "Update characters - related characters don't exist",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -4568,8 +4234,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "c42e88d5-6744-4e79-a92d-b9a5614cfd0e",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "04411c19-86be-46a0-91c1-1fb1f7e0e127",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -4587,7 +4253,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a00f31fe-3a09-4a39-81c9-9f6c11356d53"
+      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
     },
     {
       "type": "Request",
@@ -4620,8 +4286,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "24c97eb8-381b-4d98-b442-054ff001afbb",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "3c71c3f3-159d-4b57-ad20-e5941b88b57d",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "2. Create a character",
       "headers": [
         {
@@ -4644,7 +4310,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a00f31fe-3a09-4a39-81c9-9f6c11356d53"
+      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
     },
     {
       "type": "Request",
@@ -4677,8 +4343,8 @@
         "path": ""
       },
       "description": "",
-      "id": "61168a9d-d56d-4a8e-834b-394daac26e5b",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "6e120e7b-5ab4-4616-badf-845718786802",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "3. Set the sidekick & nemesis to non-existent characters",
       "headers": [
         {
@@ -4719,15 +4385,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "a00f31fe-3a09-4a39-81c9-9f6c11356d53"
+      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
     },
     {
       "type": "Service",
-      "description": "When updating a character, any properties that are not set are cleared",
-      "id": "5dc4a754-a37c-4618-9a80-0f54fdb42c73",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
-      "name": "Update characters - unset properties",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "description": "When a character's name is changed, it's URL changes too",
+      "id": "8fe8b69f-be61-451f-8476-a1b04e95e49f",
+      "lastModified": "2017-10-29T08:53:52.560-05:00",
+      "name": "Update characters - rename",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -4759,8 +4425,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "7ea545a5-7cbb-4da8-b82f-552dead22f26",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "2e97f3f7-a571-4442-85c0-c7640d777f0c",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -4778,7 +4444,341 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "5dc4a754-a37c-4618-9a80-0f54fdb42c73"
+      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "id": "c6e6fbe0-ef31-490f-9f44-a6d83543ba67",
+      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "name": "2. Create a character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/supercoder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${\"Super Tech Heroes API\".\"Update characters - rename\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "path": ""
+      },
+      "description": "",
+      "id": "7327f1cb-da34-4058-ae5c-3b81e0a919b1",
+      "lastModified": "2017-10-29T08:54:06.094-05:00",
+      "name": "3. Rename the character",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Super Duper Coder"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/superdupercoder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${\"Super Tech Heroes API\".\"Update characters - rename\".\"2. Create a character\".\"response\".\"body\".\"links\".\"self\"}",
+        "path": ""
+      },
+      "description": "",
+      "id": "3b984427-7f5a-490d-a838-67f68dbf10b0",
+      "lastModified": "2017-10-29T08:54:14.340-05:00",
+      "name": "4. Try to get the old name",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "404"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.error",
+          "value": "NOT_FOUND"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.message",
+          "value": "Character \"supercoder\" does not exist"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${\"Super Tech Heroes API\".\"Update characters - rename\".\"3. Rename the character\".\"response\".\"body\".\"links\".\"self\"}",
+        "path": ""
+      },
+      "description": "",
+      "id": "bf0c171c-70f5-497f-82f0-2387e46cfa78",
+      "lastModified": "2017-10-29T08:54:27.144-05:00",
+      "name": "5. Get the new name",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Contains",
+          "subject": "ResponseHeader",
+          "path": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.name",
+          "value": "Super Duper Coder"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$.links.self",
+          "value": "${API_ROOT}/characters/superdupercoder"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+    },
+    {
+      "type": "Service",
+      "description": "When updating a character, any properties that are not set are cleared",
+      "id": "04fcec5e-d185-415d-b6b9-4a0739c221cb",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "name": "Update characters - unset properties",
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/characters"
+      },
+      "description": "Deletes all existing characters, so we're starting-off at an empty state",
+      "id": "74cb9761-b2cb-4f85-9019-a933836ed5a5",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "name": "1. Reset state",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "X-API-Key",
+          "value": "${API_KEY}"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
     },
     {
       "type": "Request",
@@ -4810,8 +4810,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "89ee1a26-e962-40be-a957-c373e64d0248",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "ef51e515-d09f-4263-8178-a27b7de50957",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "2. Create a character",
       "headers": [
         {
@@ -4834,7 +4834,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "5dc4a754-a37c-4618-9a80-0f54fdb42c73"
+      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
     },
     {
       "type": "Request",
@@ -4867,8 +4867,8 @@
         "path": ""
       },
       "description": "",
-      "id": "13610cf9-73b4-4c6b-b95e-d2893512fbf7",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "9b3db889-b3f3-4c4d-981b-ea63596664ab",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "3. Update SOME properties of the character",
       "headers": [
         {
@@ -4933,15 +4933,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "5dc4a754-a37c-4618-9a80-0f54fdb42c73"
+      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
     },
     {
       "type": "Service",
       "description": "Updates an existing character",
-      "id": "9ebefced-5de9-4153-8cd9-0062a05bc22d",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "Update characters - update a character",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -4973,8 +4973,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "ae18c874-e76a-4857-97f7-f233c230a78f",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "ed3acbb9-097c-4ff1-b858-53b5b9c46a86",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -4992,7 +4992,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "9ebefced-5de9-4153-8cd9-0062a05bc22d"
+      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
     },
     {
       "type": "Request",
@@ -5024,8 +5024,8 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "6e4fb790-7fb6-41c0-9ea9-14f21ac0b9b7",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "c02da991-6a96-471d-aa74-013a053459e4",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "2. Create a character",
       "headers": [
         {
@@ -5048,7 +5048,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "9ebefced-5de9-4153-8cd9-0062a05bc22d"
+      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
     },
     {
       "type": "Request",
@@ -5081,8 +5081,8 @@
         "path": ""
       },
       "description": "",
-      "id": "dff03bed-e255-46b6-9c00-695b88203909",
-      "lastModified": "2017-10-27T15:05:04.925-05:00",
+      "id": "66c2685e-51a2-409d-a634-96e22584eacf",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "3. Update the character",
       "headers": [
         {
@@ -5153,15 +5153,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "9ebefced-5de9-4153-8cd9-0062a05bc22d"
+      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
     },
     {
       "type": "Service",
       "description": "Attempting to set a character's sidekick and/or nemesis to a character of the wrong type will return a 400 error ",
-      "id": "fa0259c4-b8b2-4932-b6e7-d4a50a11d830",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "59662539-58b3-4ba7-89c7-12733c3474a5",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "Update characters - wrong character types",
-      "parentId": "de3db2c3-6ff8-436b-b925-049fd87517f1"
+      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
     },
     {
       "type": "Request",
@@ -5193,8 +5193,8 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "a8934ed0-e12a-43c0-bf32-27a433b0533c",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "a3d7b019-787a-47d6-8d0f-172c6eebd556",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "1. Reset state",
       "headers": [
         {
@@ -5212,7 +5212,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fa0259c4-b8b2-4932-b6e7-d4a50a11d830"
+      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
     },
     {
       "type": "Request",
@@ -5245,8 +5245,8 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "cb8ebb93-465a-430a-bcfe-b6a26a56e954",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "685f6883-c77d-4df6-ad7f-7e50141dc49e",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "2. Create a hero + sidekick + villain",
       "headers": [
         {
@@ -5269,7 +5269,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fa0259c4-b8b2-4932-b6e7-d4a50a11d830"
+      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
     },
     {
       "type": "Request",
@@ -5302,8 +5302,8 @@
         "path": ""
       },
       "description": "",
-      "id": "f84ce6f0-bf3e-4cb7-b2fd-975661886e86",
-      "lastModified": "2017-10-27T15:05:04.926-05:00",
+      "id": "7ca126b0-e32d-49da-8410-b41fde2831f7",
+      "lastModified": "2017-10-29T06:36:50.127-05:00",
       "name": "3. Try to swap the sidekick and nemesis",
       "headers": [
         {
@@ -5344,31 +5344,13 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fa0259c4-b8b2-4932-b6e7-d4a50a11d830"
-    },
-    {
-      "type": "Context",
-      "id": "87398548-2eae-45ea-89c2-0f09494da306",
-      "lastModified": "2017-10-27T06:23:02.011-05:00",
-      "name": "super-tech-heroes (localhost)",
-      "variables": [
-        {
-          "enabled": true,
-          "name": "API_ROOT",
-          "value": "http://localhost:8080"
-        },
-        {
-          "enabled": true,
-          "name": "API_KEY",
-          "value": "ReplaceThisWithSomethingUnique"
-        }
-      ]
+      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
     },
     {
       "type": "Context",
       "id": "ffb84322-b6cf-4995-ba8e-bac7af9e31ad",
       "lastModified": "2017-10-27T06:23:05.183-05:00",
-      "name": "super-tech-heroes (public)",
+      "name": "super-tech-heroes",
       "variables": [
         {
           "enabled": true,
