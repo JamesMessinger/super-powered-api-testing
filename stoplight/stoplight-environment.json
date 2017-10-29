@@ -1,4 +1,3 @@
 {
-  "API_ROOT": "https://api.heroes.bigstickcarpet.com",
-  "API_KEY": "ReplaceThisWithSomethingUnique"
+  "API_ROOT": "https://api.heroes.bigstickcarpet.com"
 }
