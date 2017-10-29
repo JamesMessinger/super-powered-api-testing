@@ -5,17 +5,75 @@
     {
       "type": "Project",
       "description": "A REST API for technology-themed superheroes",
-      "id": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5",
-      "lastModified": "2017-10-29T15:52:06.825-05:00",
+      "id": "bc6a579c-620b-46df-b917-bb35b0974c2d",
+      "lastModified": "2017-10-29T16:38:51.902-05:00",
       "name": "Super Tech Heroes API"
     },
     {
       "type": "Service",
+      "description": "This request just serves as a way to generate a unique API Key. In other test tools, we generate a unique API Key using script, but Restlet Client doesn't support scripting, so instead we build a unique value from this request's response headers.",
+      "id": "542e1c67-9b9f-4a65-ac62-f720bc2b52aa",
+      "lastModified": "2017-10-29T16:36:30.117-05:00",
+      "name": "API Key",
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        },
+        "host": "${API_ROOT}",
+        "path": "/"
+      },
+      "description": "This request just serves as a way to generate a unique API Key. In other test tools, we generate a unique API Key using script, but Restlet Client doesn't support scripting, so instead we build a unique value from this request's response headers.",
+      "id": "e9089909-59a6-46ea-8aa1-6e46ddc7bfbc",
+      "lastModified": "2017-10-29T16:38:35.836-05:00",
+      "name": "1. API Key request",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Exists",
+          "subject": "ResponseHeader",
+          "path": "x-amzn-trace-id",
+          "value": ""
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "542e1c67-9b9f-4a65-ac62-f720bc2b52aa"
+    },
+    {
+      "type": "Service",
       "description": "Two characters cannot have the same name",
-      "id": "ee0f4ffc-3b98-4529-a84d-cff0d5522489",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "2f61c767-6c9b-4f77-b7dd-e24f13b6f4d2",
+      "lastModified": "2017-10-29T16:16:51.028-05:00",
       "name": "Create characters - duplicate characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -47,14 +105,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "b9c924ab-9ab7-4271-b769-8bde640bd66b",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "03077766-7151-4151-ab99-cf43802d0f89",
+      "lastModified": "2017-10-29T16:38:13.331-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -66,7 +124,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+      "parentId": "2f61c767-6c9b-4f77-b7dd-e24f13b6f4d2"
     },
     {
       "type": "Request",
@@ -98,14 +156,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "027b9269-35db-4153-9296-8d5419e4b0a7",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "0f8a513c-ed90-46ad-9a5b-b4b214491d7d",
+      "lastModified": "2017-10-29T16:38:44.240-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -164,7 +222,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+      "parentId": "2f61c767-6c9b-4f77-b7dd-e24f13b6f4d2"
     },
     {
       "type": "Request",
@@ -196,14 +254,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "330b7828-9f34-46a0-b018-3323b0d74a5d",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "542ab64a-253a-4cae-85e5-02b81fa2a928",
+      "lastModified": "2017-10-29T16:38:51.902-05:00",
       "name": "3. Create another character with the same name",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -238,15 +296,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ee0f4ffc-3b98-4529-a84d-cff0d5522489"
+      "parentId": "2f61c767-6c9b-4f77-b7dd-e24f13b6f4d2"
     },
     {
       "type": "Service",
       "description": "Creates a hero, sidekicks, and nemesis all at the same time",
-      "id": "ba942e90-ff36-43f1-8fe8-0544ebb25e26",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "6f21d054-635a-4889-88e2-b6b1f7865750",
+      "lastModified": "2017-10-29T16:16:51.028-05:00",
       "name": "Create characters - related characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -278,14 +336,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "2539b08d-51e9-4d73-bc0f-9d68dbdccddc",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "c73df64e-114d-481c-8ed8-cbbb0d2c72f1",
+      "lastModified": "2017-10-29T16:16:51.028-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -297,7 +355,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+      "parentId": "6f21d054-635a-4889-88e2-b6b1f7865750"
     },
     {
       "type": "Request",
@@ -329,14 +387,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "ae3a3e3f-a734-4524-92e1-b34a2d97f247",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "2ff9d444-e275-4f5b-91a1-212310c65f67",
+      "lastModified": "2017-10-29T16:16:51.028-05:00",
       "name": "2. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -407,7 +465,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+      "parentId": "6f21d054-635a-4889-88e2-b6b1f7865750"
     },
     {
       "type": "Request",
@@ -437,14 +495,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "e8c22189-8001-4ef1-a58e-84d2ccb091ad",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "6cf670eb-47e7-49d3-8c79-9e62a36fa34b",
+      "lastModified": "2017-10-29T16:16:51.028-05:00",
       "name": "3. Get all characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -576,15 +634,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "ba942e90-ff36-43f1-8fe8-0544ebb25e26"
+      "parentId": "6f21d054-635a-4889-88e2-b6b1f7865750"
     },
     {
       "type": "Service",
       "description": "Creates a new character",
-      "id": "083878d0-a365-4008-8e77-43ef32d2af38",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "8b805083-988c-4f26-a4b3-5ffdf9bfb006",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "Create characters - single character",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -616,14 +674,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "56c21047-fe1e-4021-bda2-51f4c68dd551",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "ed095e38-78e2-4911-8221-bd79592fcfa6",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -635,7 +693,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "083878d0-a365-4008-8e77-43ef32d2af38"
+      "parentId": "8b805083-988c-4f26-a4b3-5ffdf9bfb006"
     },
     {
       "type": "Request",
@@ -667,14 +725,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "a20a3644-c761-4984-b855-1b3630af9f63",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "db6893cf-a351-4121-b855-a8cb48430d42",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -739,15 +797,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "083878d0-a365-4008-8e77-43ef32d2af38"
+      "parentId": "8b805083-988c-4f26-a4b3-5ffdf9bfb006"
     },
     {
       "type": "Service",
       "description": "The `GET /characters/{slug}` endpoint should return the correct character",
-      "id": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "991dbd32-c95e-48b1-bb93-b6e217763a37",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "Get a specific character - correct result",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -779,14 +837,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "0166c6cf-d2be-4be4-ac0f-9c2d8a984d66",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "35990eae-1720-476a-a019-36c1deaa7ad9",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -798,7 +856,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Request",
@@ -831,14 +889,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "85426b71-e187-44fc-9342-f6c6af7a50d4",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "2bf3b371-9211-4bfc-ac24-ef54c1cfb5f1",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -855,7 +913,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Request",
@@ -888,14 +946,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "cd22a7ed-2291-4cd3-80f2-976ac33cd9cb",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "a167e4ef-e0f7-4d51-8aa6-d74ac0d5f53c",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -912,7 +970,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Request",
@@ -945,14 +1003,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "61afd696-ba91-4c27-9075-4aaddcd3cb39",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "c776aa0c-529b-409a-84ab-3677835403c5",
+      "lastModified": "2017-10-29T16:16:51.029-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -969,7 +1027,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Request",
@@ -1002,14 +1060,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "700d8dad-1351-4e32-acd8-342dee560010",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "b0153788-ce8e-4a33-b7db-5c1ce3ba16c0",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "5. Create Character 4",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1026,7 +1084,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Request",
@@ -1056,14 +1114,14 @@
         "host": "${API_ROOT}",
         "path": "/characters/theincrediblemvp"
       },
-      "id": "5efd74a8-5ccd-4757-a4a4-52e14b781059",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "18476cea-30e5-4c09-86a6-714f5a47a623",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "6. Get a specific character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1117,15 +1175,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8e5e8fd4-10cd-4cfb-913d-6a5cf63529bc"
+      "parentId": "991dbd32-c95e-48b1-bb93-b6e217763a37"
     },
     {
       "type": "Service",
       "description": "The `GET /characters/{slug}` endpoint should return a 404 if the character doesn't exist",
-      "id": "b2d07b92-1f67-4563-ae34-f15760914256",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "659b5873-2d11-47f9-9e24-b8b97f5263e0",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "Get a specific character - nonexistent character",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -1157,14 +1215,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "862b9a94-0764-41a6-99c3-3f2f032a447d",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "6655df84-58f6-4d20-a5ac-157d324bfefe",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1176,7 +1234,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b2d07b92-1f67-4563-ae34-f15760914256"
+      "parentId": "659b5873-2d11-47f9-9e24-b8b97f5263e0"
     },
     {
       "type": "Request",
@@ -1206,14 +1264,14 @@
         "host": "${API_ROOT}",
         "path": "/characters/supercoder"
       },
-      "id": "4700adc3-54bb-4087-93c9-234239a5fd01",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "06b103d1-ae69-4140-842e-7a6a6cc49931",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "6. Try to get a non-existent character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1243,15 +1301,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b2d07b92-1f67-4563-ae34-f15760914256"
+      "parentId": "659b5873-2d11-47f9-9e24-b8b97f5263e0"
     },
     {
       "type": "Service",
       "description": "The `GET /characters/{slug}` endpoint should return links to the character's sidekick and nemesis",
-      "id": "26687ebf-93e5-47fb-b78e-17532f711774",
-      "lastModified": "2017-10-29T06:36:50.124-05:00",
+      "id": "d32edc33-7645-422d-87e7-9295c246de3c",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "Get a specific character - related characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -1283,14 +1341,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "5961ef15-0dda-4587-934c-346b6b42e875",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "402a9347-4fcb-4c42-aa60-127c578cb629",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1302,7 +1360,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+      "parentId": "d32edc33-7645-422d-87e7-9295c246de3c"
     },
     {
       "type": "Request",
@@ -1335,14 +1393,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "d120e5e1-9bfc-4c4d-a182-7541865deed3",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "27b43299-6836-4fd1-9fab-c3793d82e9ec",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "2. Create a hero + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1359,7 +1417,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+      "parentId": "d32edc33-7645-422d-87e7-9295c246de3c"
     },
     {
       "type": "Request",
@@ -1392,14 +1450,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "351a26ac-e63a-48ef-a738-3fa1ab8bde1f",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "9471090a-e517-4697-bed5-372d79490065",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "3. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1416,7 +1474,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+      "parentId": "d32edc33-7645-422d-87e7-9295c246de3c"
     },
     {
       "type": "Request",
@@ -1446,14 +1504,14 @@
         "host": "${API_ROOT}",
         "path": "/characters/startupman"
       },
-      "id": "819101d5-1ada-412c-96af-7327a88b6be0",
-      "lastModified": "2017-10-29T06:36:50.125-05:00",
+      "id": "52ce8ed7-7577-45e2-8b59-2d280e16d3a1",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "4. Get a character and links to their relations",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1519,15 +1577,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "26687ebf-93e5-47fb-b78e-17532f711774"
+      "parentId": "d32edc33-7645-422d-87e7-9295c246de3c"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return an array of all characters",
-      "id": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "84494e90-3302-499f-a80d-549dbfb1da08",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "Get all characters - multiple characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -1559,14 +1617,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "9583e4da-72f6-4cf6-b496-c12864e9c016",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "289243bf-5695-48d9-b9da-32f4db6566a3",
+      "lastModified": "2017-10-29T16:16:51.030-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1578,7 +1636,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
+      "parentId": "84494e90-3302-499f-a80d-549dbfb1da08"
     },
     {
       "type": "Request",
@@ -1611,14 +1669,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "00358c71-4044-40c8-808d-f8de0c21e915",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "eb9c3cec-ad0b-4d57-aea0-57f644c47e07",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1635,7 +1693,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
+      "parentId": "84494e90-3302-499f-a80d-549dbfb1da08"
     },
     {
       "type": "Request",
@@ -1668,14 +1726,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "928b64ea-89b0-4a79-ad9b-b51c3044300f",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "6f87430b-a40e-4578-baed-682df1f39a24",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1692,7 +1750,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
+      "parentId": "84494e90-3302-499f-a80d-549dbfb1da08"
     },
     {
       "type": "Request",
@@ -1725,14 +1783,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "748b3191-f31e-4605-9a3e-a5384bc34704",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "3731e8a9-fead-465a-a2bb-8785ec51f6a0",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -1749,7 +1807,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
+      "parentId": "84494e90-3302-499f-a80d-549dbfb1da08"
     },
     {
       "type": "Request",
@@ -1779,14 +1837,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "b98b4a12-c4b5-450c-946d-166413f3342d",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "7c784bb2-c181-4313-a4fb-adfa681089e2",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "5. Get all characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -1942,15 +2000,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "cd083291-df28-4d6f-8bb2-0d0a8948a0ee"
+      "parentId": "84494e90-3302-499f-a80d-549dbfb1da08"
     },
     {
       "type": "Service",
       "description": "When there are no characters, The `GET /characters` endpoint should return an empty array - NOT an error",
-      "id": "fc275cca-c2ae-42b6-a85c-413da9c34547",
-      "lastModified": "2017-10-29T06:36:50.120-05:00",
+      "id": "dea206b8-9c15-4ad7-abb3-63ca427b3f99",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "Get all characters - no characters exist",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -1982,14 +2040,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "b84ffcf2-d7ce-4ff6-a237-79752dffd93a",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "57488879-ce86-4d05-ab94-2455f4576e9d",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2001,7 +2059,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fc275cca-c2ae-42b6-a85c-413da9c34547"
+      "parentId": "dea206b8-9c15-4ad7-abb3-63ca427b3f99"
     },
     {
       "type": "Request",
@@ -2031,14 +2089,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "3748c9d7-1e6b-42bb-8267-aed5728346bf",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "806f8b93-a61e-4525-9a66-9d6b9487e7e5",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "2. Get all characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2062,15 +2120,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fc275cca-c2ae-42b6-a85c-413da9c34547"
+      "parentId": "dea206b8-9c15-4ad7-abb3-63ca427b3f99"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return sidekicks and nemesis in addition to heroes",
-      "id": "2a0a4fb5-8548-4d95-b092-823f8006ab79",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "ece0c264-1352-4f23-85ff-8083be9e2ae4",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "Get all characters - related characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -2102,14 +2160,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "19d6616b-d0db-401b-9c84-c3b19f9a09fa",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "2e6a7747-6e2e-4e77-b98e-fcdaabed1dc0",
+      "lastModified": "2017-10-29T16:16:51.032-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2121,7 +2179,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
+      "parentId": "ece0c264-1352-4f23-85ff-8083be9e2ae4"
     },
     {
       "type": "Request",
@@ -2154,14 +2212,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "07be0256-1717-4ab4-be48-27e2bc6e1182",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "60a81ef5-d226-480b-b0a6-607b7345c38c",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "2. Create a hero + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2178,7 +2236,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
+      "parentId": "ece0c264-1352-4f23-85ff-8083be9e2ae4"
     },
     {
       "type": "Request",
@@ -2211,14 +2269,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "3ed3c190-dc92-46e7-a0d6-34f737f60b5f",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "1faa958f-5ce8-47f6-a4cc-9468b59bf1b6",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "3. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2235,7 +2293,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
+      "parentId": "ece0c264-1352-4f23-85ff-8083be9e2ae4"
     },
     {
       "type": "Request",
@@ -2265,14 +2323,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "031a727a-c4e7-40f3-bbf4-5c798dc8e7ed",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "e60d3b18-8167-4f44-ac59-7eff70921bbd",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "4. Get all characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2476,15 +2534,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "2a0a4fb5-8548-4d95-b092-823f8006ab79"
+      "parentId": "ece0c264-1352-4f23-85ff-8083be9e2ae4"
     },
     {
       "type": "Service",
       "description": "When there's only one character, The `GET /characters` endpoint should return a single-item array",
-      "id": "e661eb6f-22ec-492b-a103-665045ecb9dd",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "5f0dc0a7-56e4-4c82-a8a5-86090d55edfe",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "Get all characters - single character",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -2516,14 +2574,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "8cb14f20-b2c5-4b86-b9e9-de0b682a8ea8",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "11f889b7-c98c-4336-a754-518bad143f65",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2535,7 +2593,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
+      "parentId": "5f0dc0a7-56e4-4c82-a8a5-86090d55edfe"
     },
     {
       "type": "Request",
@@ -2567,14 +2625,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "886e719c-0886-48f4-8fb4-7f5e425b9b85",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "7fb613ca-65e1-40e5-962d-5fc5006784af",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2591,7 +2649,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
+      "parentId": "5f0dc0a7-56e4-4c82-a8a5-86090d55edfe"
     },
     {
       "type": "Request",
@@ -2621,14 +2679,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "b8ecd728-154c-4ef8-89c8-566286ddeab8",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "295eb524-b93d-4711-93b2-7fd997dc6719",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "3. Get all characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2694,15 +2752,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e661eb6f-22ec-492b-a103-665045ecb9dd"
+      "parentId": "5f0dc0a7-56e4-4c82-a8a5-86090d55edfe"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return all characters whose names contain a given string",
-      "id": "b0583bba-8ed2-49b5-a649-f623ea446cc0",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "9ec2cd7c-50fb-4f64-a6c8-847260596b19",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "Search for characters - query by name",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -2734,14 +2792,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "63b96741-592f-4ac5-9c5f-db3400a6934e",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "ed632f16-e292-488f-b966-6fb7f15105a9",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -2753,7 +2811,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Request",
@@ -2786,14 +2844,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "98645c24-0c86-483c-85d7-417f53a53b34",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "3b156713-9881-469f-8293-2f656e372a22",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2810,7 +2868,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Request",
@@ -2843,14 +2901,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "d18e60d3-f924-46a7-8db4-dbae4482b0d9",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "16d8330f-06a2-4bc7-93d0-678c0361d8d8",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2867,7 +2925,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Request",
@@ -2900,14 +2958,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "c57c508c-17a4-4fb3-bb1d-99853f5160cc",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "679ddd95-b980-442e-b2ee-3d7f3b7d6734",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2924,7 +2982,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Request",
@@ -2957,14 +3015,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "3eaa7dcd-9cff-480a-acf7-eaab05d7d8f9",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "062553cf-a288-4e7f-b4c1-ead5591afba0",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "5. Create Character 4",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -2981,7 +3039,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Request",
@@ -3017,14 +3075,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "7eabd685-898d-48d8-91f8-bf97df1c5ad1",
-      "lastModified": "2017-10-29T15:52:06.825-05:00",
+      "id": "a6166555-68f4-4fb1-82b7-9ecad8a364f2",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "6. Search by name",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3066,15 +3124,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "b0583bba-8ed2-49b5-a649-f623ea446cc0"
+      "parentId": "9ec2cd7c-50fb-4f64-a6c8-847260596b19"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return all characters of the specified type, whose names also contain a given string",
-      "id": "103e6f91-3513-45a6-934a-ffc6e33bda73",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "Search for characters - query by name and type",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -3106,14 +3164,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "8158e9ae-74a5-4370-a6f6-115ca148bce9",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
+      "id": "fd270415-789d-404f-894b-3e6d777eee66",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3125,7 +3183,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Request",
@@ -3158,14 +3216,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "c7b75ff8-9b80-4972-8d8c-55e5ea3789cf",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "319f66e0-fc55-4c71-ae4f-e58d0ffca8df",
+      "lastModified": "2017-10-29T16:16:51.033-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3182,7 +3240,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Request",
@@ -3215,14 +3273,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "3cc6acda-73c8-46dd-8b96-a06657f9cb79",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "0beec09b-8904-40a3-878d-5e1c0df30126",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3239,7 +3297,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Request",
@@ -3272,14 +3330,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "00f69632-45b5-4da3-a490-7ea2994b7b4a",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "b4baf497-61d4-4844-acea-83876cc6be24",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3296,7 +3354,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Request",
@@ -3329,14 +3387,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "36d9c576-8984-4062-be84-fddb696852bf",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "a325ae2d-0d12-4134-9e06-6603416e86dc",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "5. Create Character 4",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3353,7 +3411,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Request",
@@ -3394,14 +3452,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "a0e1530a-432e-4439-82eb-5ca1cd0cb45b",
-      "lastModified": "2017-10-29T15:51:57.111-05:00",
+      "id": "5142856d-4090-4a8a-b2c1-83a2423ef916",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "6. Search by name and type",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3431,15 +3489,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "103e6f91-3513-45a6-934a-ffc6e33bda73"
+      "parentId": "db14f2c1-9c25-49ea-ae00-4ef52a0722d1"
     },
     {
       "type": "Service",
       "description": "The `GET /characters` endpoint should return all characters of the specified type",
-      "id": "e868caa3-ed20-4cfe-95fe-d820c6bf780c",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "296ddf71-4f10-44bb-80a9-515f4e8e4e11",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "Search for characters - query by type",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -3471,14 +3529,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "1ead013a-e81e-4e99-9a2c-3a1eb28dce3b",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "3e24f9c7-c6aa-4cd4-941d-228348c694ba",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3490,7 +3548,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Request",
@@ -3523,14 +3581,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "c099bfa5-bb6e-4e3d-846a-5879de7c7b4b",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "f85c815c-4341-41a6-945b-2230107a26af",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "2. Create Character 1",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3547,7 +3605,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Request",
@@ -3580,14 +3638,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "e8b60281-a023-4207-85d6-9b95d52ea341",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "46c59ae3-4650-4ed7-954e-813bd846d8dd",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "3. Create Character 2",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3604,7 +3662,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Request",
@@ -3637,14 +3695,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "006b91e6-b449-4c7c-9ac8-8e2b4c55d35e",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "d23ea4c9-c511-4772-907d-23fb2740bdd6",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "4. Create Character 3",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3661,7 +3719,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Request",
@@ -3694,14 +3752,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "276ea930-253a-4226-a264-c3eecc908d0c",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "ddf4dc3c-8e10-4a43-84b4-70e1ca8d48ac",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "5. Create Character 4",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -3718,7 +3776,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Request",
@@ -3754,14 +3812,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "b9484eff-b946-431a-838e-9d2a5a9c758c",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "a04a718a-21f4-4d0d-9ad5-34a6051ad5c6",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "6. Search by type",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3797,15 +3855,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e868caa3-ed20-4cfe-95fe-d820c6bf780c"
+      "parentId": "296ddf71-4f10-44bb-80a9-515f4e8e4e11"
     },
     {
       "type": "Service",
       "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
-      "id": "e97b7288-7910-43e0-97c4-43fe5b4cf52b",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "08093f20-8087-4917-a5e9-d02b5ae35cad",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "Search for characters - query with no matches",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -3837,14 +3895,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "bdd7653a-c974-4d6d-87d8-0bca3a2504ac",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
+      "id": "894fec21-eae4-488c-9f1e-611368ff1adc",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3856,7 +3914,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e97b7288-7910-43e0-97c4-43fe5b4cf52b"
+      "parentId": "08093f20-8087-4917-a5e9-d02b5ae35cad"
     },
     {
       "type": "Request",
@@ -3897,14 +3955,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "6a0aae03-798a-41d0-85d0-6c40d53be1dc",
-      "lastModified": "2017-10-29T06:36:50.123-05:00",
+      "id": "ac90db12-9fe3-4d0c-9e1f-ebcde8be4021",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "2. Search for a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3928,15 +3986,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "e97b7288-7910-43e0-97c4-43fe5b4cf52b"
+      "parentId": "08093f20-8087-4917-a5e9-d02b5ae35cad"
     },
     {
       "type": "Service",
       "description": "A character's sidekick and/or nemesis can be updated by setting them to the URL of another character",
-      "id": "14c8119f-b7dc-4f65-8a14-34075aeb6061",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "e7586f52-ac6a-4156-8c10-2e045a54d052",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "Update characters - change related characters",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -3968,14 +4026,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "fef5568d-348b-4760-9dd6-70cb8e901a2b",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "117f889d-2c40-480b-b0e1-4d83143966b0",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -3987,7 +4045,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
+      "parentId": "e7586f52-ac6a-4156-8c10-2e045a54d052"
     },
     {
       "type": "Request",
@@ -4020,14 +4078,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "31cdaff6-5804-4e9f-bccc-fd7d37eb5fa8",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "2ff8b172-ee2d-4b00-9e19-9379aab75616",
+      "lastModified": "2017-10-29T16:16:51.034-05:00",
       "name": "2. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4044,7 +4102,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
+      "parentId": "e7586f52-ac6a-4156-8c10-2e045a54d052"
     },
     {
       "type": "Request",
@@ -4077,14 +4135,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "61d57053-297d-4808-8664-c7b3436f36d1",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "fe34acf0-0b2e-4115-9d9b-77aae045c0e7",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "3. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4101,7 +4159,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
+      "parentId": "e7586f52-ac6a-4156-8c10-2e045a54d052"
     },
     {
       "type": "Request",
@@ -4134,14 +4192,14 @@
         "path": ""
       },
       "description": "",
-      "id": "c949bdf0-5994-4441-a508-63c812149ce3",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "641a633e-a2c9-4fdd-a1b5-2978bde3d5d9",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "4. Change the sidekick and nemesis",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4194,15 +4252,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "14c8119f-b7dc-4f65-8a14-34075aeb6061"
+      "parentId": "e7586f52-ac6a-4156-8c10-2e045a54d052"
     },
     {
       "type": "Service",
       "description": "Attempting to set a character's sidekick and/or nemesis to a non-existent character will return a 404 error ",
-      "id": "bcd5b488-7a22-4501-ba6b-a07f43af80b1",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "08eb4fae-4f9e-4831-83e0-2bed802d7a5f",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "Update characters - related characters don't exist",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -4234,14 +4292,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "04411c19-86be-46a0-91c1-1fb1f7e0e127",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "f35b8388-635d-446b-b36e-160b6da481d4",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4253,7 +4311,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
+      "parentId": "08eb4fae-4f9e-4831-83e0-2bed802d7a5f"
     },
     {
       "type": "Request",
@@ -4286,14 +4344,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "3c71c3f3-159d-4b57-ad20-e5941b88b57d",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "6e532902-9400-47bd-bc96-2413ebe18bd5",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4310,7 +4368,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
+      "parentId": "08eb4fae-4f9e-4831-83e0-2bed802d7a5f"
     },
     {
       "type": "Request",
@@ -4343,14 +4401,14 @@
         "path": ""
       },
       "description": "",
-      "id": "6e120e7b-5ab4-4616-badf-845718786802",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "e2798877-9816-4835-88b0-b96fe2a5b11c",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "3. Set the sidekick & nemesis to non-existent characters",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4385,15 +4443,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "bcd5b488-7a22-4501-ba6b-a07f43af80b1"
+      "parentId": "08eb4fae-4f9e-4831-83e0-2bed802d7a5f"
     },
     {
       "type": "Service",
       "description": "When a character's name is changed, it's URL changes too",
-      "id": "8fe8b69f-be61-451f-8476-a1b04e95e49f",
-      "lastModified": "2017-10-29T08:53:52.560-05:00",
+      "id": "fb38152e-69d5-4a5d-aee8-434500aa143c",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "Update characters - rename",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -4425,14 +4483,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "2e97f3f7-a571-4442-85c0-c7640d777f0c",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "7dd2cafa-e3b3-49d4-bd58-56b1158dd4b3",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4444,7 +4502,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+      "parentId": "fb38152e-69d5-4a5d-aee8-434500aa143c"
     },
     {
       "type": "Request",
@@ -4476,14 +4534,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "c6e6fbe0-ef31-490f-9f44-a6d83543ba67",
-      "lastModified": "2017-10-29T06:36:50.126-05:00",
+      "id": "1f529260-cdf4-422a-80bf-5de912455f95",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4506,7 +4564,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+      "parentId": "fb38152e-69d5-4a5d-aee8-434500aa143c"
     },
     {
       "type": "Request",
@@ -4539,14 +4597,14 @@
         "path": ""
       },
       "description": "",
-      "id": "7327f1cb-da34-4058-ae5c-3b81e0a919b1",
-      "lastModified": "2017-10-29T08:54:06.094-05:00",
+      "id": "77ff0931-2b7b-429b-a83d-4875d2ede6d8",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "3. Rename the character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4581,7 +4639,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+      "parentId": "fb38152e-69d5-4a5d-aee8-434500aa143c"
     },
     {
       "type": "Request",
@@ -4613,14 +4671,14 @@
         "path": ""
       },
       "description": "",
-      "id": "3b984427-7f5a-490d-a838-67f68dbf10b0",
-      "lastModified": "2017-10-29T08:54:14.340-05:00",
+      "id": "c6f565f1-9d14-4273-a2bb-45787492810f",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "4. Try to get the old name",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4650,7 +4708,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+      "parentId": "fb38152e-69d5-4a5d-aee8-434500aa143c"
     },
     {
       "type": "Request",
@@ -4682,14 +4740,14 @@
         "path": ""
       },
       "description": "",
-      "id": "bf0c171c-70f5-497f-82f0-2387e46cfa78",
-      "lastModified": "2017-10-29T08:54:27.144-05:00",
+      "id": "a1430a23-b5ce-4dd1-8015-627b5b654045",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "5. Get the new name",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4719,15 +4777,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "8fe8b69f-be61-451f-8476-a1b04e95e49f"
+      "parentId": "fb38152e-69d5-4a5d-aee8-434500aa143c"
     },
     {
       "type": "Service",
       "description": "When updating a character, any properties that are not set are cleared",
-      "id": "04fcec5e-d185-415d-b6b9-4a0739c221cb",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "937d3938-4fb2-451b-af2e-b921ebe6a372",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "Update characters - unset properties",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -4759,14 +4817,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "74cb9761-b2cb-4f85-9019-a933836ed5a5",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "9b474a19-d07d-4e38-bd21-25eae662efd0",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4778,7 +4836,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
+      "parentId": "937d3938-4fb2-451b-af2e-b921ebe6a372"
     },
     {
       "type": "Request",
@@ -4810,14 +4868,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "ef51e515-d09f-4263-8178-a27b7de50957",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "d4483cb7-2d4c-48a7-87a1-3b144f6a7c27",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4834,7 +4892,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
+      "parentId": "937d3938-4fb2-451b-af2e-b921ebe6a372"
     },
     {
       "type": "Request",
@@ -4867,14 +4925,14 @@
         "path": ""
       },
       "description": "",
-      "id": "9b3db889-b3f3-4c4d-981b-ea63596664ab",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "ea0c5647-7012-4e18-aee3-72ed5cd67e4f",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "3. Update SOME properties of the character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -4933,15 +4991,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "04fcec5e-d185-415d-b6b9-4a0739c221cb"
+      "parentId": "937d3938-4fb2-451b-af2e-b921ebe6a372"
     },
     {
       "type": "Service",
       "description": "Updates an existing character",
-      "id": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "13894165-14d1-4ec1-913a-fe0b93b41e5e",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "Update characters - update a character",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -4973,14 +5031,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "ed3acbb9-097c-4ff1-b858-53b5b9c46a86",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "07e96222-4cef-4be6-981a-b9b247806f23",
+      "lastModified": "2017-10-29T16:16:51.035-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -4992,7 +5050,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
+      "parentId": "13894165-14d1-4ec1-913a-fe0b93b41e5e"
     },
     {
       "type": "Request",
@@ -5024,14 +5082,14 @@
         "host": "${API_ROOT}",
         "path": "/characters"
       },
-      "id": "c02da991-6a96-471d-aa74-013a053459e4",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "5aa2a038-744b-4f0c-9406-cafc94eb954b",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "2. Create a character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -5048,7 +5106,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
+      "parentId": "13894165-14d1-4ec1-913a-fe0b93b41e5e"
     },
     {
       "type": "Request",
@@ -5081,14 +5139,14 @@
         "path": ""
       },
       "description": "",
-      "id": "66c2685e-51a2-409d-a634-96e22584eacf",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "d8bc077c-faf4-4a3b-b51b-681d5d5e176a",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "3. Update the character",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -5153,15 +5211,15 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "fb0b86f6-dafe-4ee7-ae0e-17442d5deb95"
+      "parentId": "13894165-14d1-4ec1-913a-fe0b93b41e5e"
     },
     {
       "type": "Service",
       "description": "Attempting to set a character's sidekick and/or nemesis to a character of the wrong type will return a 400 error ",
-      "id": "59662539-58b3-4ba7-89c7-12733c3474a5",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "9ab547bf-457c-49b6-8147-1a4aa9486544",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "Update characters - wrong character types",
-      "parentId": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5"
+      "parentId": "bc6a579c-620b-46df-b917-bb35b0974c2d"
     },
     {
       "type": "Request",
@@ -5193,14 +5251,14 @@
         "path": "/characters"
       },
       "description": "Deletes all existing characters, so we're starting-off at an empty state",
-      "id": "a3d7b019-787a-47d6-8d0f-172c6eebd556",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "ed17c7b1-9eb2-4597-99cd-ee3f17711daf",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "1. Reset state",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         }
       ],
       "assertions": [
@@ -5212,7 +5270,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
+      "parentId": "9ab547bf-457c-49b6-8147-1a4aa9486544"
     },
     {
       "type": "Request",
@@ -5245,14 +5303,14 @@
         "path": "/characters"
       },
       "description": "",
-      "id": "685f6883-c77d-4df6-ad7f-7e50141dc49e",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "00180da9-3f39-472e-aeee-d0d71133357a",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "2. Create a hero + sidekick + villain",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -5269,7 +5327,7 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
+      "parentId": "9ab547bf-457c-49b6-8147-1a4aa9486544"
     },
     {
       "type": "Request",
@@ -5302,14 +5360,14 @@
         "path": ""
       },
       "description": "",
-      "id": "7ca126b0-e32d-49da-8410-b41fde2831f7",
-      "lastModified": "2017-10-29T06:36:50.127-05:00",
+      "id": "7f9eb6b5-3ece-49fd-b86b-b2a60c83b21b",
+      "lastModified": "2017-10-29T16:16:51.036-05:00",
       "name": "3. Try to swap the sidekick and nemesis",
       "headers": [
         {
           "enabled": true,
           "name": "X-API-Key",
-          "value": "${API_KEY}"
+          "value": "${\"Super Tech Heroes API\".\"API Key\".\"1. API Key request\".\"response\".\"headers\".\"x-amzn-requestid\".md5()}"
         },
         {
           "enabled": true,
@@ -5344,23 +5402,18 @@
         }
       ],
       "metaInfo": {},
-      "parentId": "59662539-58b3-4ba7-89c7-12733c3474a5"
+      "parentId": "9ab547bf-457c-49b6-8147-1a4aa9486544"
     },
     {
       "type": "Context",
       "id": "ffb84322-b6cf-4995-ba8e-bac7af9e31ad",
-      "lastModified": "2017-10-27T06:23:05.183-05:00",
+      "lastModified": "2017-10-29T16:21:36.099-05:00",
       "name": "super-tech-heroes",
       "variables": [
         {
           "enabled": true,
           "name": "API_ROOT",
           "value": "https://api.heroes.bigstickcarpet.com"
-        },
-        {
-          "enabled": true,
-          "name": "API_KEY",
-          "value": "ReplaceThisWithSomethingUnique"
         }
       ]
     }
