@@ -1625,6 +1625,875 @@
           }
         }
       ]
+    },
+    "SearchByType": {
+      "name": "Search for characters - query by type",
+      "description": "The `GET /characters` endpoint should return all characters of the specified type",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create Character 1",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Web Standards Woman\",\n  \"type\": \"hero\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ]
+          }
+        },
+        {
+          "id": "CreateCharacter2",
+          "type": "http",
+          "name": "Create Character 2",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"The Incredible MVP\",\n  \"type\": \"sidekick\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ]
+          }
+        },
+        {
+          "id": "CreateCharacter3",
+          "type": "http",
+          "name": "Create Character 3",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"The Feature Creep\",\n  \"type\": \"villain\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ]
+          }
+        },
+        {
+          "id": "CreateCharacter4",
+          "type": "http",
+          "name": "Create Character 4",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"The Fantastic Four Spaces\",\n  \"type\": \"hero\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ]
+          }
+        },
+        {
+          "id": "SearchForCharacters",
+          "type": "http",
+          "name": "Search by type",
+          "input": {
+            "method": "get",
+            "url": "{$$.env.API_ROOT}/characters?type=hero",
+            "body": "",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.body.length",
+                "op": "eq",
+                "expected": 2
+              },
+              {
+                "target": "output.body[0].name",
+                "op": "eq",
+                "expected": "The Fantastic Four Spaces"
+              },
+              {
+                "target": "output.body[1].name",
+                "op": "eq",
+                "expected": "Web Standards Woman"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "SearchNoMatches": {
+      "name": "Search for characters - query with no matches",
+      "description": "If no characters match the query criteria, the `GET /characters` endpoint should return an empty array - NOT an error",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "SearchForCharacters",
+          "type": "http",
+          "name": "Search for a character",
+          "input": {
+            "method": "get",
+            "url": "{$$.env.API_ROOT}/characters?name=spiderman&type=villain",
+            "body": "",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.body.length",
+                "op": "eq",
+                "expected": 0
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateRelatedCharacters": {
+      "name": "Update characters - change related characters",
+      "description": "A character's sidekick and/or nemesis can be updated by setting them to the URL of another character",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a hero + sidekick + villain",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Web Standards Woman\",\n  \"sidekick\": {\n    \"name\": \"W3C\"\n  },\n  \"nemesis\": {\n    \"name\": \"IE 6\"\n  }\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.W3C_URL",
+                "source": "output.body.links.sidekick"
+              },
+              {
+                "target": "$.ctx.IE6_URL",
+                "source": "output.body.links.nemesis"
+              }
+            ]
+          }
+        },
+        {
+          "id": "CreateCharacter2",
+          "type": "http",
+          "name": "Create a hero + sidekick + villain",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.STARTUP_MAN_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Change the sidekick and nemesis",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.STARTUP_MAN_URL}",
+            "body": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"{$.ctx.W3C_URL}\",\n  \"nemesis\": \"{$.ctx.IE6_URL}\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/startupman"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Startup Man"
+              },
+              {
+                "target": "output.body.type",
+                "op": "eq",
+                "expected": "hero"
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/startupman"
+              },
+              {
+                "target": "output.body.links.sidekick",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/w3c"
+              },
+              {
+                "target": "output.body.links.nemesis",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/ie6"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateRelatedCharactersDontExist": {
+      "name": "Update characters - related characters don't exist",
+      "description": "Attempting to set a character's sidekick and/or nemesis to a non-existent character will return a 404 error&nbsp;",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a character",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Super Coder\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.CHARACTER_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Set the sidekick & nemesis to non-existent characters",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.CHARACTER_URL}",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\",\n  \"sidekick\": \"{$$.env.API_ROOT}/characters/notarealcharacter\",\n  \"nemesis\": \"{$$.env.API_ROOT}/characters/notarealcharacter\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 404
+              },
+              {
+                "target": "output.body.error",
+                "op": "eq",
+                "expected": "NOT_FOUND"
+              },
+              {
+                "target": "output.body.message",
+                "op": "eq",
+                "expected": "Character \"notarealcharacter\" does not exist"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateCharacterName": {
+      "name": "Update characters - rename",
+      "description": "When a character's name is changed, it's URL changes too",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a character",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Super Coder"
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.ORIGINAL_CHARACTER_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Rename the character",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.ORIGINAL_CHARACTER_URL}",
+            "body": "{\n  \"name\": \"Super Duper Coder\",\n  \"type\": \"hero\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/superdupercoder"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Super Duper Coder"
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/superdupercoder"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n",
+            "transforms": [
+              {
+                "target": "$.ctx.NEW_CHARACTER_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "GetOldCharacterName",
+          "type": "http",
+          "name": "Try to get the old name",
+          "input": {
+            "method": "get",
+            "url": "{$.ctx.ORIGINAL_CHARACTER_URL}",
+            "body": "",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 404
+              },
+              {
+                "target": "output.body.error",
+                "op": "eq",
+                "expected": "NOT_FOUND"
+              },
+              {
+                "target": "output.body.message",
+                "op": "eq",
+                "expected": "Character \"supercoder\" does not exist"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        },
+        {
+          "id": "GetNewCharacterName",
+          "type": "http",
+          "name": "Get the new name",
+          "input": {
+            "method": "get",
+            "url": "{$.ctx.NEW_CHARACTER_URL}",
+            "body": "",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/superdupercoder"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Super Duper Coder"
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/superdupercoder"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateUnsetProperties": {
+      "name": "Update characters - unset properties",
+      "description": "When updating a character, any properties that are not set are cleared",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a character",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.CHARACTER_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Update SOME properties of the character",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.CHARACTER_URL}",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\",\n  \"weakness\": \"Imposter syndrome\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Super Coder"
+              },
+              {
+                "target": "output.body.type",
+                "op": "eq",
+                "expected": "hero"
+              },
+              {
+                "target": "output.body.powers.length",
+                "op": "eq",
+                "expected": 0
+              },
+              {
+                "target": "output.body.weakness",
+                "op": "eq",
+                "expected": "Imposter syndrome"
+              },
+              {
+                "target": "output.body.bio",
+                "op": "eq",
+                "expected": ""
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateCharacter": {
+      "name": "Update characters - update a character",
+      "description": "Updates an existing character",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a character",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"powers\": [\n    \"10-xing\"\n   ]\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.CHARACTER_URL",
+                "source": "output.body.links.self"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Update the character",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.CHARACTER_URL}",
+            "body": "{\n  \"name\": \"Super Coder\",\n  \"type\": \"hero\",\n  \"powers\": [\n    \"Caffeine\"\n   ],\n  \"weakness\": \"Imposter syndrome\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 200
+              },
+              {
+                "target": "output.headers.Location",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              },
+              {
+                "target": "output.body.name",
+                "op": "eq",
+                "expected": "Super Coder"
+              },
+              {
+                "target": "output.body.type",
+                "op": "eq",
+                "expected": "hero"
+              },
+              {
+                "target": "output.body.powers.length",
+                "op": "eq",
+                "expected": 1
+              },
+              {
+                "target": "output.body.powers[0]",
+                "op": "eq",
+                "expected": "Caffeine"
+              },
+              {
+                "target": "output.body.weakness",
+                "op": "eq",
+                "expected": "Imposter syndrome"
+              },
+              {
+                "target": "output.body.bio",
+                "op": "eq",
+                "expected": ""
+              },
+              {
+                "target": "output.body.links.self",
+                "op": "eq",
+                "expected": "{$$.env.API_ROOT}/characters/supercoder"
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
+    },
+    "UpdateCharacterWrongTypes": {
+      "name": "Update characters - wrong character types",
+      "description": "Attempting to set a character's sidekick and/or nemesis to a character of the wrong type will return a 400 error&nbsp;",
+      "steps": [
+        {
+          "id": "ResetState",
+          "type": "ref",
+          "name": "Reset state",
+          "input": {
+            "name": "Test Fixtures",
+            "$ref": "#/utilities/ResetState"
+          }
+        },
+        {
+          "id": "CreateCharacter1",
+          "type": "http",
+          "name": "Create a hero + sidekick + villain",
+          "input": {
+            "method": "post",
+            "url": "{$$.env.API_ROOT}/characters",
+            "body": "{\n  \"name\": \"Startup Man\",\n  \"sidekick\": {\n    \"name\": \"The Incredible MVP\"\n  },\n  \"nemesis\": {\n    \"name\": \"Professor Capital\"\n  }\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 201
+              }
+            ],
+            "transforms": [
+              {
+                "target": "$.ctx.CHARACTER_URL",
+                "source": "output.body.links.self"
+              },
+              {
+                "target": "$.ctx.SIDEKICK_URL",
+                "source": "output.body.links.sidekick"
+              },
+              {
+                "target": "$.ctx.VILLAIN_URL",
+                "source": "output.body.links.nemesis"
+              }
+            ]
+          }
+        },
+        {
+          "id": "UpdateCharacter",
+          "type": "http",
+          "name": "Try to swap the sidekick and nemesis",
+          "input": {
+            "method": "put",
+            "url": "{$.ctx.CHARACTER_URL}",
+            "body": "{\n  \"name\": \"Startup Man\",\n  \"type\": \"hero\",\n  \"sidekick\": \"{$.ctx.VILLAIN_URL}\",\n  \"nemesis\": \"{$.ctx.SIDEKICK_URL}\"\n}",
+            "headers": {
+              "X-API-Key": "{$.ctx.API_KEY}",
+              "Content-Type": "application/json"
+            }
+          },
+          "after": {
+            "assertions": [
+              {
+                "target": "output.status",
+                "op": "eq",
+                "expected": 400
+              },
+              {
+                "target": "output.body.error",
+                "op": "eq",
+                "expected": "BAD_REQUEST"
+              },
+              {
+                "target": "output.body.message",
+                "op": "eq",
+                "expected": "The \"sidekick.type\" value must be \"sidekick\""
+              }
+            ],
+            "script": "var contentType = output.headers.get('Content-Type');\ntests['Response is JSON'] = contentType.indexOf('application/json') >= 0;\n"
+          }
+        }
+      ]
     }
   },
   "utilities": {
