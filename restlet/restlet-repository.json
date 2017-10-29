@@ -6,7 +6,7 @@
       "type": "Project",
       "description": "A REST API for technology-themed superheroes",
       "id": "00d95d71-38ce-4ed7-9ecc-14beb3e280c5",
-      "lastModified": "2017-10-29T08:54:27.144-05:00",
+      "lastModified": "2017-10-29T15:52:06.825-05:00",
       "name": "Super Tech Heroes API"
     },
     {
@@ -3018,8 +3018,8 @@
         "path": "/characters"
       },
       "id": "7eabd685-898d-48d8-91f8-bf97df1c5ad1",
-      "lastModified": "2017-10-29T06:36:50.121-05:00",
-      "name": "6. Search by type",
+      "lastModified": "2017-10-29T15:52:06.825-05:00",
+      "name": "6. Search by name",
       "headers": [
         {
           "enabled": true,
@@ -3395,8 +3395,8 @@
         "path": "/characters"
       },
       "id": "a0e1530a-432e-4439-82eb-5ca1cd0cb45b",
-      "lastModified": "2017-10-29T06:36:50.122-05:00",
-      "name": "6. Search by type",
+      "lastModified": "2017-10-29T15:51:57.111-05:00",
+      "name": "6. Search by name and type",
       "headers": [
         {
           "enabled": true,
