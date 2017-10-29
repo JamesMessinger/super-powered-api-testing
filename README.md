@@ -28,7 +28,7 @@ This is the REST API that we're testing.  It's a directory of technology-themed 
 
 - [Demo website](http://heroes.bigstickcarpet.com/)
 - [The Raw API](https://api.heroes.bigstickcarpet.com/)
-- [API documentation]()
+- [API documentation](https://documenter.getpostman.com/view/220187/super-tech-heroes-api/77cf6KB)
 - [OpenAPI 3.0 definition](https://api.heroes.bigstickcarpet.com/schema)
 - [Swagger 2.0 definition](https://api.heroes.bigstickcarpet.com/schema?accept=application/openapi+json;version=2.0)
 
