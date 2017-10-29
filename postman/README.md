@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](../img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
 [![Postman](./img/logo.png)](http://getpostman.com)
 

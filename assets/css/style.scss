@@ -1,0 +1,16 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+html,
+body {
+  // Add a blue gradient at the top of the page, behind the superhero image
+  background-color: white;
+  background: white linear-gradient(182deg, #7ab4ff 200px, white 400px);
+}
+
+.markdown-body img {
+  // Remove the white background from that the default theme applies to images
+  background-color: transparent;
+}

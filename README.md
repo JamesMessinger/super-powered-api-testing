@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
 [![Build Status](https://api.travis-ci.org/BigstickCarpet/super-powered-api-testing.svg?branch=master)](https://travis-ci.org/BigstickCarpet/super-powered-api-testing)
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/bigstickcarpet/super-powered-api-testing?svg=true&branch=master&failingText=Windows%20build%20failing&passingText=Windows%20build%20passing)](https://ci.appveyor.com/project/BigstickCarpet/super-powered-api-testing/branch/master)
