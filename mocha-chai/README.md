@@ -1,6 +1,6 @@
 [![Super-Powered API Testing](http://apitesting.bigstickcarpet.com/assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
-[![Mocha & Chai](./img/logo.png)](http://mochajs.org)
+[![Mocha & Chai](img/logo.png)](http://mochajs.org)
 ================================================================================
 
 [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/) are JavaScript libraries that make it easy to write complex API tests using an intuitive fluent syntax that's easy to learn.
@@ -12,13 +12,15 @@
 - **[Running automated cross-browser tests](#karma)**
 
 <a id="run-everywhere"></a>
+
 Tests that run everywhere
 --------------------------------------------------------------------------------
 Mocha and Chai give you an impressive list of options for running your tests. There's a CLI for running tests on the command line, which also works well for automated testing as well as CI/CD tools. There are also [plugins](https://mochajs.org/#editor-plugins) for many popular IDEs and code editors, including [VSCode](https://marketplace.visualstudio.com/search?term=mocha&target=VSCode&category=All%20categories&sortBy=Relevance), [Atom](https://atom.io/packages/search?q=mocha), [WebStorm](https://www.youtube.com/watch?v=4mKiGkokyx8), [Visual Studio](https://github.com/Microsoft/nodejstools/wiki/Test-Explorer), and even [Emacs](https://github.com/scottaj/mocha.el).  You can even run your tests in any web browser or mobile device. (more on that below...)
 
-![Mocha + Chai screenshots](./img/screenshot.gif)
+![Mocha + Chai screenshots](img/screenshot.gif)
 
 <a id="browser-testing"></a>
+
 Browsers & Mobile testing
 --------------------------------------------------------------------------------
 This is an important feature that _only_ Mocha and Chai offers. Browsers and mobile devices have many limitations and restrictions in place for security, privacy, and latency reasons, which your API may need to account for.
@@ -27,7 +29,7 @@ Are you sure that your API works with [Same-Origin Policy](https://developer.moz
 
 You can use tools such as [Karma](https://karma-runner.github.io/) or [Nightwatch](http://nightwatchjs.org/) to automate cross-browser testing and integrate it into your CI/CD pipeline.  You can also use cloud-hosted device testing services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/) to test on a wider variety of devices.
 
-[![SauceLabs test matrix](./img/saucelabs.png)](https://wiki.saucelabs.com/display/DOCS/Using+Status+Badges+and+the+Browser+Matrix+Widget+to+Monitor+Test+Results)
+[![SauceLabs test matrix](img/saucelabs.png)](https://wiki.saucelabs.com/display/DOCS/Using+Status+Badges+and+the+Browser+Matrix+Widget+to+Monitor+Test+Results)
 
 
 Some coding required
@@ -40,9 +42,10 @@ You can also leverage numerous [Chai plugins](http://chaijs.com/plugins/) as wel
 
 
 <a id="demo-setup"></a>
+
 Demo Setup
 --------------------------------------------------------------------------------
-In this demo, you'll run [the API tests](./test/specs) from the command-line, in an IDE, in a web browser, and via automated cross-browser testing.
+In this demo, you'll run [the API tests](test/specs) from the command-line, in an IDE, in a web browser, and via automated cross-browser testing.
 
 ### Step 1. Install Node.js
 The Mocha CLI requires [Node.js 4.0 or greater](https://nodejs.org/en/).
@@ -66,6 +69,7 @@ npm install
 
 
 <a id="cli"></a>
+
 Running the tests from the command-line
 --------------------------------------------------------------------------------
 Open the demo code directory in a terminal and run the following command:
@@ -75,7 +79,7 @@ cd /path/to/demo/code
 npm run mocha
 ```
 
-This command runs the Mocha CLI, which will read the [`mocha.opts`](./test/mocha.opts) file. This file configures several Mocha options, such as timeouts and failure behavior.  It also tells Mocha which test scripts to run.
+This command runs the Mocha CLI, which will read the [`mocha.opts`](test/mocha.opts) file. This file configures several Mocha options, such as timeouts and failure behavior.  It also tells Mocha which test scripts to run.
 
 #### The `test/fixtures` folder
 This folder contains scripts that perform initialization logic and define helpers that are used by the tests
@@ -88,10 +92,11 @@ This folder contains scripts that perform initialization logic and define helper
 |`test/fixtures/open-api.js`    |This script downloads the [OpenAPI definition](https://api.heroes.bigstickcarpet.com/schema), so we can use it to test whether our API responses match the JSON Schemas.
 |`test/fixtures/setup-chai.js`  |This script initializes Chai and loads the [Chai-HTTP](http://chaijs.com/plugins/chai-http/) and [Chai-JSON-Schema](http://chaijs.com/plugins/chai-json-schema/) plugins.
 
-![CLI screenshot](./img/cli.gif)
+![CLI screenshot](img/cli.gif)
 
 
 <a id="ide"></a>
+
 Running the tests in an IDE
 --------------------------------------------------------------------------------
 Many popular IDEs and text editors have built-in support for [Mocha](https://mochajs.org/), so you can easily run your tests with the press of a button and see the results right in your IDE.
@@ -102,16 +107,17 @@ Many popular IDEs and text editors have built-in support for [Mocha](https://moc
   - [Mocha plug-ins for Atom](https://atom.io/packages/search?q=mocha)
   - [Mocha package for Emacs](https://github.com/scottaj/mocha.el)
 
-![IDE screenshot](./img/ide.gif)
+![IDE screenshot](img/ide.gif)
 
 
 
 <a id="browser"></a>
+
 Running the tests in a web browser
 --------------------------------------------------------------------------------
 Mocha and Chai can run in web browsers too, which is [very important](#browser-testing) for testing your API in real-world conditions.  You can even run your tests in mobile browsers, such as iOS and Android, and in [hybrid mobile apps](https://developer.telerik.com/featured/what-is-a-hybrid-mobile-app/) such as PhoneGap, Cordova, and React Native.
 
-Just open the [`browser.html`](./browser.html) file in a web browser.  Or run the following command to open it in your default browser:
+Just open the [`browser.html`](browser.html) file in a web browser.  Or run the following command to open it in your default browser:
 
 ```
 cd /path/to/demo/code
@@ -120,16 +126,17 @@ npm start
 
 The Mocha web UI automatically runs all of your tests and checks-off each one as they pass.  If any tests fail, you'll see the reason for the failure.  You can click on any test to see the source code for that test.  You can also click the arrows on the far right side of the page to run a single test, which is great for debugging.
 
-![Browser screenshot](./img/browser.gif)
+![Browser screenshot](img/browser.gif)
 
 
 
 <a id="karma"></a>
+
 Running automated cross-browser tests
 --------------------------------------------------------------------------------
 Mocha and Chai work great with cross-browser automation tools such as [Karma](https://karma-runner.github.io/) or [Nightwatch](http://nightwatchjs.org/), which can easily be integrated into your CI/CD pipeline.  You can also use cloud-hosted device testing services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/) to test on a wider variety of devices.
 
-For this demo, we'll use [Karma](https://karma-runner.github.io/), which is a Node.js-based CLI.  Karma is a powerful with [lots of configuration options](https://karma-runner.github.io/1.0/config/configuration-file.html) and [hundreds of plugins](https://www.npmjs.com/browse/keyword/karma-plugin), which can be daunting at first.  For this demo, I've already created a [`karma.conf.js` config file](./karma.conf.js), so all you need to do is run the following command:
+For this demo, we'll use [Karma](https://karma-runner.github.io/), which is a Node.js-based CLI.  Karma is a powerful with [lots of configuration options](https://karma-runner.github.io/1.0/config/configuration-file.html) and [hundreds of plugins](https://www.npmjs.com/browse/keyword/karma-plugin), which can be daunting at first.  For this demo, I've already created a [`karma.conf.js` config file](karma.conf.js), so all you need to do is run the following command:
 
 ```
 cd /path/to/demo/code
@@ -142,4 +149,4 @@ Karma can also run in a "watch" mode, where it will keep the browsers running in
 
 Karma can be integrated into [TravisCI](https://karma-runner.github.io/1.0/plus/travis.html), [Jenkins](https://karma-runner.github.io/1.0/plus/jenkins.html), [TeamCity](https://karma-runner.github.io/1.0/plus/teamcity.html), or any other CI/CD tool that can run Node.js scripts.
 
-![Karma screenshot](./img/karma.png)
+![Karma screenshot](img/karma.png)

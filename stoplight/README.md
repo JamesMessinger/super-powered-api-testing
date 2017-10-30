@@ -1,5 +1,5 @@
-[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
-[![Stoplight](./img/logo.png)](http://stoplight.io/)
+[![Stoplight](img/logo.png)](http://stoplight.io/)
 
-![Stoplight screenshot](./img/screenshot.gif)
+![Stoplight screenshot](img/screenshot.gif)
