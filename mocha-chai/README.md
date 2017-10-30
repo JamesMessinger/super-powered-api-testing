@@ -51,12 +51,12 @@ In this demo, you'll run [the API tests](https://github.com/BigstickCarpet/super
 The Mocha CLI requires [Node.js 4.0 or greater](https://nodejs.org/en/).
 
 ### Step 2. Download the demo code
-Download [this tarball file](https://registry.npmjs.org/super-powered-api-testing/-/super-powered-api-testing-2.1.2.tgz), which contains the sample tests and scripts to run them.
+Download [this tarball file](https://registry.npmjs.org/super-powered-api-testing/-/super-powered-api-testing-2.1.3.tgz), which contains the sample tests and scripts to run them.
 
 If you don't have a way to unpack the tarball, then you can use the following [npx](https://www.npmjs.com/package/npx) command:
 
 ```
-npx decompress-cli super-powered-api-testing-2.1.2.tgz -o .
+npx decompress-cli super-powered-api-testing-2.1.3.tgz -o .
 ```
 
 ### Step 3. Install dependencies
