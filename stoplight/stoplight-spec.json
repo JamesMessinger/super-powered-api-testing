@@ -271,89 +271,6 @@
           }
         }
       }
-    },
-    "/": {
-      "get": {
-        "operationId": "GET_root",
-        "summary": "Get API info",
-        "tags": [
-          "Root"
-        ],
-        "description": "This endpoint returns general API info, such as the version number, description, and relevant links.\n",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns API info",
-            "schema": {
-              "$ref": "#/definitions/APIInfo"
-            }
-          }
-        },
-        "x-stoplight": {
-          "id": "GET_root",
-          "beforeScript": null,
-          "afterScript": null,
-          "public": true,
-          "mock": {
-            "statusCode": 200,
-            "dynamic": false,
-            "enabled": false
-          }
-        }
-      }
-    },
-    "/schema": {
-      "get": {
-        "operationId": "GET_schema",
-        "summary": "Get API definition schema",
-        "tags": [
-          "Schema"
-        ],
-        "description": "This endpoint returns the API definition schema. By default, the response is in OpenAPI v3.0 JSON format, but you can specify your desired format via the `Accept` header or an `accept` query parameter.\n",
-        "produces": [
-          "application/openapi+json;version=3.0",
-          "application/openapi+yaml;version=3.0",
-          "application/openapi+json;version=2.0",
-          "application/openapi+yaml;version=2.0"
-        ],
-        "parameters": [
-          {
-            "name": "accept",
-            "in": "query",
-            "description": "You can override the `Accept` header using the `accept` query parameter. This parameter takes the same format as the `Accept` header. For example, to request OpenAPI v2.0 in YAML format, the querystring would be `?accept=application/openapi+yaml;version=2.0`.\n",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "You can request a specific OpenAPI version and format. The default is `application/openapi+json;version=3.0`, which returns a OpenAPI v3.0 definition, in JSON format.  You can request either OpenAPI v2.0 (fka Swagger) or v3.0, in either JSON or YAML format. For example, to request OpenAPI v2.0 in YAML format, you would set the `Accept` header to `application/openapi+yaml;version=2.0`.\n",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the API schema in the requested format",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "x-stoplight": {
-          "id": "GET_schema",
-          "beforeScript": null,
-          "afterScript": null,
-          "public": true,
-          "mock": {
-            "statusCode": 200,
-            "dynamic": false,
-            "enabled": false
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -550,57 +467,6 @@
         "name": "CharacterResponse",
         "public": true
       }
-    },
-    "APIInfo": {
-      "title": "APIInfo",
-      "type": "object",
-      "required": [
-        "name",
-        "version",
-        "description",
-        "links"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "links": {
-          "type": "object",
-          "required": [
-            "characters",
-            "www",
-            "schema",
-            "docs"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "characters": {
-              "type": "string"
-            },
-            "www": {
-              "type": "string"
-            },
-            "schema": {
-              "type": "string"
-            },
-            "docs": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "x-stoplight": {
-        "id": "APIInfo",
-        "name": "APIInfo",
-        "public": true
-      }
     }
   },
   "x-stoplight": {
@@ -673,10 +539,6 @@
               {
                 "type": "schemas",
                 "_id": "CharacterResponse"
-              },
-              {
-                "type": "schemas",
-                "_id": "APIInfo"
               }
             ],
             "description": "Models make up the core input and ouput structures in this API. They are used in endpoint request and response bodies.",
