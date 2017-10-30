@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SuperPowered API Testing | Mocha+Chai lets you test your API in web browsers!</title>
+
+    <link rel="stylesheet" href="lib/mocha.css"/>
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <!-- Third-Party Libraries -->
+    <script src="lib/mocha.js"></script>
+    <script src="lib/chai.js"></script>
+    <script src="lib/karma-host-environment.js"></script>
+    <script src="lib/chai-http.js"></script>
+    <script src="lib/jsonpointer.js"></script>
+    <script src="lib/tv4.js"></script>
+    <script src="lib/chai-json-schema.js"></script>
+
+    <script>
+      mocha.setup({
+        ui: 'bdd',
+        timeout: 10000,
+      });
+    </script>
+
+    <!-- Test Fixutres -->
+    <script src="test/fixtures/assertions.js"></script>
+    <script src="test/fixtures/before-each.js"></script>
+    <script src="test/fixtures/environment.js"></script>
+    <script src="test/fixtures/open-api.js"></script>
+    <script src="test/fixtures/setup-chai.js"></script>
+
+    <!-- Tests -->
+    <script src="test/specs/get-all-characters.spec.js"></script>
+    <script src="test/specs/search-characters.spec.js"></script>
+    <script src="test/specs/get-character.spec.js"></script>
+    <script src="test/specs/create-character.spec.js"></script>
+    <script src="test/specs/update-character.spec.js"></script>
+
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

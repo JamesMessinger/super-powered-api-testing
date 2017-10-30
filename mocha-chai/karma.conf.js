@@ -9,10 +9,10 @@ module.exports = function (karma) {
 
     files: [
       // Third-Party Libraries
-      'https://cdn.rawgit.com/chaijs/chai-http/80b4efb1/dist/chai-http.min.js',
-      'https://cdn.rawgit.com/alexeykuzmin/jsonpointer.js/57d7cf48/src/jsonpointer.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/tv4/1.3.0/tv4.min.js',
-      'https://cdn.rawgit.com/chaijs/chai-json-schema/da14f449/index.js',
+      'lib/chai-http.js',
+      'lib/jsonpointer.js',
+      'lib/tv4.js',
+      'lib/chai-json-schema.js',
 
       // Test Fixtures
       'test/fixtures/*.js',

@@ -20,11 +20,22 @@
     "type": "git",
     "url": "git+https://github.com/BigstickCarpet/super-powered-api-testing.git"
   },
+  "files": [
+    "img",
+    "lib",
+    "test",
+    "browser.html",
+    "karma.conf.js",
+    "README.md"
+  ],
   "scripts": {
-    "start": "opn test/browser.html",
+    "start": "opn browser.html",
     "test": "npm run mocha && npm run karma",
     "mocha": "mocha",
-    "karma": "karma start --single-run"
+    "karma": "karma start --single-run",
+    "upgrade": "npm-check -u",
+    "bump": "bump --prompt --grep README.md --tag --push --all",
+    "release": "npm run upgrade && npm test && npm run bump && npm publish"
   },
   "dependencies": {
     "chai": "^4.1.2",
@@ -41,6 +52,12 @@
     "karma-safari-launcher": "^1.0.0",
     "mocha": "^4.0.1",
     "opn-cli": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-modular": "^4.1.0",
+    "npm-check": "^5.4.5",
+    "version-bump-prompt": "^3.1.2"
   },
   "engines": {
     "node": ">=4.0",
