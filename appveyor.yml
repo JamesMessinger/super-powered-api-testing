@@ -6,6 +6,9 @@ image: Visual Studio 2017
 # Don't run MSBuild
 build: off
 
+# Don't build tags
+skip_tags: true
+
 environment:
   nodejs_version: "8"
 
