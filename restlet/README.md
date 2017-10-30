@@ -1,5 +1,5 @@
-[![Super-Powered API Testing](assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
-[![Restlet](img/logo.png)](https://restlet.com/)
+[![Restlet](../assets/img/restlet/logo.png)](https://restlet.com/)
 
-![Restlet screenshot](img/screenshot.gif)
+![Restlet screenshot](../assets/img/restlet/screenshot.gif)

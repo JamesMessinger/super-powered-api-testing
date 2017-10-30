@@ -21,7 +21,6 @@
     "url": "git+https://github.com/BigstickCarpet/super-powered-api-testing.git"
   },
   "files": [
-    "img",
     "lib",
     "test",
     "browser.html",

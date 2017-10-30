@@ -1,6 +1,6 @@
-[![Super-Powered API Testing](assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
 
-[![Postman](img/logo.png)](http://getpostman.com)
+[![Postman](../assets/img/postman/logo.png)](http://getpostman.com)
 
 Postman is a totally different kind of API testing tool from all the other frameworks in this project.  Instead of using a text editor to write your tests, you use the [Postman app](http://getpostman.com/apps), which has an easy-to-use GUI interface where you can build your HTTP requests and organize them into [collections](http://www.getpostman.com/docs/collections).
 
@@ -55,17 +55,17 @@ There are three different ways that you can run your tests in Postman, depending
 ### Request Builder
 The [request builder](http://www.getpostman.com/docs/requests) is what you see when you first open the app.  Here, you can build HTTP requests in an easy-to-use GUI, view the results, write tests, and organize your requests into collections.  This mode is great for day-to-day development and debugging, and for running individual requests.
 
-![Postman Request Builder](img/screenshot.gif)
+![Postman Request Builder](../assets/img/postman/screenshot.gif)
 
 
 ### Collection Runner
 The [collection runner](http://www.getpostman.com/docs/running_collections-1) is Postman's test runner.  It can run all of your tests, or just the tests in a single folder.  You can also load a data file (JSON or CSV), and your tests will be run against each row of data in teh file.  When your tests are done running, you get a pass/fail summary, and you can drill-down to see the detailed results for any request.
 
-![Postman Collection Runner](img/runner.gif)
+![Postman Collection Runner](../assets/img/postman/runner.gif)
 
 
 ### Newman
 [Newman](http://www.getpostman.com/docs/newman_intro) is a command-line version of Postman's collection runner.  If you prefer the CLI instead of a GUI, then this the tool for you.  It's also ideal for [continuous-integration](https://en.wikipedia.org/wiki/Continuous_integration) and [continuous-delivery](https://en.wikipedia.org/wiki/Continuous_delivery) testing.  Just like the collection runner, you can run your entire suite of tests, or just a single folder.  You can load data from a file, and even write the test results to an output file in various formats (JSON, XML, HTML)
 
-![Newman](img/newman.gif)
+![Newman](../assets/img/postman/newman.gif)
 
