@@ -1,6 +1,6 @@
 {
   "name": "super-powered-api-testing",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Sample REST API tests, written in Mocha + Chai",
   "keywords": [
     "rest",
