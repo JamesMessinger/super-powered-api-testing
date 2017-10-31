@@ -10,19 +10,15 @@ This website accompanies a talk/workshop ([here's the slide deck](https://github
 
 Getting Started
 --------------------------
-- **Step 1: Download the tests**<br>
-[This zip file](https://github.com/BigstickCarpet/super-powered-api-testing/archive/master.zip) contains all the sample tests and code you'll need.
+You'll need to download and install each of the testing tools to follow-along with the demos.  Some tools require a bit of setup, such as installing dependencies or creating free online accounts.  Here are the setup instructions for each tool:
 
-- **Step 2: Setup each tool**<br>
-Some of the testing tools require you to download and install them. Others require you to create free online accounts.  Here are the setup instructions for each tool:
-
-    - [Mocha+Chai](mocha-chai/)
-    - [Restlet](restlet/)
-    - [Postman](postman/)
-    - [Stoplight](stoplight/)
+- [Mocha+Chai](mocha-chai/)
+- [Restlet](restlet/)
+- [Postman](postman/)
+- [Stoplight](stoplight/)
 
 
-The _✨Super Tech Heroes✨_ API
+The Demo API
 --------------------------
 This is the REST API that we're testing.  It's a directory of technology-themed superheroes, sidekicks, and villains.
 
