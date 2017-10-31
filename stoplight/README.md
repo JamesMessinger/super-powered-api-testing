@@ -53,3 +53,35 @@ This file contains environment variables, which allow the same Stoplight tests t
 [`http://apitesting.bigstickcarpet.com/stoplight/stoplight-environment.json`](http://apitesting.bigstickcarpet.com/stoplight/stoplight-environment.jso)
 
 
+
+<a id="test-runner"></a>
+
+Running tests in Stoplight
+--------------------------------------------------------------------------------
+After importing the Stoplight collection, you'll see a bunch of folders on the left.  Clicking on any folder will show a screen with "Run Scenario" and "Run Collection" buttons at the top.  Clicking "Run Scenario" will just run the current folder.  Clicking "Run Collection" will run **all** of the tests.
+
+Click the "Home" link on the left menu to go to the root of the Stoplight collection.  Then click the "Run Collection" button to orun all of the tests.  You'll see the test results **very quickly**, since Stoplight runs all tests concurrently.  You can also see the code coverage results on this screen.
+
+![Stoplight Test Runner](../assets/img/stoplight/runner.gif)
+
+
+
+<a id="cli"></a>
+
+Running tests from the command line
+--------------------------------------------------------------------------------
+[Prism](https://stoplight.io/platform/prism/) is Stoplight's command-line test runner.  It actually does a lot more than just run tests, but that's what we'll focus on here.
+
+You can run the Stoplight tests via Prism with the following command:
+
+```
+cd /path/to/demo/files
+prism conduct stoplight-collection.json --spec stoplight-spec.json --env stoplight-environment.json
+```
+
+You can also use Prism to automate Stoplight tests or integrate it into your CI/CD pipeline.  [More info here](https://help.stoplight.io/scenarios/conducting-scenarios-outside-of-stoplight/running-scenarios)
+
+![Stoplight in Maven](../assets/img/stoplight/prism.gif)
+
+
+
