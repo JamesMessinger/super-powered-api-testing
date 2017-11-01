@@ -3,7 +3,7 @@
 [![Stoplight](../assets/img/stoplight/logo.png)](http://stoplight.io/)
 ================================================================================
 
-[Stoplight](http://stoplight.io) is a powerful API development tool that's based on OpenAPI (fka Swagger).  It has tight integration with OpenAPI, including automatic contract verification.
+[Stoplight](http://stoplight.io) is a powerful API development tool that's based on OpenAPI (fka Swagger).  Its tight integration with OpenAPI enables powerful features like automatic contract verification and code-coverage analysis.
 
 - **[Demo setup instructions](#demo-setup)**
 - **[Running tests in Stoplight](#test-runner)**
