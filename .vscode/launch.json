@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/Mocha-Chai/node_modules/.bin/_mocha",
+      "stopOnEntry": false,
+      "args": ["--timeout=600000"],
+      "cwd": "${workspaceRoot}/Mocha-Chai",
+      "preLaunchTask": null,
+      "runtimeExecutable": null,
+      "runtimeArgs": [
+        "--nolazy"
+      ],
+      "env": {
+        "NODE_ENV": "test",
+        "API_ROOT": "http://localhost:8080"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "sourceMaps": true
+    }
+  ]
+}

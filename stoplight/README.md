@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](https://apitesting.jamesmessinger.com)
 
 [![Stoplight](../assets/img/stoplight/logo.png)](http://stoplight.io/)
 ================================================================================
@@ -45,12 +45,12 @@ Go to the "Testing" tab and click the "New Collection" button.  Import the follo
 #### Stoplight Collection
 This file contains the API requests and the test assertions.
 
-[`http://apitesting.bigstickcarpet.com/stoplight/stoplight-collection.json`](http://apitesting.bigstickcarpet.com/stoplight/stoplight-collection.json)
+[`https://apitesting.jamesmessinger.com/stoplight/stoplight-collection.json`](https://apitesting.jamesmessinger.com/stoplight/stoplight-collection.json)
 
 #### Stoplight Environment
 This file contains environment variables, which allow the same Stoplight tests to be run in different environments (e.g. development, staging, prod)
 
-[`http://apitesting.bigstickcarpet.com/stoplight/stoplight-environment.json`](http://apitesting.bigstickcarpet.com/stoplight/stoplight-environment.jso)
+[`https://apitesting.jamesmessinger.com/stoplight/stoplight-environment.json`](https://apitesting.jamesmessinger.com/stoplight/stoplight-environment.jso)
 
 
 

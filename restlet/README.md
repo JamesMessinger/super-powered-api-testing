@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](https://apitesting.jamesmessinger.com)
 
 [![Restlet](../assets/img/restlet/logo.png)](https://restlet.com/)
 ================================================================================
@@ -45,7 +45,7 @@ Click the "Import" button at the bottom, left of the Restlet window, and select 
 #### Restlet Repository
 This file contains the API requests and the test assertions as well as environment variables.
 
-[`http://apitesting.bigstickcarpet.com/restlet/restlet-repository.json`](http://apitesting.bigstickcarpet.com/restlet/restlet-repository.json)
+[`https://apitesting.jamesmessinger.com/restlet/restlet-repository.json`](https://apitesting.jamesmessinger.com/restlet/restlet-repository.json)
 
 
 
@@ -67,7 +67,7 @@ Running tests from the command line
 --------------------------------------------------------------------------------
 Running Restlet tests from the command line requires [Maven](https://maven.apache.org/) and [the JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).  Once you have those installed and setup, you'll need to [create a `pom.xml` file](https://restlet.com/documentation/client/user-guide/automate/run-tests-from-cli) and get license key from Restlet.
 
-For this demo, you can use [this `pom.xml` file](http://apitesting.bigstickcarpet.com/restlet/pom.xml). You can run the Restlet tests via Maven with the following command:
+For this demo, you can use [this `pom.xml` file](https://apitesting.jamesmessinger.com/restlet/pom.xml). You can run the Restlet tests via Maven with the following command:
 
 > **NOTE:** Both the `pom.xml` file and the `restlet-repository.json` file must be in the same directory
 

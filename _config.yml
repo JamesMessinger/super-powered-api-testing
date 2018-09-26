@@ -11,9 +11,9 @@ title: Super-Powered API Testing
 logo: /assets/img/title-banner.png
 author:
   name: James Messinger
-  twitter: BigstickCarpet
+  twitter: James_Messinger
 twitter:
-  username: BigstickCarpet
+  username: James_Messinger
 defaults:
   - scope:
       path: ""  # All pages

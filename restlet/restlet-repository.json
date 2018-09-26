@@ -5413,7 +5413,7 @@
         {
           "enabled": true,
           "name": "API_ROOT",
-          "value": "https://api.heroes.bigstickcarpet.com"
+          "value": "https://api.heroes.jamesmessinger.com"
         }
       ]
     }

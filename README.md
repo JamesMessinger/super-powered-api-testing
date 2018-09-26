@@ -1,19 +1,19 @@
-[![Super-Powered API Testing](assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](assets/img/title-banner.png)](https://apitesting.jamesmessinger.com)
 
 What is this?
 --------------------------------------------------------------------------------
-This website accompanies a talk/workshop ([here's the slide deck](https://github.com/BigstickCarpet/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
+This website accompanies a talk/workshop ([here's the slide deck](https://github.com/James-Messinger/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
 
 
 Demo API
 --------------------------------------------------------------------------------
 This is the REST API that we're testing.  It's a fun list of technology-themed superheroes, sidekicks, and villains.
 
-- [Demo website](http://heroes.bigstickcarpet.com/)
-- [The Raw API](https://api.heroes.bigstickcarpet.com/)
+- [Demo website](https://heroes.jamesmessinger.com/)
+- [The Raw API](https://api.heroes.jamesmessinger.com/)
 - [API documentation](https://documenter.getpostman.com/view/220187/super-tech-heroes-api/77cf6KB)
-- [OpenAPI 3.0 definition](https://api.heroes.bigstickcarpet.com/schema)
-- [Swagger 2.0 definition](https://api.heroes.bigstickcarpet.com/schema?accept=application/openapi+json;version=2.0)
+- [OpenAPI 3.0 definition](https://api.heroes.jamesmessinger.com/schema)
+- [Swagger 2.0 definition](https://api.heroes.jamesmessinger.com/schema?accept=application/openapi+json;version=2.0)
 
 
 

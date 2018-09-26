@@ -1,4 +1,4 @@
-[![Super-Powered API Testing](../assets/img/title-banner.png)](http://apitesting.bigstickcarpet.com)
+[![Super-Powered API Testing](../assets/img/title-banner.png)](https://apitesting.jamesmessinger.com)
 
 [![Postman](../assets/img/postman/logo.png)](http://getpostman.com)
 ================================================================================
@@ -75,12 +75,12 @@ Click the "Import" button at the top of the Postman window, and import **both** 
 #### Postman Collection
 This file contains the API requests and the test scripts.
 
-[`http://apitesting.bigstickcarpet.com/postman/postman-collection.json`](https://github.com/BigstickCarpet/super-powered-api-testing/blob/v2/postman/postman-collection.json)
+[`https://apitesting.jamesmessinger.com/postman/postman-collection.json`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/postman/postman-collection.json)
 
 #### Postman Environment
 This file contains environment variables, which allow the same Postman tests to be run in different environments (e.g. development, staging, prod)
 
-[`http://apitesting.bigstickcarpet.com/postman/postman-environment.json`](https://github.com/BigstickCarpet/super-powered-api-testing/blob/v2/postman/postman-environment.json)
+[`https://apitesting.jamesmessinger.com/postman/postman-environment.json`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/postman/postman-environment.json)
 
 
 <a id="manual-testing"></a>

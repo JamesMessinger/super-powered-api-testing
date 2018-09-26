@@ -12,13 +12,13 @@
   ],
   "author": {
     "name": "James Messinger",
-    "url": "http://bigstickcarpet.com"
+    "url": "https://jamesmessinger.com"
   },
   "license": "MIT",
-  "homepage": "http://apitesting.bigstickcarpet.com",
+  "homepage": "https://apitesting.jamesmessinger.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BigstickCarpet/super-powered-api-testing.git"
+    "url": "git+https://github.com/James-Messinger/super-powered-api-testing.git"
   },
   "files": [
     "lib",
