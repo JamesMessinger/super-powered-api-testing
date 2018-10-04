@@ -1,8 +1,8 @@
 /*!
  * Karma Host Environment
  * v1.1.1 (June 12th 2017)
- * https://github.com/James-Messinger/karma-host-environment
- * https://cdn.rawgit.com/James-Messinger/karma-host-environment/83d42517/dist/karma-host-environment.min.js
+ * https://github.com/JamesMessinger/karma-host-environment
+ * https://cdn.rawgit.com/JamesMessinger/karma-host-environment/83d42517/dist/karma-host-environment.min.js
  *
  * @author  James Messinger (https://jamesmessinger.com)
  * @license MIT

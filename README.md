@@ -2,7 +2,7 @@
 
 What is this?
 --------------------------------------------------------------------------------
-This website accompanies a talk/workshop ([here's the slide deck](https://github.com/James-Messinger/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
+This website accompanies a talk/workshop ([here's the slide deck](https://github.com/JamesMessinger/super-powered-api-testing/blob/master/presentation.pdf)) that discusses and compares various API testing tools and best-practices.  I've re-created the same API test suite in several different tools to make it easy to compare and contrast them in terms of features, ease-of-use, syntax, etc.
 
 
 Demo API

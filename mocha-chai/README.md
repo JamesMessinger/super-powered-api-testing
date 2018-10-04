@@ -45,7 +45,7 @@ You can also leverage numerous [Chai plugins](http://chaijs.com/plugins/) as wel
 
 Demo Setup
 --------------------------------------------------------------------------------
-In this demo, you'll run [the API tests](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/specs) from the command-line, in an IDE, in a web browser, and via automated cross-browser testing.
+In this demo, you'll run [the API tests](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/specs) from the command-line, in an IDE, in a web browser, and via automated cross-browser testing.
 
 ### Step 1. Install Node.js
 The Mocha CLI requires [Node.js 4.0 or greater](https://nodejs.org/en/).
@@ -79,18 +79,18 @@ cd /path/to/demo/code
 npm run mocha
 ```
 
-This command runs the Mocha CLI, which will read the [`mocha.opts`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/mocha.opts) file. This file configures several Mocha options, such as timeouts and failure behavior.  It also tells Mocha which test scripts to run.
+This command runs the Mocha CLI, which will read the [`mocha.opts`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/mocha.opts) file. This file configures several Mocha options, such as timeouts and failure behavior.  It also tells Mocha which test scripts to run.
 
 #### The `test/fixtures` folder
 This folder contains scripts that perform initialization logic and define helpers that are used by the tests
 
 |Script file                   |Purpose
 |:-----------------------------|:-----------------------------------------------------------
-|[`test/fixtures/assertions.js`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/assertions.js)  |Defines custom Chai.js assertions, which eliminate redundancy and make our tests more readable (e.g. `response.body.should.be.a.character()`)
-|[`fixtures/before-each.js`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/before-each.js)     |Defines a Mocha `beforeEach` hook, which will reset the state before each test by deleting any data that were created by the previous test.
-|[`test/fixtures/environment.js`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/environment.js)|Sets environment variables, such as `API_ROOT` and `API_KEY`. These variables allow us to test against different instances of our API (e.g. dev, staging, prod)
-|[`test/fixtures/open-api.js`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/open-api.js)      |This script downloads the [OpenAPI definition](https://api.heroes.jamesmessinger.com/schema), so we can use it to test whether our API responses match the JSON Schemas.
-|[`test/fixtures/setup-chai.js`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/setup-chai.js)  |This script initializes Chai and loads the [Chai-HTTP](http://chaijs.com/plugins/chai-http/) and [Chai-JSON-Schema](http://chaijs.com/plugins/chai-json-schema/) plugins.
+|[`test/fixtures/assertions.js`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/assertions.js)  |Defines custom Chai.js assertions, which eliminate redundancy and make our tests more readable (e.g. `response.body.should.be.a.character()`)
+|[`fixtures/before-each.js`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/before-each.js)     |Defines a Mocha `beforeEach` hook, which will reset the state before each test by deleting any data that were created by the previous test.
+|[`test/fixtures/environment.js`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/environment.js)|Sets environment variables, such as `API_ROOT` and `API_KEY`. These variables allow us to test against different instances of our API (e.g. dev, staging, prod)
+|[`test/fixtures/open-api.js`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/open-api.js)      |This script downloads the [OpenAPI definition](https://api.heroes.jamesmessinger.com/schema), so we can use it to test whether our API responses match the JSON Schemas.
+|[`test/fixtures/setup-chai.js`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/test/fixtures/setup-chai.js)  |This script initializes Chai and loads the [Chai-HTTP](http://chaijs.com/plugins/chai-http/) and [Chai-JSON-Schema](http://chaijs.com/plugins/chai-json-schema/) plugins.
 
 ![CLI screenshot](https://apitesting.jamesmessinger.com/assets/img/mocha-chai/cli.gif)
 
@@ -117,7 +117,7 @@ Running the tests in a web browser
 --------------------------------------------------------------------------------
 Mocha and Chai can run in web browsers too, which is [very important](#browser-testing) for testing your API in real-world conditions.  You can even run your tests in mobile browsers, such as iOS and Android, and in [hybrid mobile apps](https://developer.telerik.com/featured/what-is-a-hybrid-mobile-app/) such as PhoneGap, Cordova, and React Native.
 
-Just open the [`browser.html`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/browser.html) file in a web browser.  Or run the following command to open it in your default browser:
+Just open the [`browser.html`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/browser.html) file in a web browser.  Or run the following command to open it in your default browser:
 
 ```
 cd /path/to/demo/code
@@ -136,7 +136,7 @@ Running automated cross-browser tests
 --------------------------------------------------------------------------------
 Mocha and Chai work great with cross-browser automation tools such as [Karma](https://karma-runner.github.io/) or [Nightwatch](http://nightwatchjs.org/), which can easily be integrated into your CI/CD pipeline.  You can also use cloud-hosted device testing services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/) to test on a wider variety of devices.
 
-For this demo, we'll use [Karma](https://karma-runner.github.io/), which is a Node.js-based CLI.  Karma is a powerful with [lots of configuration options](https://karma-runner.github.io/1.0/config/configuration-file.html) and [hundreds of plugins](https://www.npmjs.com/browse/keyword/karma-plugin), which can be daunting at first.  For this demo, I've already created a [`karma.conf.js` config file](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/mocha-chai/karma.conf.js), so all you need to do is run the following command:
+For this demo, we'll use [Karma](https://karma-runner.github.io/), which is a Node.js-based CLI.  Karma is a powerful with [lots of configuration options](https://karma-runner.github.io/1.0/config/configuration-file.html) and [hundreds of plugins](https://www.npmjs.com/browse/keyword/karma-plugin), which can be daunting at first.  For this demo, I've already created a [`karma.conf.js` config file](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/mocha-chai/karma.conf.js), so all you need to do is run the following command:
 
 ```
 cd /path/to/demo/code

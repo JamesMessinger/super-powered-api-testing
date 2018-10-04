@@ -75,12 +75,12 @@ Click the "Import" button at the top of the Postman window, and import **both** 
 #### Postman Collection
 This file contains the API requests and the test scripts.
 
-[`https://apitesting.jamesmessinger.com/postman/postman-collection.json`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/postman/postman-collection.json)
+[`https://apitesting.jamesmessinger.com/postman/postman-collection.json`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/postman/postman-collection.json)
 
 #### Postman Environment
 This file contains environment variables, which allow the same Postman tests to be run in different environments (e.g. development, staging, prod)
 
-[`https://apitesting.jamesmessinger.com/postman/postman-environment.json`](https://github.com/James-Messinger/super-powered-api-testing/blob/v2/postman/postman-environment.json)
+[`https://apitesting.jamesmessinger.com/postman/postman-environment.json`](https://github.com/JamesMessinger/super-powered-api-testing/blob/v2/postman/postman-environment.json)
 
 
 <a id="manual-testing"></a>

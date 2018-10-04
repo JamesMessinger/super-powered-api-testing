@@ -18,7 +18,7 @@
   "homepage": "https://apitesting.jamesmessinger.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/James-Messinger/super-powered-api-testing.git"
+    "url": "git+https://github.com/JamesMessinger/super-powered-api-testing.git"
   },
   "files": [
     "lib",
